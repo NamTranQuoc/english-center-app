@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:week3/components/InputEmail.dart';
+import 'package:week3/components/InputPassword.dart';
+import 'package:week3/screen/Home.dart';
 import 'package:week3/screen/Signup.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -8,11 +11,35 @@ class LoginScreen extends StatefulWidget {
   _LoginScreen createState() => _LoginScreen();
 }
 
-class _LoginScreen extends State<LoginScreen> with InputValidationMixin {
+class _LoginScreen extends State<LoginScreen> {
   final formGlobalKey = GlobalKey<FormState>();
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  bool _isObscure = true;
+
+  onLogin() {
+    if (formGlobalKey.currentState!.validate()) {
+      formGlobalKey.currentState!.save();
+      if (usernameController.text == 'user@gmail.com' &&
+          passwordController.text == 'user123') {
+        Navigator.of(context).push(MaterialPageRoute(builder: (_) {
+          return const HomeScreen();
+        }));
+      } else {
+        showDialog<String>(
+            context: context,
+            builder: (BuildContext context) => AlertDialog(
+                  title: const Text('Thông báo'),
+                  content: const Text('Username hoăc password không đúng'),
+                  actions: <Widget>[
+                    TextButton(
+                      onPressed: () => Navigator.pop(context, 'OK'),
+                      child: const Text('OK'),
+                    ),
+                  ],
+                ));
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,48 +59,8 @@ class _LoginScreen extends State<LoginScreen> with InputValidationMixin {
                   key: formGlobalKey,
                   child: Column(
                     children: [
-                      Container(
-                        padding: const EdgeInsets.all(10),
-                        child: TextFormField(
-                          validator: (email) {
-                            if (isEmailValid(email!)) {
-                              return null;
-                            } else {
-                              return 'Vui lòng nhâp email';
-                            }
-                          },
-                          controller: usernameController,
-                          decoration: const InputDecoration(
-                              border: OutlineInputBorder(),
-                              labelText: 'Username'),
-                        ),
-                      ),
-                      Container(
-                        padding: const EdgeInsets.all(10),
-                        child: TextFormField(
-                          validator: (password) {
-                            if (isPasswordValid(password!)) {
-                              return null;
-                            } else {
-                              return 'Password phải dài hơn 6 ký tự';
-                            }
-                          },
-                          obscureText: _isObscure,
-                          controller: passwordController,
-                          decoration: InputDecoration(
-                              border: const OutlineInputBorder(),
-                              labelText: 'Password',
-                              suffixIcon: IconButton(
-                                  icon: Icon(_isObscure
-                                      ? Icons.visibility
-                                      : Icons.visibility_off),
-                                  onPressed: () {
-                                    setState(() {
-                                      _isObscure = !_isObscure;
-                                    });
-                                  })),
-                        ),
-                      ),
+                      InputEmail("Username", usernameController),
+                      InputPassword("Password", passwordController),
                     ],
                   ),
                 ),
@@ -82,11 +69,7 @@ class _LoginScreen extends State<LoginScreen> with InputValidationMixin {
                     padding: const EdgeInsets.all(10),
                     child: ElevatedButton(
                       child: const Text('ĐĂNG NHẬP'),
-                      onPressed: () {
-                        if (formGlobalKey.currentState!.validate()) {
-                          formGlobalKey.currentState!.save();
-                        }
-                      },
+                      onPressed: onLogin,
                     )),
                 Container(
                   height: 75,
@@ -121,16 +104,5 @@ class _LoginScreen extends State<LoginScreen> with InputValidationMixin {
                         ))),
               ],
             )));
-  }
-}
-
-mixin InputValidationMixin {
-  bool isPasswordValid(String password) => password.length > 6;
-
-  bool isEmailValid(String email) {
-    String pattern =
-        r'^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-    RegExp regex = RegExp(pattern);
-    return regex.hasMatch(email);
   }
 }
