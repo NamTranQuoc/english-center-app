@@ -1,37 +1,43 @@
 
 import 'package:flutter/material.dart';
 
-class InputEmail extends StatefulWidget {
-  InputEmail(this.label, this.usernameController);
-
+class InputCustom extends StatelessWidget {
   final String label;
   final TextEditingController usernameController;
+  final InputType inputType;
+  final String textError;
 
-  @override
-  State<StatefulWidget> createState() => _InputEmail();
-
-}
-
-class _InputEmail extends State<InputEmail> {
+  InputCustom(this.label, this.usernameController, this.inputType, this.textError);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(10),
       child: TextFormField(
-        validator: (email) {
-          if (isEmailValid(email!)) {
+        validator: (text) {
+          if (validation(text!)) {
             return null;
           } else {
-            return 'Vui lòng nhập email đúng định dạng';
+            return textError;
           }
         },
-        controller: widget.usernameController,
+        controller: usernameController,
         decoration: InputDecoration(
             border: const OutlineInputBorder(),
-            labelText: widget.label),
+            labelText: label),
       ),
     );
+  }
+
+  bool validation(String s) {
+    switch(inputType) {
+      case InputType.EMAIL:
+        return isEmailValid(s);
+      case InputType.REQUEST:
+        return isNotBlank(s);
+      default:
+        return true;
+    }
   }
 
   bool isEmailValid(String s) {
@@ -40,4 +46,14 @@ class _InputEmail extends State<InputEmail> {
     RegExp regex = RegExp(pattern);
     return regex.hasMatch(s);
   }
+
+  bool isNotBlank(String s) {
+    return s.isNotEmpty;
+  }
+}
+
+enum InputType {
+  EMAIL,
+  REQUEST,
+  NONE
 }

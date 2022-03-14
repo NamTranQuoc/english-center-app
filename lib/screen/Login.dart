@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:week3/components/InputEmail.dart';
-import 'package:week3/components/InputPassword.dart';
+import 'package:week3/components/button/ButtonCustom.dart';
+import 'package:week3/components/input/InputCustom.dart';
+import 'package:week3/components/input/InputPassword.dart';
 import 'package:week3/screen/Home.dart';
 import 'package:week3/screen/Signup.dart';
 
@@ -59,18 +60,12 @@ class _LoginScreen extends State<LoginScreen> {
                   key: formGlobalKey,
                   child: Column(
                     children: [
-                      InputEmail("Username", usernameController),
+                      InputCustom("Username", usernameController, InputType.EMAIL, 'Vui lòng nhập đúng định dạng email'),
                       InputPassword("Password", passwordController),
                     ],
                   ),
                 ),
-                Container(
-                    height: 75,
-                    padding: const EdgeInsets.all(10),
-                    child: ElevatedButton(
-                      child: const Text('ĐĂNG NHẬP'),
-                      onPressed: onLogin,
-                    )),
+                ButtonCustom('ĐĂNG NHẬP', Colors.lightBlueAccent, onLogin),
                 Container(
                   height: 75,
                   padding: const EdgeInsets.all(10),
@@ -79,29 +74,13 @@ class _LoginScreen extends State<LoginScreen> {
                     textAlign: TextAlign.right,
                   ),
                 ),
-                Container(
-                    height: 75,
-                    padding: const EdgeInsets.all(10),
-                    child: ElevatedButton(
-                        child: const Text('TẠO TÀI KHOẢN'),
-                        onPressed: () {
-                          Navigator.of(context)
-                              .push(MaterialPageRoute(builder: (_) {
-                            return SignUpScreen();
-                          }));
-                        },
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.blueGrey,
-                        ))),
-                Container(
-                    height: 75,
-                    padding: const EdgeInsets.all(10),
-                    child: ElevatedButton(
-                        child: const Text('ĐĂNG NHẬP VỚI GOOGLE'),
-                        onPressed: () {},
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.green,
-                        ))),
+                ButtonCustom('TẠO TÀI KHOẢN', Colors.blueGrey, () {
+                      Navigator.of(context)
+                          .push(MaterialPageRoute(builder: (_) {
+                        return SignUpScreen();
+                      }));
+                    }),
+                ButtonCustom('ĐĂNG NHẬP VỚI GOOGLE', Colors.green, () {}),
               ],
             )));
   }
