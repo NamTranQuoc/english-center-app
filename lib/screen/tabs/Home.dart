@@ -1,8 +1,8 @@
-
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
   static const routeName = '/home';
+
   HomeScreen();
 
   @override
@@ -15,8 +15,6 @@ class _HomeScreen extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-        body: Text("Home")
-    );
+    return const Scaffold(body: Text("Home"));
   }
 }

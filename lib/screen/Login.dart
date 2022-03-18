@@ -55,7 +55,11 @@ class _LoginScreen extends State<LoginScreen> {
                   key: formGlobalKey,
                   child: Column(
                     children: [
-                      InputCustom("Username", usernameController, InputType.EMAIL, 'Vui lòng nhập đúng định dạng email'),
+                      InputCustom(
+                          "Username",
+                          usernameController,
+                          InputType.EMAIL,
+                          'Vui lòng nhập đúng định dạng email'),
                       InputPassword("Password", passwordController),
                     ],
                   ),
@@ -70,11 +74,10 @@ class _LoginScreen extends State<LoginScreen> {
                   ),
                 ),
                 ButtonCustom('TẠO TÀI KHOẢN', Colors.blueGrey, () {
-                      Navigator.of(context)
-                          .push(MaterialPageRoute(builder: (_) {
-                        return SignUpScreen();
-                      }));
-                    }),
+                  Navigator.of(context).push(MaterialPageRoute(builder: (_) {
+                    return SignUpScreen();
+                  }));
+                }),
                 ButtonCustom('ĐĂNG NHẬP VỚI GOOGLE', Colors.green, () {}),
               ],
             )));

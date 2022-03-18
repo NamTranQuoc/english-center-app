@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:week3/components/Image/Logo.dart';
 import 'package:week3/components/button/ButtonCustom.dart';
@@ -27,23 +26,22 @@ class _SignUpScreen extends State<SignUpScreen> {
   void onSignUp() {
     if (formGlobalKey.currentState!.validate()) {
       formGlobalKey.currentState!.save();
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (_) {
+      Navigator.of(context).push(MaterialPageRoute(builder: (_) {
         return LoginScreen();
       }));
 
       showDialog<String>(
           context: context,
           builder: (BuildContext context) => AlertDialog(
-            title: const Text('Thông báo'),
-            content: const Text('Username hoăc password không đúng'),
-            actions: <Widget>[
-              TextButton(
-                onPressed: () => Navigator.pop(context, 'OK'),
-                child: const Text('OK'),
-              ),
-            ],
-          ));
+                title: const Text('Thông báo'),
+                content: const Text('Username hoăc password không đúng'),
+                actions: <Widget>[
+                  TextButton(
+                    onPressed: () => Navigator.pop(context, 'OK'),
+                    child: const Text('OK'),
+                  ),
+                ],
+              ));
     }
   }
 
@@ -59,17 +57,20 @@ class _SignUpScreen extends State<SignUpScreen> {
                   key: formGlobalKey,
                   child: Column(
                     children: [
-                      InputCustom("Name", name, InputType.REQUEST, "Vui lòng nhập tên"),
-                      InputCustom("Email", email, InputType.EMAIL, "Vui lòng nhập đúng định dạng email"),
-                      InputCustom("Phone number", phone, InputType.PHONE, "Vui lòng nhập số điện thoại"),
+                      InputCustom(
+                          "Name", name, InputType.REQUEST, "Vui lòng nhập tên"),
+                      InputCustom("Email", email, InputType.EMAIL,
+                          "Vui lòng nhập đúng định dạng email"),
+                      InputCustom("Phone number", phone, InputType.PHONE,
+                          "Vui lòng nhập số điện thoại"),
                       SelectCustom('Nam', genders, 'Gender'),
                     ],
                   ),
                 ),
                 ButtonCustom('ĐĂNG NHẬP', Colors.lightBlueAccent, onSignUp),
-                ButtonText("Đăng nhập ngay", const TextStyle(color: Colors.black), () {
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (_) {
+                ButtonText(
+                    "Đăng nhập ngay", const TextStyle(color: Colors.black), () {
+                  Navigator.of(context).push(MaterialPageRoute(builder: (_) {
                     return LoginScreen();
                   }));
                 }),

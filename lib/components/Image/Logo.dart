@@ -1,8 +1,6 @@
-
 import 'package:flutter/material.dart';
 
 class Logo extends StatelessWidget {
-
   Logo();
 
   @override

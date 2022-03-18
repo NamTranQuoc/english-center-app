@@ -1,8 +1,8 @@
-
 import 'package:flutter/material.dart';
 
 class ScheduleScreen extends StatefulWidget {
   static const routeName = '/schedule';
+
   ScheduleScreen();
 
   @override
@@ -15,8 +15,6 @@ class _ScheduleScreen extends State<ScheduleScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-        body: Text("Schedule")
-    );
+    return const Scaffold(body: Text("Schedule"));
   }
 }

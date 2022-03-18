@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class SelectCustom extends StatefulWidget {
@@ -19,7 +18,8 @@ class _SelectCustom extends State<SelectCustom> {
       padding: const EdgeInsets.all(10),
       child: InputDecorator(
           decoration: InputDecoration(
-              contentPadding: const EdgeInsets.only(left: 20, right: 20, bottom: 15, top: 15),
+              contentPadding: const EdgeInsets.only(
+                  left: 20, right: 20, bottom: 15, top: 15),
               border: const OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(30.0))),
               labelText: widget.label),

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class InputCustom extends StatelessWidget {
@@ -7,7 +6,8 @@ class InputCustom extends StatelessWidget {
   final InputType inputType;
   final String textError;
 
-  InputCustom(this.label, this.usernameController, this.inputType, this.textError);
+  InputCustom(
+      this.label, this.usernameController, this.inputType, this.textError);
 
   @override
   Widget build(BuildContext context) {
@@ -23,15 +23,17 @@ class InputCustom extends StatelessWidget {
         },
         controller: usernameController,
         decoration: InputDecoration(
-            contentPadding: const EdgeInsets.only(left: 20, right: 20, bottom: 18, top: 18),
-            border: const OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(30.0))),
+            contentPadding:
+                const EdgeInsets.only(left: 20, right: 20, bottom: 18, top: 18),
+            border: const OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(30.0))),
             labelText: label),
       ),
     );
   }
 
   bool validation(String s) {
-    switch(inputType) {
+    switch (inputType) {
       case InputType.EMAIL:
         return isEmailValid(s);
       case InputType.REQUEST:
@@ -55,16 +57,10 @@ class InputCustom extends StatelessWidget {
   }
 
   bool isPhoneNumber(String s) {
-    String pattern =
-        r'^(84|0[3|5|7|8|9])+([0-9]{8})$';
+    String pattern = r'^(84|0[3|5|7|8|9])+([0-9]{8})$';
     RegExp regex = RegExp(pattern);
     return regex.hasMatch(s);
   }
 }
 
-enum InputType {
-  EMAIL,
-  REQUEST,
-  NONE,
-  PHONE
-}
+enum InputType { EMAIL, REQUEST, NONE, PHONE }

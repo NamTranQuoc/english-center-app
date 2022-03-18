@@ -1,4 +1,3 @@
-
 import 'package:ff_navigation_bar/ff_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:week3/screen/tabs/Home.dart';
@@ -7,6 +6,7 @@ import 'package:week3/screen/tabs/Schedule.dart';
 
 class MainScreen extends StatefulWidget {
   static const routeName = '/main';
+
   MainScreen();
 
   @override
@@ -41,18 +41,18 @@ class _MainScreen extends State<MainScreen> {
                 filled: true,
                 prefixIcon: Icon(Icons.search),
                 border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                  borderRadius: BorderRadius.all(Radius.circular(30.0)),
                 ),
                 contentPadding: EdgeInsets.all(10.0),
                 hintText: 'Search',
               ),
-            )
-        ),
+            )),
         actions: [
           IconButton(
             onPressed: () {},
             icon: const Icon(Icons.notifications),
-          )],
+          )
+        ],
       ),
       body: getTab(),
       bottomNavigationBar: FFNavigationBar(
