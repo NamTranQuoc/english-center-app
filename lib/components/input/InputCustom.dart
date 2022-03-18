@@ -35,6 +35,8 @@ class InputCustom extends StatelessWidget {
         return isEmailValid(s);
       case InputType.REQUEST:
         return isNotBlank(s);
+      case InputType.PHONE:
+        return isPhoneNumber(s);
       default:
         return true;
     }
@@ -50,10 +52,18 @@ class InputCustom extends StatelessWidget {
   bool isNotBlank(String s) {
     return s.isNotEmpty;
   }
+
+  bool isPhoneNumber(String s) {
+    String pattern =
+        r'^(84|0[3|5|7|8|9])+([0-9]{8})$';
+    RegExp regex = RegExp(pattern);
+    return regex.hasMatch(s);
+  }
 }
 
 enum InputType {
   EMAIL,
   REQUEST,
-  NONE
+  NONE,
+  PHONE
 }

@@ -1,13 +1,51 @@
 
 import 'package:flutter/material.dart';
+import 'package:week3/components/Image/Logo.dart';
+import 'package:week3/components/button/ButtonCustom.dart';
+import 'package:week3/components/button/ButtonText.dart';
+import 'package:week3/components/input/InputCustom.dart';
+import 'package:week3/components/select/SelectCustom.dart';
+import 'package:week3/screen/Login.dart';
 
-class SignUpScreen extends StatelessWidget {
-  SignUpScreen({Key? key}) : super(key: key);
-
+class SignUpScreen extends StatefulWidget {
   static const routeName = '/signup';
 
-  TextEditingController nameController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  @override
+  _SignUpScreen createState() => _SignUpScreen();
+}
+
+class _SignUpScreen extends State<SignUpScreen> {
+  final formGlobalKey = GlobalKey<FormState>();
+
+  List<String> genders = ['Nam', 'Nữ', 'Khác'];
+
+  TextEditingController name = TextEditingController();
+  TextEditingController email = TextEditingController();
+  TextEditingController phone = TextEditingController();
+  TextEditingController gender = TextEditingController();
+
+  void onSignUp() {
+    if (formGlobalKey.currentState!.validate()) {
+      formGlobalKey.currentState!.save();
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (_) {
+        return LoginScreen();
+      }));
+
+      showDialog<String>(
+          context: context,
+          builder: (BuildContext context) => AlertDialog(
+            title: const Text('Thông báo'),
+            content: const Text('Username hoăc password không đúng'),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () => Navigator.pop(context, 'OK'),
+                child: const Text('OK'),
+              ),
+            ],
+          ));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,68 +54,25 @@ class SignUpScreen extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(10, 50, 10, 10),
             child: ListView(
               children: <Widget>[
-                Container(
-                    height: 100,
-                    margin: const EdgeInsets.fromLTRB(10, 10, 10, 20),
-                    child: const Image(
-                      image: NetworkImage(
-                          'https://firebasestorage.googleapis.com/v0/b/englishcenter-2021.appspot.com/o/images%2Flogo.png?alt=media'),
-                    )),
-                Container(
-                  padding: const EdgeInsets.all(10),
-                  child: TextField(
-                    controller: nameController,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Name',
-                    ),
+                Logo(),
+                Form(
+                  key: formGlobalKey,
+                  child: Column(
+                    children: [
+                      InputCustom("Name", name, InputType.REQUEST, "Vui lòng nhập tên"),
+                      InputCustom("Email", email, InputType.EMAIL, "Vui lòng nhập đúng định dạng email"),
+                      InputCustom("Phone number", phone, InputType.PHONE, "Vui lòng nhập số điện thoại"),
+                      SelectCustom('Nam', genders, 'Gender'),
+                    ],
                   ),
                 ),
-                Container(
-                  padding: const EdgeInsets.all(10),
-                  child: TextField(
-                    controller: passwordController,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Email',
-                    ),
-                  ),
-                ),
-                Container(
-                  padding: const EdgeInsets.all(10),
-                  child: TextField(
-                    controller: passwordController,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Phone number',
-                    ),
-                  ),
-                ),
-                Container(
-                  padding: const EdgeInsets.all(10),
-                  child: TextField(
-                    controller: passwordController,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Gender',
-                    ),
-                  ),
-                ),
-                Container(
-                    height: 75,
-                    padding: const EdgeInsets.all(10),
-                    child: ElevatedButton(
-                      child: const Text('ĐĂNG NHẬP'),
-                      onPressed: () {},
-                    )),
-                Container(
-                  height: 75,
-                  padding: const EdgeInsets.all(10),
-                  child: const Text(
-                    'Forgot Password',
-                    textAlign: TextAlign.right,
-                  ),
-                ),
+                ButtonCustom('ĐĂNG NHẬP', Colors.lightBlueAccent, onSignUp),
+                ButtonText("Đăng nhập ngay", const TextStyle(color: Colors.black), () {
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (_) {
+                    return LoginScreen();
+                  }));
+                }),
               ],
             )));
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:week3/components/Image/Logo.dart';
 import 'package:week3/components/button/ButtonCustom.dart';
 import 'package:week3/components/input/InputCustom.dart';
 import 'package:week3/components/input/InputPassword.dart';
@@ -49,13 +50,7 @@ class _LoginScreen extends State<LoginScreen> {
             padding: const EdgeInsets.fromLTRB(10, 50, 10, 10),
             child: ListView(
               children: <Widget>[
-                Container(
-                    height: 100,
-                    margin: const EdgeInsets.fromLTRB(10, 10, 10, 20),
-                    child: const Image(
-                      image: NetworkImage(
-                          'https://firebasestorage.googleapis.com/v0/b/englishcenter-2021.appspot.com/o/images%2Flogo.png?alt=media'),
-                    )),
+                Logo(),
                 Form(
                   key: formGlobalKey,
                   child: Column(
@@ -70,7 +65,7 @@ class _LoginScreen extends State<LoginScreen> {
                   height: 75,
                   padding: const EdgeInsets.all(10),
                   child: const Text(
-                    'Forgot Password?',
+                    'Quên mật khẩu?',
                     textAlign: TextAlign.right,
                   ),
                 ),
