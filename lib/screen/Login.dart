@@ -3,7 +3,7 @@ import 'package:week3/components/Image/Logo.dart';
 import 'package:week3/components/button/ButtonCustom.dart';
 import 'package:week3/components/input/InputCustom.dart';
 import 'package:week3/components/input/InputPassword.dart';
-import 'package:week3/screen/Home.dart';
+import 'package:week3/screen/Main.dart';
 import 'package:week3/screen/Signup.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -24,7 +24,7 @@ class _LoginScreen extends State<LoginScreen> {
       if (usernameController.text == 'user@gmail.com' &&
           passwordController.text == 'user123') {
         Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-          return const HomeScreen();
+          return MainScreen();
         }));
       } else {
         showDialog<String>(

@@ -30,7 +30,8 @@ class _InputPassword extends State<InputPassword> {
         obscureText: _isObscure,
         controller: widget.password,
         decoration: InputDecoration(
-            border: const OutlineInputBorder(),
+            contentPadding: const EdgeInsets.only(left: 20, right: 20, bottom: 18, top: 18),
+            border: const OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(30.0))),
             labelText: widget.label,
             suffixIcon: IconButton(
                 icon: Icon(_isObscure

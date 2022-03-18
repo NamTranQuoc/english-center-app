@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:week3/screen/Home.dart';
+import 'package:week3/screen/Main.dart';
 import 'package:week3/screen/Login.dart';
 import 'package:week3/screen/Signup.dart';
 
@@ -9,7 +9,7 @@ void main() {
       title: 'English center',
       initialRoute: LoginScreen.routeName,
       routes: {
-        HomeScreen.routeName: (context) => const HomeScreen(),
+        MainScreen.routeName: (context) => MainScreen(),
         LoginScreen.routeName: (context) => LoginScreen(),
         SignUpScreen.routeName: (context) => SignUpScreen(),
       },
