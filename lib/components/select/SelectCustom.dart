@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class SelectCustom extends StatefulWidget {
-  final String item;
+  String item;
   final List<String> list;
   final String label;
 
@@ -28,7 +28,10 @@ class _SelectCustom extends State<SelectCustom> {
               value: widget.item,
               isDense: true,
               onChanged: (i) {
-                print(i);
+                widget.item = i!;
+                setState(() {
+                  widget.item;
+                });
               },
               items: widget.list.map((String value) {
                 return DropdownMenuItem<String>(

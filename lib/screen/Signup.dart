@@ -21,7 +21,7 @@ class _SignUpScreen extends State<SignUpScreen> {
   TextEditingController name = TextEditingController();
   TextEditingController email = TextEditingController();
   TextEditingController phone = TextEditingController();
-  TextEditingController gender = TextEditingController();
+  String gender = 'Nam';
 
   void onSignUp() {
     if (formGlobalKey.currentState!.validate()) {
@@ -63,7 +63,7 @@ class _SignUpScreen extends State<SignUpScreen> {
                           "Vui lòng nhập đúng định dạng email"),
                       InputCustom("Phone number", phone, InputType.PHONE,
                           "Vui lòng nhập số điện thoại"),
-                      SelectCustom('Nam', genders, 'Gender'),
+                      SelectCustom(gender, genders, 'Gender'),
                     ],
                   ),
                 ),
