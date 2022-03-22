@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:week3/screen/Login.dart';
 import 'package:week3/screen/Main.dart';
 import 'package:week3/screen/Signup.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 void main() {
   runApp(
@@ -13,6 +14,7 @@ void main() {
         LoginScreen.routeName: (context) => LoginScreen(),
         SignUpScreen.routeName: (context) => SignUpScreen(),
       },
+      builder: EasyLoading.init(),
     ),
   );
 }

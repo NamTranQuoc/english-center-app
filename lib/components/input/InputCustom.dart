@@ -26,7 +26,7 @@ class InputCustom extends StatelessWidget {
             contentPadding:
                 const EdgeInsets.only(left: 20, right: 20, bottom: 18, top: 18),
             border: const OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(30.0))),
+                borderRadius: BorderRadius.all(Radius.circular(13.0))),
             labelText: label),
       ),
     );

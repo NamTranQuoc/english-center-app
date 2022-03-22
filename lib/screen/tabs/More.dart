@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:week3/components/button/ButtonCustom.dart';
 import 'package:week3/screen/Login.dart';
+import 'package:week3/util/LocalStorage.dart';
 
 class MoreScreen extends StatefulWidget {
   static const routeName = '/menu';
+  final LocalStorage storage = LocalStorage();
 
   MoreScreen();
 
@@ -37,10 +39,10 @@ class _MoreScreen extends State<MoreScreen> {
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                 ),
-                ButtonCustom(
-                    'CẬP NHẬT THÔNG TIN', Colors.lightBlueAccent, () {}),
-                ButtonCustom('ĐỔI MẬT KHẨU', Colors.lightBlueAccent, () {}),
-                ButtonCustom('ĐĂNG XUẤT', Colors.lightBlueAccent, () {
+                ButtonCustom('Cập Nhật Thông Tin', Colors.lightBlueAccent, () {}),
+                ButtonCustom('Đổi Mật Khẩu', Colors.lightBlueAccent, () {}),
+                ButtonCustom('Đăng Xuất', Colors.lightBlueAccent, () {
+                  widget.storage.cleanToken();
                   Navigator.of(context).push(MaterialPageRoute(builder: (_) {
                     return LoginScreen();
                   }));

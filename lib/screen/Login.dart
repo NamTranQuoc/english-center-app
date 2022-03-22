@@ -3,11 +3,17 @@ import 'package:week3/components/Image/Logo.dart';
 import 'package:week3/components/button/ButtonCustom.dart';
 import 'package:week3/components/input/InputCustom.dart';
 import 'package:week3/components/input/InputPassword.dart';
+import 'package:week3/components/message/NotiDialog.dart';
 import 'package:week3/screen/Main.dart';
 import 'package:week3/screen/Signup.dart';
+import 'package:week3/services/UserService.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+
+import '../util/LocalStorage.dart';
 
 class LoginScreen extends StatefulWidget {
   static const routeName = '/sign-in';
+  final LocalStorage storage = LocalStorage();
 
   @override
   _LoginScreen createState() => _LoginScreen();
@@ -18,28 +24,31 @@ class _LoginScreen extends State<LoginScreen> {
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  onLogin() {
-    if (formGlobalKey.currentState!.validate()) {
-      formGlobalKey.currentState!.save();
-      if (usernameController.text == 'user@gmail.com' &&
-          passwordController.text == 'user123') {
+  @override
+  void initState() {
+    super.initState();
+    widget.storage.getToken().then((value) {
+      if (value != '') {
         Navigator.of(context).push(MaterialPageRoute(builder: (_) {
           return MainScreen();
         }));
-      } else {
-        showDialog<String>(
-            context: context,
-            builder: (BuildContext context) => AlertDialog(
-                  title: const Text('Thông báo'),
-                  content: const Text('Username hoăc password không đúng'),
-                  actions: <Widget>[
-                    TextButton(
-                      onPressed: () => Navigator.pop(context, 'OK'),
-                      child: const Text('OK'),
-                    ),
-                  ],
-                ));
       }
+    });
+  }
+
+  onLogin() {
+    if (formGlobalKey.currentState!.validate()) {
+      formGlobalKey.currentState!.save();
+      login(usernameController.text, passwordController.text).then((value) {
+        if (value.code == 9999) {
+          widget.storage.setToken(value.payload);
+          Navigator.of(context).push(MaterialPageRoute(builder: (_) {
+            return MainScreen();
+          }));
+        } else {
+          showNotificationDialog('Thông báo', value.message, context);
+        }
+      });
     }
   }
 
@@ -64,7 +73,7 @@ class _LoginScreen extends State<LoginScreen> {
                     ],
                   ),
                 ),
-                ButtonCustom('ĐĂNG NHẬP', Colors.lightBlueAccent, onLogin),
+                ButtonCustom('Đăng Nhập', Colors.lightBlueAccent, onLogin),
                 Container(
                   height: 75,
                   padding: const EdgeInsets.all(10),
@@ -73,12 +82,12 @@ class _LoginScreen extends State<LoginScreen> {
                     textAlign: TextAlign.right,
                   ),
                 ),
-                ButtonCustom('TẠO TÀI KHOẢN', Colors.blueGrey, () {
+                ButtonCustom('Tạo Tài Khoản', Colors.blueGrey, () {
                   Navigator.of(context).push(MaterialPageRoute(builder: (_) {
                     return SignUpScreen();
                   }));
                 }),
-                ButtonCustom('ĐĂNG NHẬP VỚI GOOGLE', Colors.green, () {}),
+                ButtonCustom('Đăng nhập Với Google', Colors.green, () {}),
               ],
             )));
   }

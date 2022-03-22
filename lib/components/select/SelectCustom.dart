@@ -21,7 +21,7 @@ class _SelectCustom extends State<SelectCustom> {
               contentPadding: const EdgeInsets.only(
                   left: 20, right: 20, bottom: 15, top: 15),
               border: const OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(30.0))),
+                  borderRadius: BorderRadius.all(Radius.circular(13.0))),
               labelText: widget.label),
           child: DropdownButtonHideUnderline(
             child: DropdownButton<String>(

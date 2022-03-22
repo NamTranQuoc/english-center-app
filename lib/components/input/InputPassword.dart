@@ -31,7 +31,7 @@ class _InputPassword extends State<InputPassword> {
             contentPadding:
                 const EdgeInsets.only(left: 20, right: 20, bottom: 18, top: 18),
             border: const OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(30.0))),
+                borderRadius: BorderRadius.all(Radius.circular(13.0))),
             labelText: widget.label,
             suffixIcon: IconButton(
                 icon:
@@ -45,5 +45,5 @@ class _InputPassword extends State<InputPassword> {
     );
   }
 
-  bool isPasswordValid(String password) => password.length > 6;
+  bool isPasswordValid(String password) => password.length > 4;
 }
