@@ -4,6 +4,7 @@ import 'package:week3/components/button/ButtonCustom.dart';
 import 'package:week3/components/input/InputCustom.dart';
 import 'package:week3/components/input/InputPassword.dart';
 import 'package:week3/components/message/NotiDialog.dart';
+import 'package:week3/components/message/Notification.dart';
 import 'package:week3/screen/Main.dart';
 import 'package:week3/screen/Signup.dart';
 import 'package:week3/services/UserService.dart';
@@ -46,7 +47,7 @@ class _LoginScreen extends State<LoginScreen> {
             return MainScreen();
           }));
         } else {
-          showNotificationDialog('Thông báo', value.message, context);
+          showError(value.message.toString());
         }
       });
     }

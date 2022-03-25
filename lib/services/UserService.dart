@@ -2,14 +2,12 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:week3/components/message/Notification.dart';
 import 'package:week3/services/Response.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
+import '../components/message/Notification.dart';
 
 Future<Response> login(String username, String password) async {
-  await EasyLoading.show(
-    status: 'loading...',
-    maskType: EasyLoadingMaskType.clear,
-  );
+  showLoader();
   final http.Response response = await http.post(
       Uri.parse('https://englishcenter-spkt-api.herokuapp.com/auth/login'),
       headers: <String, String>{
@@ -20,7 +18,7 @@ Future<Response> login(String username, String password) async {
         "password": password
       }));
 
-  await EasyLoading.dismiss();
+  dismiss();
   if (response.statusCode == 200) {
     return Response.fromJson(jsonDecode(response.body));
   } else {
