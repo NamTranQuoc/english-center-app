@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "640196743442",
+    "project_id": "englishcenter-2021",
+    "storage_bucket": "englishcenter-2021.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:640196743442:android:058d526c4b700480a0e3cb",
+        "android_client_info": {
+          "package_name": "com.example.week3"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "640196743442-2at53t9mbed88vdgbdad0k21qfet1mk6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDca9xFp0q4yoksC5kuq_kus_rLS6V0V9Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "640196743442-2at53t9mbed88vdgbdad0k21qfet1mk6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
