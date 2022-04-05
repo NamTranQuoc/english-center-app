@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:week3/components/button/ButtonCustom.dart';
+import 'package:week3/components/upload/AvatarCustom.dart';
 import 'package:week3/screen/Login.dart';
 import 'package:week3/util/LocalStorage.dart';
 
@@ -24,14 +25,7 @@ class _MoreScreen extends State<MoreScreen> {
             padding: const EdgeInsets.fromLTRB(10, 50, 10, 10),
             child: ListView(
               children: <Widget>[
-                Container(
-                  height: 150,
-                  margin: const EdgeInsets.fromLTRB(10, 10, 10, 20),
-                  child: const CircleAvatar(
-                      radius: 20,
-                      backgroundImage: NetworkImage(
-                          'https://firebasestorage.googleapis.com/v0/b/englishcenter-2021.appspot.com/o/images%2Favatar.png?alt=media')),
-                ),
+                AvatarCustom(),
                 Container(
                   margin: const EdgeInsets.fromLTRB(10, 10, 10, 20),
                   alignment: Alignment.center,
