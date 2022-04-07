@@ -12,13 +12,17 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2
-  ff_navigation_bar: ^0.1.5
   http: ^0.13.4
   path_provider: ^2.0.9
   flutter_easyloading: ^3.0.3
   firebase_core: ^1.14.0
   firebase_storage: ^10.2.10
   file_picker: ^4.5.1
+  flutter_localizations:
+    sdk: flutter
+  intl: ^0.17.0
+  flutter_bloc: ^8.0.1
+  dot_navigation_bar: ^1.0.1+4
 
 dev_dependencies:
   flutter_test:
@@ -27,3 +31,6 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  generate: true
+flutter_intl:
+  enabled: true

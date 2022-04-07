@@ -1,27 +1,31 @@
-import 'package:ff_navigation_bar/ff_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:dot_navigation_bar/dot_navigation_bar.dart';
 import 'package:week3/screen/tabs/Home.dart';
 import 'package:week3/screen/tabs/More.dart';
 import 'package:week3/screen/tabs/Schedule.dart';
 
+
 class MainScreen extends StatefulWidget {
   static const routeName = '/main';
 
-  MainScreen();
-
   @override
-  _MainScreen createState() => _MainScreen();
+  _HomeState createState() => _HomeState();
 }
 
-class _MainScreen extends State<MainScreen> {
-  int selectedIndex = 0;
-  TextEditingController keyword = TextEditingController();
+class _HomeState extends State<MainScreen> {
+  var _selectedTab = _SelectedTab.home;
+
+  void _handleIndexChanged(int i) {
+    setState(() {
+      _selectedTab = _SelectedTab.values[i];
+    });
+  }
 
   Widget getTab() {
-    switch (selectedIndex) {
-      case 0:
+    switch (_selectedTab) {
+      case _SelectedTab.schedule:
         return ScheduleScreen();
-      case 2:
+      case _SelectedTab.person:
         return MoreScreen();
       default:
         return HomeScreen();
@@ -31,64 +35,42 @@ class _MainScreen extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: const SizedBox(
-            height: 40,
-            child: TextField(
-              decoration: InputDecoration(
-                fillColor: Colors.white,
-                filled: true,
-                prefixIcon: Icon(Icons.search),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(30.0)),
-                ),
-                contentPadding: EdgeInsets.all(10.0),
-                hintText: 'Search',
-              ),
-            )),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.notifications),
-          )
-        ],
-      ),
+      extendBody: true,
       body: getTab(),
-      bottomNavigationBar: FFNavigationBar(
-        theme: FFNavigationBarTheme(
-          barBackgroundColor: Colors.white,
-          selectedItemBorderColor: Colors.transparent,
-          selectedItemBackgroundColor: Colors.green,
-          selectedItemIconColor: Colors.white,
-          selectedItemLabelColor: Colors.black,
-          showSelectedItemShadow: false,
-          barHeight: 70,
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.only(bottom: 10),
+        child: DotNavigationBar(
+          margin: const EdgeInsets.only(left: 10, right: 10),
+          currentIndex: _SelectedTab.values.indexOf(_selectedTab),
+          dotIndicatorColor: Colors.black,
+          backgroundColor: Colors.cyan,
+          unselectedItemColor: Colors.grey[300],
+          // enableFloatingNavBar: false,
+          onTap: _handleIndexChanged,
+          items: [
+
+            /// Likes
+            DotNavigationBarItem(
+              icon: Icon(Icons.schedule),
+              selectedColor: Color(0xff73544C),
+            ),
+
+            /// Home
+            DotNavigationBarItem(
+              icon: const Icon(Icons.home),
+              selectedColor: Color(0xff73544C),
+            ),
+
+            /// Profile
+            DotNavigationBarItem(
+              icon: Icon(Icons.person),
+              selectedColor: Color(0xff73544C),
+            ),
+          ],
         ),
-        selectedIndex: selectedIndex,
-        onSelectTab: (index) {
-          setState(() {
-            selectedIndex = index;
-          });
-        },
-        items: [
-          FFNavigationBarItem(
-            iconData: Icons.schedule_sharp,
-            label: 'Schedule',
-            selectedBackgroundColor: Colors.purple,
-          ),
-          FFNavigationBarItem(
-            iconData: Icons.home,
-            label: 'Home',
-            selectedBackgroundColor: Colors.blue,
-          ),
-          FFNavigationBarItem(
-            iconData: Icons.menu,
-            label: 'More',
-            selectedBackgroundColor: Colors.red,
-          ),
-        ],
       ),
     );
   }
 }
+
+enum _SelectedTab { schedule, home, person }
