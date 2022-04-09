@@ -3,7 +3,6 @@ import 'package:week3/components/Image/Logo.dart';
 import 'package:week3/components/button/ButtonCustom.dart';
 import 'package:week3/components/input/InputCustom.dart';
 import 'package:week3/components/input/InputPassword.dart';
-import 'package:week3/components/message/NotiDialog.dart';
 import 'package:week3/components/message/Notification.dart';
 import 'package:week3/screen/Main.dart';
 import 'package:week3/screen/Signup.dart';
@@ -71,7 +70,7 @@ class _LoginScreen extends State<LoginScreen> {
                     ],
                   ),
                 ),
-                ButtonCustom(AppLocalizations.of(context)!.helloWorld, Colors.lightBlueAccent, onLogin),
+                ButtonCustom(AppLocalizations.of(context)!.labelLogin, Colors.lightBlueAccent, onLogin),
                 Container(
                   height: 75,
                   padding: const EdgeInsets.all(10),
