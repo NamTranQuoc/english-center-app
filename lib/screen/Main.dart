@@ -51,20 +51,20 @@ class _HomeState extends State<MainScreen> {
 
             /// Likes
             DotNavigationBarItem(
-              icon: Icon(Icons.schedule),
-              selectedColor: Color(0xff73544C),
+              icon: const Icon(Icons.schedule),
+              selectedColor: const Color(0xff73544C),
             ),
 
             /// Home
             DotNavigationBarItem(
               icon: const Icon(Icons.home),
-              selectedColor: Color(0xff73544C),
+              selectedColor: const Color(0xff73544C),
             ),
 
             /// Profile
             DotNavigationBarItem(
-              icon: Icon(Icons.person),
-              selectedColor: Color(0xff73544C),
+              icon: const Icon(Icons.person),
+              selectedColor: const Color(0xff73544C),
             ),
           ],
         ),
