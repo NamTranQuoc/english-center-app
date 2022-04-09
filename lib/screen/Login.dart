@@ -7,7 +7,7 @@ import 'package:week3/components/message/NotiDialog.dart';
 import 'package:week3/components/message/Notification.dart';
 import 'package:week3/screen/Main.dart';
 import 'package:week3/screen/Signup.dart';
-import 'package:week3/services/UserService.dart';
+import 'package:week3/services/AuthService.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -42,14 +42,10 @@ class _LoginScreen extends State<LoginScreen> {
     if (formGlobalKey.currentState!.validate()) {
       formGlobalKey.currentState!.save();
       login(usernameController.text, passwordController.text).then((value) {
-        if (value.code == 9999) {
-          widget.storage.setToken(value.payload);
-          Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-            return MainScreen();
-          }));
-        } else {
-          showError(value.message.toString());
-        }
+        widget.storage.setToken(value.payload);
+        Navigator.of(context).push(MaterialPageRoute(builder: (_) {
+          return MainScreen();
+        }));
       });
     }
   }

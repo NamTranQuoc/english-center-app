@@ -4,7 +4,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:week3/domain/Member.dart';
-import 'package:week3/services/UserService.dart';
+import 'package:week3/services/MemberService.dart';
 import 'package:week3/util/Enums.dart';
 import 'package:week3/util/firebase_api.dart';
 
@@ -65,20 +65,24 @@ class _AvatarCustom extends State<AvatarCustom> {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      child: Container(
-        width: 100,
-        margin: const EdgeInsets.only(left: 100, right: 100, bottom: 18, top: 18),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(50),
-          child: Image(
-              image: NetworkImage(url)),
-        ),
-      ),
-      onTap: () async {
-        await selectFile();
-        uploadFile();
-      },
-    );
+    return Center(
+        child: InkWell(
+          child: Container(
+            width: 170,
+            height: 170,
+            padding: const EdgeInsets.all(5),
+            decoration: BoxDecoration(
+            border: Border.all(color: Colors.blueAccent),
+            borderRadius: BorderRadius.circular(20)),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: Image(image: NetworkImage(url)),
+            ),
+          ),
+          onTap: () async {
+            await selectFile();
+            uploadFile();
+            },
+        ));
   }
 }
