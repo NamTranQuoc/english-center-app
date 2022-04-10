@@ -23,12 +23,6 @@ class _AvatarCustom extends State<AvatarCustom> {
   UploadTask? task;
   File? file;
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
-
   Future selectFile() async {
     final result = await FilePicker.platform.pickFiles(allowMultiple: false);
 

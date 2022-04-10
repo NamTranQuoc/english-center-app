@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:week3/domain/Member.dart';
 
 class MemberProvider extends ChangeNotifier {
-  late Member _currentMember;
+  late Member _currentMember = Member.fromJson({});
 
   Member get currentMember => _currentMember;
 
