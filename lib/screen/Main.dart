@@ -1,8 +1,9 @@
+
+import 'package:english_center/screen/tabs/Home.dart';
+import 'package:english_center/screen/tabs/More.dart';
+import 'package:english_center/screen/tabs/Schedule.dart';
 import 'package:flutter/material.dart';
 import 'package:dot_navigation_bar/dot_navigation_bar.dart';
-import 'package:week3/screen/tabs/Home.dart';
-import 'package:week3/screen/tabs/More.dart';
-import 'package:week3/screen/tabs/Schedule.dart';
 
 
 class MainScreen extends StatefulWidget {
@@ -51,20 +52,20 @@ class _HomeState extends State<MainScreen> {
 
             /// Likes
             DotNavigationBarItem(
-              icon: Icon(Icons.schedule),
-              selectedColor: Color(0xff73544C),
+              icon: const Icon(Icons.schedule),
+              selectedColor: const Color(0xff73544C),
             ),
 
             /// Home
             DotNavigationBarItem(
               icon: const Icon(Icons.home),
-              selectedColor: Color(0xff73544C),
+              selectedColor: const Color(0xff73544C),
             ),
 
             /// Profile
             DotNavigationBarItem(
-              icon: Icon(Icons.person),
-              selectedColor: Color(0xff73544C),
+              icon: const Icon(Icons.person),
+              selectedColor: const Color(0xff73544C),
             ),
           ],
         ),

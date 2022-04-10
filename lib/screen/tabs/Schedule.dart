@@ -1,8 +1,8 @@
+import 'package:english_center/components/button/ButtonCustom.dart';
+import 'package:english_center/providers/CommonProvider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:week3/translate/cubits/languages_cubit.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:provider/provider.dart';
 
 class ScheduleScreen extends StatefulWidget {
   static const routeName = '/schedule';
@@ -27,21 +27,14 @@ class _ScheduleScreen extends State<ScheduleScreen> {
         const SizedBox(
           height: 10,
         ),
-        BlocBuilder<LanguagesCubit, Locale?>(builder: (context, state) {
-          return Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              GestureDetector(
-                  onTap: () =>
-                      context.read<LanguagesCubit>().change(Locale('vi', '')),
-                  child: Text("Tieng Viet")),
-              GestureDetector(
-                  onTap: () =>
-                      context.read<LanguagesCubit>().change(Locale('en', '')),
-                  child: Text("English")),
-            ],
-          );
-        }),
+        ButtonCustom(Provider.of<CommandProvider>(context).currentLocale.languageCode, Colors.red, () {
+          CommandProvider provider = Provider.of<CommandProvider>(context, listen: false);
+          if (provider.currentLocale.languageCode == 'vi') {
+            provider.set(const Locale('en', ''));
+          } else {
+            provider.set(const Locale('vi', ''));
+          }
+        })
       ],
     ));
   }

@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 
 class InputCustom extends StatelessWidget {
@@ -6,8 +7,7 @@ class InputCustom extends StatelessWidget {
   final InputType inputType;
   final String textError;
 
-  InputCustom(
-      this.label, this.usernameController, this.inputType, this.textError);
+  InputCustom(this.label, this.usernameController, this.inputType, this.textError);
 
   @override
   Widget build(BuildContext context) {
