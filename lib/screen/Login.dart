@@ -7,6 +7,7 @@ import 'package:english_center/screen/Main.dart';
 import 'package:english_center/screen/Signup.dart';
 import 'package:english_center/services/AuthService.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../util/LocalStorage.dart';
 
