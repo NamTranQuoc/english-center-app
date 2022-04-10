@@ -69,7 +69,7 @@ class _LoginScreen extends State<LoginScreen> {
                     ],
                   ),
                 ),
-                ButtonCustom(AppLocalizations.of(context)!.labelLogin, Colors.lightBlueAccent, onLogin),
+                ButtonCustom(AppLocalizations.of(context).labelLogin, Colors.lightBlueAccent, onLogin),
                 Container(
                   height: 75,
                   padding: const EdgeInsets.all(10),
