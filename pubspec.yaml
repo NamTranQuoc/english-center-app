@@ -1,7 +1,7 @@
-name: week3
-description: A new Flutter project.
+name: english_center
+description: English Center Mobile App.
 
-publish_to:
+publish_to: 'none'
 
 version: 1.0.0+1
 

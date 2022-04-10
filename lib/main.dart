@@ -1,11 +1,11 @@
+import 'package:english_center/providers/CommonProvider.dart';
+import 'package:english_center/providers/MemberProvider.dart';
+import 'package:english_center/screen/Login.dart';
+import 'package:english_center/screen/Main.dart';
+import 'package:english_center/screen/Signup.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:week3/providers/CommonProvider.dart';
-import 'package:week3/providers/MemberProvider.dart';
-import 'package:week3/screen/Login.dart';
-import 'package:week3/screen/Main.dart';
-import 'package:week3/screen/Signup.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';

@@ -1,10 +1,11 @@
+
+import 'package:english_center/components/Image/Logo.dart';
+import 'package:english_center/components/button/ButtonCustom.dart';
+import 'package:english_center/components/button/ButtonText.dart';
+import 'package:english_center/components/input/InputCustom.dart';
+import 'package:english_center/components/select/SelectCustom.dart';
+import 'package:english_center/screen/Login.dart';
 import 'package:flutter/material.dart';
-import 'package:week3/components/Image/Logo.dart';
-import 'package:week3/components/button/ButtonCustom.dart';
-import 'package:week3/components/button/ButtonText.dart';
-import 'package:week3/components/input/InputCustom.dart';
-import 'package:week3/components/select/SelectCustom.dart';
-import 'package:week3/screen/Login.dart';
 
 class SignUpScreen extends StatefulWidget {
   static const routeName = '/signup';

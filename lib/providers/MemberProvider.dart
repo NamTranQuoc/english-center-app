@@ -1,6 +1,6 @@
 
+import 'package:english_center/domain/Member.dart';
 import 'package:flutter/foundation.dart';
-import 'package:week3/domain/Member.dart';
 
 class MemberProvider extends ChangeNotifier {
   late Member _currentMember = Member.fromJson({});

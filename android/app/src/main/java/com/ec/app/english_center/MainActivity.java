@@ -1,4 +1,4 @@
-package com.example.week3;
+package com.ec.app.english_center;
 
 import io.flutter.embedding.android.FlutterActivity;
 

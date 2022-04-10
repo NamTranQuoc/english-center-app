@@ -1,6 +1,6 @@
-# week3
+# english_center
 
-A new Flutter project.
+English Center Mobile App.
 
 ## Getting Started
 

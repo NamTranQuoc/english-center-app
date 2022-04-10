@@ -1,14 +1,12 @@
+
+import 'package:english_center/components/Image/Logo.dart';
+import 'package:english_center/components/button/ButtonCustom.dart';
+import 'package:english_center/components/input/InputCustom.dart';
+import 'package:english_center/components/input/InputPassword.dart';
+import 'package:english_center/screen/Main.dart';
+import 'package:english_center/screen/Signup.dart';
+import 'package:english_center/services/AuthService.dart';
 import 'package:flutter/material.dart';
-import 'package:week3/components/Image/Logo.dart';
-import 'package:week3/components/button/ButtonCustom.dart';
-import 'package:week3/components/input/InputCustom.dart';
-import 'package:week3/components/input/InputPassword.dart';
-import 'package:week3/components/message/Notification.dart';
-import 'package:week3/screen/Main.dart';
-import 'package:week3/screen/Signup.dart';
-import 'package:week3/services/AuthService.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../util/LocalStorage.dart';
 

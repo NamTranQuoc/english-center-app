@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.week3">
+    package="com.ec.app.english_center">
    <application
-        android:label="week3"
+        android:label="english_center"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

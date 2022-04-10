@@ -1,14 +1,11 @@
 import 'dart:io';
 
+import 'package:english_center/providers/MemberProvider.dart';
+import 'package:english_center/util/firebase_api.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:week3/domain/Member.dart';
-import 'package:week3/providers/MemberProvider.dart';
-import 'package:week3/services/MemberService.dart';
-import 'package:week3/util/Enums.dart';
-import 'package:week3/util/firebase_api.dart';
 
 class AvatarCustom extends StatefulWidget {
   AvatarCustom();

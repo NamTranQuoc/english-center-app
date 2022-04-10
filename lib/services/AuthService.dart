@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:week3/services/Common.dart';
-import 'package:week3/services/Response.dart';
-import 'package:week3/util/Enums.dart';
+import 'package:english_center/services/Common.dart';
+import 'package:english_center/services/Response.dart';
+import 'package:english_center/util/Enums.dart';
 
 final endpoint = '${Common.host}/auth/';
 

@@ -1,8 +1,9 @@
+
+import 'package:english_center/screen/tabs/Home.dart';
+import 'package:english_center/screen/tabs/More.dart';
+import 'package:english_center/screen/tabs/Schedule.dart';
 import 'package:flutter/material.dart';
 import 'package:dot_navigation_bar/dot_navigation_bar.dart';
-import 'package:week3/screen/tabs/Home.dart';
-import 'package:week3/screen/tabs/More.dart';
-import 'package:week3/screen/tabs/Schedule.dart';
 
 
 class MainScreen extends StatefulWidget {
