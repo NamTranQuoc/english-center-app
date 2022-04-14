@@ -31,6 +31,9 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - images/GB@2x.png
+    - images/VN@2x.png
   generate: true
 flutter_intl:
   enabled: true

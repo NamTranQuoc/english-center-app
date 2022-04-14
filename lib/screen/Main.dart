@@ -4,6 +4,8 @@ import 'package:english_center/screen/tabs/More.dart';
 import 'package:english_center/screen/tabs/Schedule.dart';
 import 'package:flutter/material.dart';
 import 'package:circle_nav_bar/circle_nav_bar.dart';
+import 'package:provider/provider.dart';
+import '../providers/CommonProvider.dart';
 
 
 class MainScreen extends StatefulWidget {
@@ -15,11 +17,55 @@ class MainScreen extends StatefulWidget {
 
 class _HomeState extends State<MainScreen> with SingleTickerProviderStateMixin {
   int tabIndex = 1;
+  var language = "";
   late TabController tabController = TabController(length: 3, initialIndex: tabIndex, vsync: this);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading:
+        IconButton(
+          onPressed: (){
+            CommandProvider provider = Provider.of<CommandProvider>(context, listen: false);
+            if (provider.currentLocale.languageCode == 'vi') {
+              provider.set(const Locale('en', ''));
+              language = "vi";
+            } else {
+              provider.set(const Locale('vi', ''));
+              language = "en";
+            }
+          },
+          icon: Image.asset((language == "vi") ? 'images/GB@2x.png' : 'images/VN@2x.png'),
+          splashRadius: 100,
+        ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.search),
+            onPressed: (){
+              print("search");
+            },
+          ),
+          IconButton(
+            icon: const Icon(Icons.notifications_none),
+            onPressed: (){
+              print("notification");
+            },
+          ),
+        ],
+        // backgroundColor: Colors.amber,
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Colors.purple, Colors.brown],
+              begin: Alignment.bottomRight,
+              end: Alignment.topLeft,
+            )
+          ),
+        ),
+        elevation: 20,
+        titleSpacing: 4,
+      ),
       bottomNavigationBar: CircleNavBar(
         activeIcons: const [
           Icon(Icons.schedule_sharp, color: Colors.blue),
