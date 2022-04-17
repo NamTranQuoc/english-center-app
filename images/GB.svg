@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 25.4.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 21 15" style="enable-background:new 0 0 21 15;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill-rule:evenodd;clip-rule:evenodd;fill:url(#FlagBackground_00000000217620179201152510000002050857490263047562_);}
+	.st1{fill-rule:evenodd;clip-rule:evenodd;fill:url(#Mask-Copy_00000171684846085480262010000005943237647827792025_);}
+	.st2{fill-rule:evenodd;clip-rule:evenodd;fill:url(#Rectangle-2_00000182501596671913931700000004521758871194595216_);}
+	.st3{fill:#DB1F35;}
+	.st4{fill-rule:evenodd;clip-rule:evenodd;fill:url(#Rectangle-2-Copy-3_00000109718723317076840230000010969084393823713158_);}
+</style>
+<desc>Created with sketchtool.</desc>
+<g id="Symbols">
+	<g id="GB">
+		
+			<linearGradient id="FlagBackground_00000108272552587501606110000007192960559426251956_" gradientUnits="userSpaceOnUse" x1="-280.4465" y1="378.1336" x2="-280.4465" y2="377.1336" gradientTransform="matrix(21 0 0 -15 5900 5672)">
+			<stop  offset="0" style="stop-color:#FFFFFF"/>
+			<stop  offset="1" style="stop-color:#F0F0F0"/>
+		</linearGradient>
+		
+			<rect id="FlagBackground" x="0.1" y="0" style="fill-rule:evenodd;clip-rule:evenodd;fill:url(#FlagBackground_00000108272552587501606110000007192960559426251956_);" width="21" height="15"/>
+		
+			<linearGradient id="Mask-Copy_00000043451899988652934940000003335912696195237015_" gradientUnits="userSpaceOnUse" x1="-280.4465" y1="378.1336" x2="-280.4465" y2="377.1336" gradientTransform="matrix(21 0 0 -15 5899.998 5672)">
+			<stop  offset="0" style="stop-color:#0A17A7"/>
+			<stop  offset="1" style="stop-color:#030E88"/>
+		</linearGradient>
+		
+			<path id="Mask-Copy" style="fill-rule:evenodd;clip-rule:evenodd;fill:url(#Mask-Copy_00000043451899988652934940000003335912696195237015_);" d="
+			M4.4,0h12.5c2.3,0,4.2,1.9,4.2,4.2v6.5c0,2.3-1.9,4.2-4.2,4.2H4.4c-2.3,0-4.2-1.9-4.2-4.2V4.2C0.1,1.9,2,0,4.4,0z"/>
+		
+			<linearGradient id="Rectangle-2_00000143575018319858377390000004980699102968957089_" gradientUnits="userSpaceOnUse" x1="-282.7678" y1="382.2321" x2="-282.7678" y2="381.3391" gradientTransform="matrix(22.8532 -6.132257e-02 -4.037576e-02 -15.0466 6488.1865 5734.7397)">
+			<stop  offset="0" style="stop-color:#FFFFFF"/>
+			<stop  offset="1" style="stop-color:#F0F0F0"/>
+		</linearGradient>
+		
+			<path id="Rectangle-2" style="fill-rule:evenodd;clip-rule:evenodd;fill:url(#Rectangle-2_00000143575018319858377390000004980699102968957089_);" d="
+			M6.3,9.4l-4,0l0-3.8l4,0L0.7,2.1l0.9-1.2l7.1,4.5l0-4.2l4,0l0,4.2l7.1-4.6L20.6,2L15,5.6l4,0l0,3.8l-4,0l5.6,3.6l-0.9,1.2
+			l-7.1-4.5l0,4.2l-4,0l0-4.2l-7.1,4.6L0.7,13L6.3,9.4z"/>
+		<path id="Line" class="st3" d="M13.5,5.7l6.4-4.1c0.1,0,0.1-0.2,0-0.2c-0.1-0.1-0.2-0.1-0.2,0l-6.4,4.1c-0.1,0-0.1,0.2,0,0.2
+			C13.3,5.7,13.4,5.7,13.5,5.7z"/>
+		<path id="Line-Copy-2" class="st3" d="M13.6,9.6l6.3,3.9c0.1,0.1,0.2,0,0.3,0c0.1-0.1,0-0.2,0-0.2l-6.3-3.9c-0.1-0.1-0.2,0-0.3,0
+			C13.5,9.4,13.5,9.5,13.6,9.6z"/>
+		<path id="Line-Copy" class="st3" d="M8.2,5.4L1.6,1.3c-0.1-0.1-0.2,0-0.3,0c-0.1,0.1,0,0.2,0.1,0.2L8,5.7c0.1,0.1,0.2,0,0.3,0
+			C8.3,5.5,8.3,5.4,8.2,5.4z"/>
+		<path id="Line-Copy-3" class="st3" d="M7.7,9.3l-6.5,4c-0.1,0-0.1,0.1,0,0.2c0.1,0.1,0.2,0.1,0.2,0l6.5-4C8,9.5,8,9.4,8,9.3
+			C7.9,9.3,7.8,9.3,7.7,9.3z"/>
+		
+			<linearGradient id="Rectangle-2-Copy-3_00000159470513576373373420000011928630209340056745_" gradientUnits="userSpaceOnUse" x1="-280.4465" y1="378.1336" x2="-280.4465" y2="377.1336" gradientTransform="matrix(21 0 0 -15 5899.998 5672)">
+			<stop  offset="0" style="stop-color:#E6273E"/>
+			<stop  offset="1" style="stop-color:#CF152B"/>
+		</linearGradient>
+		
+			<polygon id="Rectangle-2-Copy-3" style="fill-rule:evenodd;clip-rule:evenodd;fill:url(#Rectangle-2-Copy-3_00000159470513576373373420000011928630209340056745_);" points="
+			0.1,9 9.1,9 9.1,15 12.1,15 12.1,9 21.1,9 21.1,6 12.1,6 12.1,0 9.1,0 9.1,6 0.1,6 		"/>
+	</g>
+</g>
+</svg>

@@ -1,4 +1,5 @@
 {
     "helloWorld": "xin chào",
-    "labelLogin": "Đăng nhập"
+    "labelLogin": "Đăng nhập",
+    "test": "abc"
 }
