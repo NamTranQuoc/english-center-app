@@ -23,7 +23,7 @@ class _ScheduleScreen extends State<ScheduleScreen> {
         body: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(AppLocalizations.of(context).test),
+        Text(AppLocalizations.of(context).helloWorld),
         const SizedBox(
           height: 10,
         ),
