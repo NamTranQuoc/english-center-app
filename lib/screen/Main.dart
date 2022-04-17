@@ -4,6 +4,7 @@ import 'package:english_center/screen/tabs/More.dart';
 import 'package:english_center/screen/tabs/Schedule.dart';
 import 'package:flutter/material.dart';
 import 'package:circle_nav_bar/circle_nav_bar.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import '../providers/CommonProvider.dart';
 
@@ -36,8 +37,11 @@ class _HomeState extends State<MainScreen> with SingleTickerProviderStateMixin {
               language = "en";
             }
           },
-          icon: Image.asset((language == "vi") ? 'images/GB@2x.png' : 'images/VN@2x.png'),
-          splashRadius: 100,
+          icon: SizedBox(
+            height: 25,
+            width: 35,
+            child: SvgPicture.asset((language == "vi") ? 'images/GB.svg' : 'images/VN.svg')
+          ),
         ),
         actions: [
           IconButton(
