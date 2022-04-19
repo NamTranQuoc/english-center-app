@@ -4,10 +4,12 @@ import 'package:english_center/components/upload/AvatarCustom.dart';
 import 'package:english_center/domain/Member.dart';
 import 'package:english_center/providers/MemberProvider.dart';
 import 'package:english_center/screen/Login.dart';
+import 'package:english_center/screen/tabs/more/ChangePassword.dart';
 import 'package:english_center/services/MemberService.dart';
 import 'package:english_center/util/LocalStorage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MoreScreen extends StatefulWidget {
   static const routeName = '/menu';
@@ -56,9 +58,14 @@ class _MoreScreen extends State<MoreScreen> {
                   ),
                 ),
                 ButtonCustom(
-                    'Cập Nhật Thông Tin', Colors.lightBlueAccent, () {}),
-                ButtonCustom('Đổi Mật Khẩu', Colors.lightBlueAccent, () {}),
-                ButtonCustom('Đăng Xuất', Colors.lightBlueAccent, () {
+                    AppLocalizations.of(context).loginWithGoogle, Colors.lightBlueAccent, () {}),
+                ButtonCustom(AppLocalizations.of(context).changePassword, Colors.lightBlueAccent, () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ChangePassword()),
+                  );
+                }),
+                ButtonCustom(AppLocalizations.of(context).logOut, Colors.lightBlueAccent, () {
                   widget.storage.cleanToken();
                   Provider.of<MemberProvider>(context, listen: false)
                       .set(Member.fromJson({}));
