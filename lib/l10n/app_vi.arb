@@ -1,5 +1,17 @@
 {
     "helloWorld": "xin chào",
     "labelLogin": "Đăng nhập",
-    "test": "abc"
+    "test": "abc",
+    "oldPassword": "Mật Khẩu Cũ",
+    "newPassword": "Mật Khẩu Mới",
+    "confirmPassword": "Nhập Lại Mật Khẩu",
+    "username": "Tên đăng nhập",
+    "password": "Mật khẩu",
+    "validateErrorFormat": "Vui lòng nhập đúng định dạng",
+    "forgetPassword": "Quên Mật Khẩu",
+    "signUp": "Đăng Ký",
+    "loginWithGoogle": "Đăng Nhập Với Google",
+    "updateInformation": "Cập Nhật Thông Tin",
+    "changePassword": "Đổi Mật Khẩu",
+    "logOut": "Đăng Xuất"
 }

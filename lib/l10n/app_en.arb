@@ -1,5 +1,17 @@
 {
     "helloWorld": "Hello World!",
     "labelLogin": "Login",
-    "test": "test"
+    "test": "test",
+    "oldPassword": "Old Password",
+    "newPassword": "New Password",
+    "confirmPassword": "Confirm Password",
+    "username": "Username",
+    "password": "Password",
+    "validateErrorFormat": "Please enter the correct format",
+    "forgetPassword": "Forget Password",
+    "signUp": "Sign Up",
+    "loginWithGoogle": "Login With Google",
+    "updateInformation": "Update Information",
+    "changePassword": "Change Password",
+    "logOut": "Log Out"
 }

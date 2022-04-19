@@ -61,11 +61,11 @@ class _LoginScreen extends State<LoginScreen> {
                   child: Column(
                     children: [
                       InputCustom(
-                          "Username",
+                          AppLocalizations.of(context).username,
                           usernameController,
                           InputType.EMAIL,
-                          'Vui lòng nhập đúng định dạng email'),
-                      InputPassword("Password", passwordController),
+                          AppLocalizations.of(context).validateErrorFormat),
+                      InputPassword(AppLocalizations.of(context).password, passwordController),
                     ],
                   ),
                 ),
@@ -73,17 +73,17 @@ class _LoginScreen extends State<LoginScreen> {
                 Container(
                   height: 75,
                   padding: const EdgeInsets.all(10),
-                  child: const Text(
-                    'Quên mật khẩu?',
+                  child: Text(
+                    AppLocalizations.of(context).forgetPassword + '?',
                     textAlign: TextAlign.right,
                   ),
                 ),
-                ButtonCustom('Tạo Tài Khoản', Colors.blueGrey, () {
+                ButtonCustom(AppLocalizations.of(context).signUp, Colors.blueGrey, () {
                   Navigator.of(context).push(MaterialPageRoute(builder: (_) {
                     return SignUpScreen();
                   }));
                 }),
-                ButtonCustom('Đăng nhập Với Google', Colors.green, () {}),
+                ButtonCustom(AppLocalizations.of(context).loginWithGoogle, Colors.green, () {}),
               ],
             )));
   }
