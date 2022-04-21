@@ -21,3 +21,15 @@ Future<Response> signUp(String name, String email, String gender, String phoneNu
     "dob": dob
   });
 }
+
+Future<Response> updateMember(String id, String name, String nickName, String phone, String gender, int dob, String type) async {
+  return putAuthenticated('${endpoint}update', {
+    "id": id,
+    "name": name,
+    "gender": gender,
+    "phone_number": phone,
+    "dob": dob,
+    "nick_name": nickName,
+    "type": type
+  });
+}

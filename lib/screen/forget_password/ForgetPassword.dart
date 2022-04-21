@@ -56,7 +56,7 @@ class _ForgetPassword extends State<ForgetPassword> {
                       InputCustom(
                           "Code",
                           code,
-                          InputType.NONE,
+                          InputType.REQUEST,
                           AppLocalizations.of(context).validateErrorFormat),
                       InputPassword(AppLocalizations.of(context).newPassword,
                           newPassword),

@@ -8,6 +8,7 @@ import 'package:english_center/components/picker/DatePicker.dart';
 import 'package:english_center/components/select/SelectCustom.dart';
 import 'package:english_center/screen/Login.dart';
 import 'package:english_center/services/MemberService.dart';
+import 'package:english_center/util/ParseUtil.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
@@ -33,8 +34,7 @@ class _SignUpScreen extends State<SignUpScreen> {
   void onSignUp() {
     if (formGlobalKey.currentState!.validate()) {
       formGlobalKey.currentState!.save();
-      var date = DateFormat("dd-MM-yyyy").parse(dob.text).millisecondsSinceEpoch;
-      signUp(name.text, email.text, gender, phone.text, date).then((value) {
+      signUp(name.text, email.text, gender, phone.text, StringToTimeStamp(dob.text)).then((value) {
         if (value.code == 9999) {
           showSuccess("Sign Up Success");
           Navigator.of(context).push(MaterialPageRoute(builder: (_) {
@@ -68,7 +68,7 @@ class _SignUpScreen extends State<SignUpScreen> {
                       SelectCustom(gender, genders, AppLocalizations.of(context).gender, (val) {setState(() {
                         gender = val;
                       });}),
-                      DatePicker(AppLocalizations.of(context).dob, dob),
+                      DatePicker(AppLocalizations.of(context).dob, dob, DateTime.now()),
                     ],
                   ),
                 ),

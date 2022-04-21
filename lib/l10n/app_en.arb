@@ -24,5 +24,7 @@
     "validateErrorInputBlank": "Data cannot be empty",
     "dob": "DOB",
     "send": "Send",
-    "restore": "Restore"
+    "restore": "Restore",
+    "nickName": "Nick Name",
+    "update": "Update"
 }

@@ -65,7 +65,7 @@ class _LoginScreen extends State<LoginScreen> {
                       InputCustom(
                           AppLocalizations.of(context).username,
                           usernameController,
-                          InputType.NONE,
+                          InputType.REQUEST,
                           AppLocalizations.of(context).validateErrorFormat),
                       InputPassword(AppLocalizations.of(context).password, passwordController),
                     ],

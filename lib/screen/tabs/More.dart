@@ -1,15 +1,15 @@
-
 import 'package:english_center/components/button/ButtonCustom.dart';
 import 'package:english_center/components/upload/AvatarCustom.dart';
 import 'package:english_center/domain/Member.dart';
 import 'package:english_center/providers/MemberProvider.dart';
 import 'package:english_center/screen/Login.dart';
 import 'package:english_center/screen/tabs/more/ChangePassword.dart';
+import 'package:english_center/screen/tabs/more/UpdateInformation.dart';
 import 'package:english_center/services/MemberService.dart';
 import 'package:english_center/util/LocalStorage.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
 class MoreScreen extends StatefulWidget {
   static const routeName = '/menu';
@@ -29,7 +29,8 @@ class _MoreScreen extends State<MoreScreen> {
     // TODO: implement initState
     super.initState();
 
-    MemberProvider memberProvider = Provider.of<MemberProvider>(context, listen: false);
+    MemberProvider memberProvider =
+        Provider.of<MemberProvider>(context, listen: false);
     if (memberProvider.currentMember.id == null) {
       getCurrentMember().then((value) {
         Member member = Member.fromJson(value.payload);
@@ -57,15 +58,23 @@ class _MoreScreen extends State<MoreScreen> {
                     },
                   ),
                 ),
-                ButtonCustom(
-                    AppLocalizations.of(context).updateInformation, Colors.lightBlueAccent, () {}),
-                ButtonCustom(AppLocalizations.of(context).changePassword, Colors.lightBlueAccent, () {
+                ButtonCustom(AppLocalizations.of(context).updateInformation,
+                    Colors.lightBlueAccent, () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => UpdateInformation(Provider.of<MemberProvider>(context).currentMember)),
+                  );
+                }),
+                ButtonCustom(AppLocalizations.of(context).changePassword,
+                    Colors.lightBlueAccent, () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => ChangePassword()),
                   );
                 }),
-                ButtonCustom(AppLocalizations.of(context).logOut, Colors.lightBlueAccent, () {
+                ButtonCustom(
+                    AppLocalizations.of(context).logOut, Colors.lightBlueAccent,
+                    () {
                   widget.storage.cleanToken();
                   Provider.of<MemberProvider>(context, listen: false)
                       .set(Member.fromJson({}));
