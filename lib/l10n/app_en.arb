@@ -13,5 +13,14 @@
     "loginWithGoogle": "Login With Google",
     "updateInformation": "Update Information",
     "changePassword": "Change Password",
-    "logOut": "Log Out"
+    "logOut": "Log Out",
+    "email": "Email",
+    "name": "Name",
+    "phoneNumber": "Phone Number",
+    "gender": "Gender",
+    "male": "Male",
+    "female": "Female",
+    "other": "Other",
+    "validateErrorInputBlank": "Data cannot be empty",
+    "dob": "DOB"
 }
