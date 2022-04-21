@@ -22,5 +22,7 @@
     "female": "Female",
     "other": "Other",
     "validateErrorInputBlank": "Data cannot be empty",
-    "dob": "DOB"
+    "dob": "DOB",
+    "send": "Send",
+    "restore": "Restore"
 }

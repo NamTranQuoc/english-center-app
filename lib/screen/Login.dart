@@ -1,10 +1,12 @@
 
 import 'package:english_center/components/Image/Logo.dart';
 import 'package:english_center/components/button/ButtonCustom.dart';
+import 'package:english_center/components/button/ButtonText.dart';
 import 'package:english_center/components/input/InputCustom.dart';
 import 'package:english_center/components/input/InputPassword.dart';
 import 'package:english_center/screen/Main.dart';
 import 'package:english_center/screen/Signup.dart';
+import 'package:english_center/screen/forget_password/RequestPassword.dart';
 import 'package:english_center/services/AuthService.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -63,21 +65,18 @@ class _LoginScreen extends State<LoginScreen> {
                       InputCustom(
                           AppLocalizations.of(context).username,
                           usernameController,
-                          InputType.EMAIL,
+                          InputType.NONE,
                           AppLocalizations.of(context).validateErrorFormat),
                       InputPassword(AppLocalizations.of(context).password, passwordController),
                     ],
                   ),
                 ),
                 ButtonCustom(AppLocalizations.of(context).labelLogin, Colors.lightBlueAccent, onLogin),
-                Container(
-                  height: 75,
-                  padding: const EdgeInsets.all(10),
-                  child: Text(
-                    AppLocalizations.of(context).forgetPassword + '?',
-                    textAlign: TextAlign.right,
-                  ),
-                ),
+                ButtonText(AppLocalizations.of(context).forgetPassword + "?", const TextStyle(), () {
+                  Navigator.of(context).push(MaterialPageRoute(builder: (_) {
+                    return RequestPassword();
+                  }));
+                }),
                 ButtonCustom(AppLocalizations.of(context).signUp, Colors.blueGrey, () {
                   Navigator.of(context).push(MaterialPageRoute(builder: (_) {
                     return SignUpScreen();

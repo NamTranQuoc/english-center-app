@@ -31,7 +31,6 @@ class _SignUpScreen extends State<SignUpScreen> {
   String gender = 'male';
 
   void onSignUp() {
-    print(gender);
     if (formGlobalKey.currentState!.validate()) {
       formGlobalKey.currentState!.save();
       var date = DateFormat("dd-MM-yyyy").parse(dob.text).millisecondsSinceEpoch;

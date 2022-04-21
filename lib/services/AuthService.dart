@@ -19,3 +19,16 @@ Future<Response> changePassword(
     "new_password": newPassword
   });
 }
+
+Future<Response> requestForgetPassword(String email) async {
+  return getUnauthenticated('${endpoint}request_code_forget_password/$email', {});
+}
+
+Future<Response> forgetPassword(String newPassword, String confirmPassword, String code, String email) async {
+  return postUnauthenticated('${endpoint}forget_password/code', {
+    "confirm_password": confirmPassword,
+    "new_password": newPassword,
+    "code": code,
+    "username": email
+  });
+}

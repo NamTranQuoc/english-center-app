@@ -58,7 +58,7 @@ class _MoreScreen extends State<MoreScreen> {
                   ),
                 ),
                 ButtonCustom(
-                    AppLocalizations.of(context).loginWithGoogle, Colors.lightBlueAccent, () {}),
+                    AppLocalizations.of(context).updateInformation, Colors.lightBlueAccent, () {}),
                 ButtonCustom(AppLocalizations.of(context).changePassword, Colors.lightBlueAccent, () {
                   Navigator.push(
                     context,
