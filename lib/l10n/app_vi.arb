@@ -13,5 +13,14 @@
     "loginWithGoogle": "Đăng Nhập Với Google",
     "updateInformation": "Cập Nhật Thông Tin",
     "changePassword": "Đổi Mật Khẩu",
-    "logOut": "Đăng Xuất"
+    "logOut": "Đăng Xuất",
+    "email": "Email",
+    "name": "Tên",
+    "phoneNumber": "Số Điện Thoại",
+    "gender": "Giới Tính",
+    "male": "Nam",
+    "female": "Nữ",
+    "other": "Khác",
+    "validateErrorInputBlank": "Dữ liệu không được để trống",
+    "dob": "Ngày Sinh"
 }
