@@ -17,11 +17,43 @@ class HomeScreen extends StatefulWidget {
   _HomeScreen createState() => _HomeScreen();
 }
 
+class StudyProgram {
+  final String categoryName;
+  final String categoryId;
+  final String categoryUrlImage;
+  const StudyProgram({required this.categoryName, required this.categoryId, required this.categoryUrlImage});
+}
+
+class Class {
+  final String name;
+  final String numberOfStudent;
+  final String price;
+  final String schedule;
+
+  Class(this.name, this.numberOfStudent, this.price, this.schedule);
+}
+
 class _HomeScreen extends State<HomeScreen> {
   UploadTask? task;
   File? file;
-  final List _studyProgram =["Toeic", "Ielts", "Giao Tiep", "Toeic", "Ielts", "Giao Tiep"];
-  final List _class =["Toeic", "Ielts", "Giao Tiep", "Toeic", "Ielts", "Giao Tiep"];
+  final List<StudyProgram> _studyProgram = [
+    StudyProgram(categoryName: "Toeic", categoryId: "Toeic", categoryUrlImage: "abc"),
+    StudyProgram(categoryName: "Ielts", categoryId: "Ielts", categoryUrlImage: "abc"),
+    StudyProgram(categoryName: "Giao tiếp", categoryId: "Giao tiếp", categoryUrlImage: "abc"),
+    StudyProgram(categoryName: "Trẻ em", categoryId: "Trẻ em", categoryUrlImage: "abc"),
+    StudyProgram(categoryName: "Cơ bản", categoryId: "Cơ bản", categoryUrlImage: "abc"),
+    StudyProgram(categoryName: "Nâng cao", categoryId: "Nâng cao", categoryUrlImage: "abc"),
+  ];
+  final List<Class> _class = [
+    Class("Toeic 500", "15", "3000000", "T2 T3 T4"),
+    Class("Ielts 7.0", "10", "9000000", "T2 T4 T6"),
+    Class("Ielts 8.5", "10", "12000000", "T3 T5 T7"),
+    Class("Toeic 700", "20", "6000000", "T6 T7 CN"),
+    Class("Trẻ em 1", "15", "3000000", "T5 T6 T7"),
+    Class("Cơ bản 1", "25", "4000000", "T3 T4 T6"),
+    Class("Cơ bản 2", "25", "5000000", "T2 T5 T7"),
+    Class("Giao tiếp 1", "15", "6000000", "T2 T3 T4"),
+  ];
 
   Future selectFile() async {
     final result = await FilePicker.platform.pickFiles(allowMultiple: false);
@@ -48,6 +80,34 @@ class _HomeScreen extends State<HomeScreen> {
 
     print('Download-Link: $urlDownload');
   }
+  bool isClick = false;
+  String categorySelect = "";
+  String previousSelect = "empty";
+
+  Widget scrollList(){
+    if(categorySelect != "" && categorySelect != previousSelect)
+      {
+        return Container(
+          margin: const EdgeInsets.symmetric(vertical: 2, horizontal: 10),
+          height: 50,
+          child: ListView.builder(
+            itemCount: _studyProgram.length,
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (context, index){
+              return CardItem(
+                  _studyProgram[index].categoryName,
+                  _studyProgram[index].categoryId,
+                  _studyProgram[index].categoryUrlImage,
+                  (categoryName){
+                    print(categoryName);
+                  }
+              );
+            },
+          ),
+        );
+      }
+    return Container();
+  }
 
 
   @override
@@ -57,32 +117,46 @@ class _HomeScreen extends State<HomeScreen> {
       body:
       Column(
         children: [
-          Container(
+          Align(
+            alignment: Alignment.centerLeft,
             child: Text(
               AppLocalizations.of(context).labelStudy,
               textAlign: TextAlign.left,
-              style: const TextStyle(fontSize: 15),
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
           ),
           Container(
-            height: 100,
+            margin: const EdgeInsets.symmetric(vertical: 2, horizontal: 10),
+            height: 50,
             child: ListView.builder(
-                itemCount: _studyProgram.length,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index){
-                  return CircleItem(
-                    child: _studyProgram[index],
-                  );
-                }
+              itemCount: _studyProgram.length,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index){
+                return CardItem(
+                    _studyProgram[index].categoryName,
+                    _studyProgram[index].categoryId,
+                    _studyProgram[index].categoryUrlImage,
+                        (categoryName){
+                      setState(() {
+                        previousSelect = categorySelect;
+                        categorySelect = categoryName;
+                      });
+                    }
+                );
+              },
             ),
           ),
+          scrollList(),
           Expanded(
             child: ListView.builder(
-                itemCount: _studyProgram.length,
+                itemCount: _class.length,
                 scrollDirection: Axis.vertical,
                 itemBuilder: (context, index){
-                  return CardItem(
-                    child: _studyProgram[index],
+                  return CircleItem(
+                    _class[index].name,
+                    _class[index].numberOfStudent,
+                    _class[index].price,
+                    _class[index].schedule
                   );
                 }
             ),
