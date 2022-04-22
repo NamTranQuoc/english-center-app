@@ -21,7 +21,13 @@ class StudyProgram {
   final String categoryName;
   final String categoryId;
   final String categoryUrlImage;
-  const StudyProgram({required this.categoryName, required this.categoryId, required this.categoryUrlImage});
+  StudyProgram(this.categoryName, this.categoryId, this.categoryUrlImage);
+}
+
+class Course {
+  final String courseName;
+  final String courseId;
+  Course( this.courseName, this.courseId);
 }
 
 class Class {
@@ -37,12 +43,26 @@ class _HomeScreen extends State<HomeScreen> {
   UploadTask? task;
   File? file;
   final List<StudyProgram> _studyProgram = [
-    StudyProgram(categoryName: "Toeic", categoryId: "Toeic", categoryUrlImage: "abc"),
-    StudyProgram(categoryName: "Ielts", categoryId: "Ielts", categoryUrlImage: "abc"),
-    StudyProgram(categoryName: "Giao tiếp", categoryId: "Giao tiếp", categoryUrlImage: "abc"),
-    StudyProgram(categoryName: "Trẻ em", categoryId: "Trẻ em", categoryUrlImage: "abc"),
-    StudyProgram(categoryName: "Cơ bản", categoryId: "Cơ bản", categoryUrlImage: "abc"),
-    StudyProgram(categoryName: "Nâng cao", categoryId: "Nâng cao", categoryUrlImage: "abc"),
+     StudyProgram("Toeic", "Toeic", "abc"),
+     StudyProgram("Ielts", "Ielts", "abc"),
+     StudyProgram("Giao tiếp", "Giao tiếp", "abc"),
+     StudyProgram("Trẻ em", "Trẻ em", "abc"),
+     StudyProgram("Cơ bản", "Cơ bản", "abc"),
+     StudyProgram("Nâng cao", "Nâng cao", "abc"),
+  ];
+  final List<Course> _courseToeic = [
+    Course("Toeic 500", "Toeic500"),
+    Course("Toeic 600", "Toeic600"),
+    Course("Toeic 700", "Toeic700"),
+    Course("Toeic 800", "Toeic800"),
+    Course("Toeic 900", "Toeic900"),
+  ];
+  final List<Course> _courseIelts = [
+    Course("Ielts 5.0", "Ielts"),
+    Course("Ielts 6.0", "Ielts"),
+    Course("Ielts 7.0", "Ielts"),
+    Course("Ielts 8.0", "Ielts"),
+    Course("Ielts 8.5", "Ielts"),
   ];
   final List<Class> _class = [
     Class("Toeic 500", "15", "3000000", "T2 T3 T4"),
@@ -87,24 +107,41 @@ class _HomeScreen extends State<HomeScreen> {
   Widget scrollList(){
     if(categorySelect != "" && categorySelect != previousSelect)
       {
+        List<Course> abc = [];
+        if(categorySelect == "Toeic")
+          {
+            abc = _courseToeic;
+          }
+        else
+          {
+            abc = _courseIelts;
+          }
         return Container(
           margin: const EdgeInsets.symmetric(vertical: 2, horizontal: 10),
           height: 50,
           child: ListView.builder(
-            itemCount: _studyProgram.length,
+            itemCount: abc.length,
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index){
               return CardItem(
-                  _studyProgram[index].categoryName,
-                  _studyProgram[index].categoryId,
-                  _studyProgram[index].categoryUrlImage,
-                  (categoryName){
-                    print(categoryName);
+                  abc[index].courseName,
+                  abc[index].courseId,
+                      (categoryName){
+                    setState(() {
+                      previousSelect = categorySelect;
+                      categorySelect = categoryName;
+                    });
                   }
+
               );
             },
           ),
         );
+      }
+    else
+      {
+        previousSelect = "empty";
+        categorySelect = "";
       }
     return Container();
   }
@@ -135,7 +172,6 @@ class _HomeScreen extends State<HomeScreen> {
                 return CardItem(
                     _studyProgram[index].categoryName,
                     _studyProgram[index].categoryId,
-                    _studyProgram[index].categoryUrlImage,
                         (categoryName){
                       setState(() {
                         previousSelect = categorySelect;

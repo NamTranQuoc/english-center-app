@@ -3,9 +3,8 @@ import 'package:flutter/material.dart';
 class CardItem extends StatelessWidget {
   final String categoryName;
   final String categoryId;
-  final String categoryUrlImage;
   final StringCallback callback;
-  const CardItem( this.categoryName,  this.categoryId,  this.categoryUrlImage, this.callback);
+  const CardItem( this.categoryName,  this.categoryId, this.callback);
   @override
   Widget build(BuildContext context) {
     bool isSelect = false;
@@ -26,31 +25,6 @@ class CardItem extends StatelessWidget {
           backgroundColor: Colors.lightBlueAccent,
         ),
       ),
-      /*child: Column(
-        children: [
-          Expanded(
-            child: AspectRatio(
-              aspectRatio: 4 / 3,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: Material(
-                  child: IconButton(
-                    icon: const Icon(Icons.search),
-                    onPressed: (){
-                      callback(categoryName);
-                    },
-                  ),
-                ),
-              ),
-            ),
-          ),
-          const SizedBox(height: 4,),
-          Text(
-            categoryName,
-            style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold, color: Colors.black),
-          )
-        ],
-      ),*/
     );
   }
 }

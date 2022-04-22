@@ -8,6 +8,47 @@ class CircleItem extends StatelessWidget {
   final String schedule;
   const CircleItem(this.name, this.numberOfStudent, this.price, this.schedule);
 
+  showDialogFunc(context, name)
+  {
+    return showDialog(
+        context: context,
+        builder: (context){
+          return Center(
+            child: Material(
+              type: MaterialType.transparency,
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.white,
+                ),
+                padding: EdgeInsets.all(15),
+                width: MediaQuery.of(context).size.width*0.7,
+                height: 320,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    ClipRRect(
+                       borderRadius: BorderRadius.circular(10),
+                      child: Image.asset('images/Toeic.jpg', width: 200, height: 200,),
+                    ),
+                    SizedBox(height: 10,),
+                    Text(
+                      name,
+                      style: const TextStyle (
+                        fontSize: 25,
+                        color: Colors.grey,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+          );
+        }
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -85,7 +126,9 @@ class CircleItem extends StatelessWidget {
                 padding: EdgeInsets.only(left: 50),
                 child: ElevatedButton(
                     child: const Text("Register", style: TextStyle(fontSize: 20)),
-                    onPressed: (){},
+                    onPressed: (){
+                      showDialogFunc(context, name);
+                    },
                     style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(13.0),
