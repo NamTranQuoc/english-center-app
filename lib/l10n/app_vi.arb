@@ -1,4 +1,8 @@
 {
+    "labelStudy": "Chương trình học",
+    "labelSchedule": "Lịch học",
+    "labelNumberOfStudent": "Số lượng học viên",
+    "labelPrice": "Học phí",
     "helloWorld": "xin chào",
     "labelLogin": "Đăng nhập",
     "test": "abc",

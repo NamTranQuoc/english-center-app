@@ -37,6 +37,7 @@ flutter:
   assets:
     - images/GB.svg
     - images/VN.svg
+    - images/Toeic.jpg
   generate: true
 flutter_intl:
   enabled: true
