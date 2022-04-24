@@ -66,7 +66,7 @@ class _UpdateInformation extends State<UpdateInformation> {
   onSubmit() {
     if (formGlobalKey.currentState!.validate()) {
       formGlobalKey.currentState!.save();
-      updateMember(widget.member.id!, name.text, nickName.text, phone.text, gender, StringToTimeStamp(dob.text), type).then((value) {
+      updateMember(widget.member.id!, name.text, nickName.text, phone.text, gender, stringToTimeStamp(dob.text), type).then((value) {
         if (value.code == 9999) {
           MemberProvider memberProvider = Provider.of<MemberProvider>(context, listen: false);
           memberProvider.set(Member.fromJson(value.payload));

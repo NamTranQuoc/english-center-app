@@ -34,7 +34,7 @@ class _SignUpScreen extends State<SignUpScreen> {
   void onSignUp() {
     if (formGlobalKey.currentState!.validate()) {
       formGlobalKey.currentState!.save();
-      signUp(name.text, email.text, gender, phone.text, StringToTimeStamp(dob.text)).then((value) {
+      signUp(name.text, email.text, gender, phone.text, stringToTimeStamp(dob.text)).then((value) {
         if (value.code == 9999) {
           showSuccess("Sign Up Success");
           Navigator.of(context).push(MaterialPageRoute(builder: (_) {
