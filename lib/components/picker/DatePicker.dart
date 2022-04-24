@@ -6,8 +6,9 @@ import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 class DatePicker extends StatelessWidget {
   final String label;
   final TextEditingController dateController;
+  final DateTime initDate;
 
-  DatePicker(this.label, this.dateController);
+  DatePicker(this.label, this.dateController, this.initDate);
 
   final _format = DateFormat("dd-MM-yyyy");
   @override
@@ -20,7 +21,7 @@ class DatePicker extends StatelessWidget {
             return showDatePicker(
                 context: context,
                 firstDate: DateTime(1900),
-                initialDate: currentValue ?? DateTime.now(),
+                initialDate: currentValue ?? initDate,
                 lastDate: DateTime(2100));
           },
           controller: dateController,

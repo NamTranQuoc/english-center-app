@@ -26,5 +26,9 @@
     "female": "Nữ",
     "other": "Khác",
     "validateErrorInputBlank": "Dữ liệu không được để trống",
-    "dob": "Ngày Sinh"
+    "dob": "Ngày Sinh",
+    "send": "Gửi",
+    "restore": "Khôi Phục",
+    "nickName": "Tên Tiếng Anh",
+    "update": "Cập Nhật"
 }

@@ -44,8 +44,8 @@ class MyApp extends StatelessWidget {
       ],
       locale: Provider.of<CommandProvider>(context).currentLocale,
       supportedLocales: const [
-        Locale('en', ''), // English, no country code
-        Locale('vi', ''), // Spanish, no country code
+        Locale('en', ''),
+        Locale('vi', ''),
       ],
       builder: EasyLoading.init(),
     );
