@@ -30,5 +30,11 @@
     "send": "Send",
     "restore": "Restore",
     "nickName": "Nick Name",
-    "update": "Update"
+    "update": "Update",
+    "className": "Class Name",
+    "session": "Session",
+    "startTime": "Start Time",
+    "endTime": "End Time",
+    "teacher": "Teacher",
+    "room": "Room"
 }

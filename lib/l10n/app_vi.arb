@@ -30,5 +30,11 @@
     "send": "Gửi",
     "restore": "Khôi Phục",
     "nickName": "Tên Tiếng Anh",
-    "update": "Cập Nhật"
+    "update": "Cập Nhật",
+    "className": "Tên Lớp Học",
+    "session": "Buổi Học",
+    "startTime": "Thời Gian Bắt Đầu",
+    "endTime": "Thời Gian Kết Thúc",
+    "teacher": "Giáo Viên",
+    "room": "Phòng"
 }
