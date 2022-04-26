@@ -56,7 +56,7 @@ class _ChangePassword extends State<ChangePassword> {
                     ],
                   ),
                 ),
-                ButtonCustom(AppLocalizations.of(context).labelLogin,
+                ButtonCustom(AppLocalizations.of(context).update,
                     Colors.lightBlueAccent, onSubmit),
               ],
             )));

@@ -11,7 +11,6 @@ import 'package:english_center/services/MemberService.dart';
 import 'package:english_center/util/ParseUtil.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:intl/intl.dart';
 
 class SignUpScreen extends StatefulWidget {
   static const routeName = '/signup';

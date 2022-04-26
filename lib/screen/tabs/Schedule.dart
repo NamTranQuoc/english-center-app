@@ -1,4 +1,5 @@
 import 'package:english_center/domain/Schedule.dart';
+import 'package:english_center/screen/tabs/schedules/DetalSchedule.dart';
 import 'package:english_center/services/ScheduleService.dart';
 import 'package:english_center/util/ParseUtil.dart';
 import 'package:flutter/material.dart';
@@ -214,7 +215,12 @@ class _ScheduleScreen extends State<ScheduleScreen> {
                         borderRadius: BorderRadius.circular(13.0),
                       ),
                       child: ListTile(
-                        onTap: () => print('${value[index]}'),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => DetailSchedule(value[index])),
+                          );
+                        },
                         title: Text('${value[index].title} - ${value[index].room} (${timestampToString(value[index].start!)})'),
                       ),
                     );

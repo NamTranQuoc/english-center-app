@@ -6,14 +6,16 @@ class InputCustom extends StatelessWidget {
   final TextEditingController usernameController;
   final InputType inputType;
   final String textError;
+  final bool? disable;
 
-  InputCustom(this.label, this.usernameController, this.inputType, this.textError);
+  InputCustom(this.label, this.usernameController, this.inputType, this.textError, {this.disable});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(10),
       child: TextFormField(
+        readOnly: disable ?? false,
         validator: (text) {
           if (validation(text!)) {
             return null;
