@@ -1,4 +1,3 @@
-
 import 'package:english_center/components/Image/Logo.dart';
 import 'package:english_center/components/button/ButtonCustom.dart';
 import 'package:english_center/components/button/ButtonText.dart';
@@ -33,7 +32,9 @@ class _SignUpScreen extends State<SignUpScreen> {
   void onSignUp() {
     if (formGlobalKey.currentState!.validate()) {
       formGlobalKey.currentState!.save();
-      signUp(name.text, email.text, gender, phone.text, stringToTimeStamp(dob.text)).then((value) {
+      signUp(name.text, email.text, gender, phone.text,
+              stringToTimeStamp(dob.text))
+          .then((value) {
         if (value.code == 9999) {
           showSuccess("Sign Up Success");
           Navigator.of(context).push(MaterialPageRoute(builder: (_) {
@@ -41,7 +42,6 @@ class _SignUpScreen extends State<SignUpScreen> {
           }));
         }
       });
-
     }
   }
 
@@ -58,22 +58,36 @@ class _SignUpScreen extends State<SignUpScreen> {
                   child: Column(
                     children: [
                       InputCustom(
-                          AppLocalizations.of(context).name, name, InputType.REQUEST,
+                          AppLocalizations.of(context).name,
+                          name,
+                          InputType.REQUEST,
                           AppLocalizations.of(context).validateErrorInputBlank),
-                      InputCustom(AppLocalizations.of(context).email, email, InputType.EMAIL,
+                      InputCustom(
+                          AppLocalizations.of(context).email,
+                          email,
+                          InputType.EMAIL,
                           AppLocalizations.of(context).validateErrorFormat),
-                      InputCustom(AppLocalizations.of(context).phoneNumber, phone, InputType.PHONE,
+                      InputCustom(
+                          AppLocalizations.of(context).phoneNumber,
+                          phone,
+                          InputType.PHONE,
                           AppLocalizations.of(context).validateErrorFormat),
-                      SelectCustom(gender, genders, AppLocalizations.of(context).gender, (val) {setState(() {
-                        gender = val;
-                      });}),
-                      DatePicker(AppLocalizations.of(context).dob, dob, DateTime.now()),
+                      SelectCustom(
+                          gender, genders, AppLocalizations.of(context).gender,
+                          (val) {
+                        setState(() {
+                          gender = val;
+                        });
+                      }),
+                      DatePicker(AppLocalizations.of(context).dob, dob,
+                          DateTime.now()),
                     ],
                   ),
                 ),
-                ButtonCustom(AppLocalizations.of(context).signUp, Colors.lightBlueAccent, onSignUp),
-                ButtonText(
-                    AppLocalizations.of(context).labelLogin, const TextStyle(color: Colors.black), () {
+                ButtonCustom(AppLocalizations.of(context).signUp,
+                    Colors.lightBlueAccent, onSignUp),
+                ButtonText(AppLocalizations.of(context).labelLogin,
+                    const TextStyle(color: Colors.black), () {
                   Navigator.of(context).push(MaterialPageRoute(builder: (_) {
                     return LoginScreen();
                   }));
