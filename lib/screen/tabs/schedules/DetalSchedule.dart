@@ -30,7 +30,6 @@ class _DetailSchedule extends State<DetailSchedule> {
   onSubmit() {
     if (formGlobalKey.currentState!.validate()) {
       formGlobalKey.currentState!.save();
-
     }
   }
 
@@ -59,12 +58,24 @@ class _DetailSchedule extends State<DetailSchedule> {
                   key: formGlobalKey,
                   child: Column(
                     children: [
-                      InputCustom(AppLocalizations.of(context).className, className, InputType.NONE, "", disable: true),
-                      InputCustom(AppLocalizations.of(context).session, session, InputType.NONE, "", disable: true),
-                      InputCustom(AppLocalizations.of(context).startTime, startTime, InputType.NONE, "", disable: true),
-                      InputCustom(AppLocalizations.of(context).endTime, endTime, InputType.NONE, "", disable: true),
-                      InputCustom(AppLocalizations.of(context).room, room, InputType.NONE, "", disable: true),
-                      InputCustom(AppLocalizations.of(context).teacher, teacher, InputType.NONE, "", disable: true),
+                      InputCustom(AppLocalizations.of(context).className,
+                          className, InputType.NONE, "",
+                          disable: true),
+                      InputCustom(AppLocalizations.of(context).session, session,
+                          InputType.NONE, "",
+                          disable: true),
+                      InputCustom(AppLocalizations.of(context).startTime,
+                          startTime, InputType.NONE, "",
+                          disable: true),
+                      InputCustom(AppLocalizations.of(context).endTime, endTime,
+                          InputType.NONE, "",
+                          disable: true),
+                      InputCustom(AppLocalizations.of(context).room, room,
+                          InputType.NONE, "",
+                          disable: true),
+                      InputCustom(AppLocalizations.of(context).teacher, teacher,
+                          InputType.NONE, "",
+                          disable: true),
                     ],
                   ),
                 ),

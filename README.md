@@ -1,6 +1,6 @@
 # english_center
 
-English Center Mobile App.
+A new Flutter project.
 
 ## Getting Started
 
