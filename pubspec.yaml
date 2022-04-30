@@ -38,6 +38,7 @@ flutter:
     - images/GB.svg
     - images/VN.svg
     - images/Toeic.jpg
+    - images/Ielts.png
   generate: true
 flutter_intl:
   enabled: true

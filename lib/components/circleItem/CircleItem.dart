@@ -29,7 +29,7 @@ class CircleItem extends StatelessWidget {
                   children: <Widget>[
                     ClipRRect(
                        borderRadius: BorderRadius.circular(10),
-                      child: Image.asset('images/Toeic.jpg', width: 200, height: 200,),
+                      child: Image.asset('images/Ielts.png', width: 200, height: 200,),
                     ),
                     SizedBox(height: 10,),
                     Text(
@@ -80,7 +80,6 @@ class CircleItem extends StatelessWidget {
                 child: const CircleAvatar(
                   backgroundColor: Colors.green,
                   foregroundColor: Colors.green,
-                  backgroundImage: ExactAssetImage('images/Toeic.jpg'),
                 ),
               ),
               const SizedBox(width: 5.0,),
@@ -89,7 +88,7 @@ class CircleItem extends StatelessWidget {
                 children: <Widget>[
                   Container(
                       alignment: Alignment.center,
-                      padding: EdgeInsets.only(left: 50),
+                    padding: EdgeInsets.only(left: 50),
                       child: Padding(
                         padding: const EdgeInsets.all(3.0),
                         child: Text(

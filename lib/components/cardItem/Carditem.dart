@@ -15,7 +15,7 @@ class CardItem extends StatelessWidget {
       child: OutlinedButton(
         child: Text(categoryName),
         onPressed: () {
-          callback(categoryName);
+          callback(categoryId);
         },
         style: OutlinedButton.styleFrom(
           shape: RoundedRectangleBorder(
