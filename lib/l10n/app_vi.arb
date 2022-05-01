@@ -36,5 +36,6 @@
     "startTime": "Thời Gian Bắt Đầu",
     "endTime": "Thời Gian Kết Thúc",
     "teacher": "Giáo Viên",
-    "room": "Phòng"
+    "room": "Phòng",
+    "registerAbsent": "Đăng Ký Học Bù"
 }

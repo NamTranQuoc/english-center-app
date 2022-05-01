@@ -36,5 +36,6 @@
     "startTime": "Start Time",
     "endTime": "End Time",
     "teacher": "Teacher",
-    "room": "Room"
+    "room": "Room",
+    "registerAbsent": "Register Absent"
 }
