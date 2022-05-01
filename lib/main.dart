@@ -1,5 +1,6 @@
 import 'package:english_center/providers/CommonProvider.dart';
 import 'package:english_center/providers/MemberProvider.dart';
+import 'package:english_center/providers/ScheduleProvider.dart';
 import 'package:english_center/screen/Login.dart';
 import 'package:english_center/screen/Main.dart';
 import 'package:english_center/screen/Signup.dart';
@@ -18,6 +19,7 @@ void main() async {
     providers: [
       ChangeNotifierProvider(create: (context) => MemberProvider()),
       ChangeNotifierProvider(create: (context) => CommandProvider()),
+      ChangeNotifierProvider(create: (context) => ScheduleProvider()),
     ],
     child: const MyApp(),
   ),);

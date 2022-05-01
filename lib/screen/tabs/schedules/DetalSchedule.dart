@@ -2,25 +2,25 @@ import 'dart:ui';
 
 import 'package:english_center/components/button/ButtonCustom.dart';
 import 'package:english_center/components/button/ButtonText.dart';
-import 'package:english_center/components/input/InputCustom.dart';
-import 'package:english_center/components/input/InputPassword.dart';
-import 'package:english_center/components/select/SelectCustom.dart';
+import 'package:english_center/components/message/Notification.dart';
 import 'package:english_center/components/select/SelectCustomV2.dart';
 import 'package:english_center/domain/ClassroomAbsent.dart';
 import 'package:english_center/domain/Schedule.dart';
-import 'package:english_center/services/ScheduleService.dart';
+import 'package:english_center/providers/ScheduleProvider.dart';
 import 'package:english_center/util/ParseUtil.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
 import '../../../services/AbsentService.dart';
 
 class DetailSchedule extends StatefulWidget {
   static const routeName = '/detail_schedule';
+  
+  final String date;
+  final int index;
 
-  final Schedule schedule;
-
-  DetailSchedule(this.schedule);
+  DetailSchedule(this.date, this.index);
 
   @override
   _DetailSchedule createState() => _DetailSchedule();
@@ -29,52 +29,66 @@ class DetailSchedule extends StatefulWidget {
 class _DetailSchedule extends State<DetailSchedule> {
   final formGlobalKey = GlobalKey<FormState>();
 
-  TextEditingController className = TextEditingController();
-  TextEditingController session = TextEditingController();
-  TextEditingController startTime = TextEditingController();
-  TextEditingController endTime = TextEditingController();
-  TextEditingController room = TextEditingController();
-  TextEditingController teacher = TextEditingController();
-
   bool f = false;
   Map<String, String> classroomAbsents = {};
-  String absentId = "1";
+  String absentId = "";
+  late Schedule schedule;
 
   onSubmit() {
     if (formGlobalKey.currentState!.validate()) {
       formGlobalKey.currentState!.save();
+      if (absentId == "") {
+        showError("param_not_null");
+      } else {
+        registerAbsent(schedule.id!, absentId).then((value) {
+          if (value.code == 9999) {
+            ScheduleProvider scheduleProvider = Provider.of<ScheduleProvider>(context, listen: false);
+            List<Schedule> list = scheduleProvider.schedules[widget.date] ?? [];
+            list.removeAt(widget.index);
+            scheduleProvider.putIfAbsent(widget.date, list);
+
+            Schedule r = Schedule.fromJson(value.payload);
+            DateTime d = DateTime.fromMillisecondsSinceEpoch(r.start!);
+            String key = getKey(d);
+            List<Schedule> list1 = scheduleProvider.schedules[key] ?? [];
+            list1.add(r);
+            scheduleProvider.putIfAbsent(key, list1);
+
+            Navigator.of(context).pop("ok");
+          }
+        });
+      }
     }
+  }
+
+  String getKey(DateTime day) {
+    return '${day.year}-${day.month}-${day.day}';
   }
 
   @override
   void initState() {
     // TODO: implement initState
-    className.text = widget.schedule.title!;
-    session.text = widget.schedule.session!.toString();
-    startTime.text = timestampToString(widget.schedule.start!);
-    endTime.text = timestampToString(widget.schedule.end!);
-    room.text = widget.schedule.room!;
-    teacher.text = widget.schedule.teacher!;
+    List<Schedule> list = Provider.of<ScheduleProvider>(context, listen: false).schedules[widget.date] ?? [];
+    schedule = list[widget.index];
   }
 
   Widget viewAbsent() {
-    classroomAbsents = {};
-    absentId = '1';
-    if (!widget.schedule.tookPlace!) {
+    if (!schedule.tookPlace!) {
       if (!f) {
+        classroomAbsents = {};
+        absentId = "";
         return ButtonText(
             AppLocalizations.of(context).registerAbsent, const TextStyle(), () {
-          getClassroomAbsent(widget.schedule.id!).then((value) {
+          getClassroomAbsent(schedule.id!).then((value) {
             List<Map<String, dynamic>> list = List.from(value.payload);
-            list.forEach((element) {
-              ClassroomAbsent classroomAbsent =
-                  ClassroomAbsent.fromJson(element);
-              if (absentId == '1') {
+            for (var element in list) {
+              ClassroomAbsent classroomAbsent = ClassroomAbsent.fromJson(element);
+              if (absentId == "") {
                 absentId = classroomAbsent.id!;
               }
-              classroomAbsents.putIfAbsent(classroomAbsent.id!,
-                  () => classroomAbsent.name!);
-            });
+              classroomAbsents.putIfAbsent(
+                  classroomAbsent.id!, () => classroomAbsent.name!);
+            }
             setState(() {
               f = true;
             });
@@ -83,9 +97,8 @@ class _DetailSchedule extends State<DetailSchedule> {
       } else {
         return Column(
           children: [
-            SelectCustomV2(
-                absentId, classroomAbsents, AppLocalizations.of(context).gender,
-                (val) {
+            SelectCustomV2(absentId, classroomAbsents,
+                AppLocalizations.of(context).className, (val) {
               setState(() {
                 absentId = val;
               });
@@ -125,7 +138,7 @@ class _DetailSchedule extends State<DetailSchedule> {
                                 Text(
                                     '${AppLocalizations.of(context).className}: ',
                                     style: const TextStyle(fontSize: 18)),
-                                Text(className.text,
+                                Text(schedule.title ?? "",
                                     style: const TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold)),
@@ -139,7 +152,7 @@ class _DetailSchedule extends State<DetailSchedule> {
                                 Text(
                                     '${AppLocalizations.of(context).session}: ',
                                     style: const TextStyle(fontSize: 18)),
-                                Text(session.text,
+                                Text(schedule.session!.toString(),
                                     style: const TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold)),
@@ -153,7 +166,7 @@ class _DetailSchedule extends State<DetailSchedule> {
                                 Text(
                                     '${AppLocalizations.of(context).startTime}: ',
                                     style: const TextStyle(fontSize: 18)),
-                                Text(startTime.text,
+                                Text(timestampToString(schedule.start!),
                                     style: const TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold)),
@@ -167,7 +180,7 @@ class _DetailSchedule extends State<DetailSchedule> {
                                 Text(
                                     '${AppLocalizations.of(context).endTime}: ',
                                     style: const TextStyle(fontSize: 18)),
-                                Text(endTime.text,
+                                Text(timestampToString(schedule.end!),
                                     style: const TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold)),
@@ -180,7 +193,7 @@ class _DetailSchedule extends State<DetailSchedule> {
                               children: [
                                 Text('${AppLocalizations.of(context).room}: ',
                                     style: const TextStyle(fontSize: 18)),
-                                Text(room.text,
+                                Text(schedule.room ?? "",
                                     style: const TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold)),
@@ -194,7 +207,7 @@ class _DetailSchedule extends State<DetailSchedule> {
                                 Text(
                                     '${AppLocalizations.of(context).teacher}: ',
                                     style: const TextStyle(fontSize: 18)),
-                                Text(teacher.text,
+                                Text(schedule.teacher ?? "",
                                     style: const TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold)),

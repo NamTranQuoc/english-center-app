@@ -1,8 +1,10 @@
 import 'package:english_center/domain/Schedule.dart';
+import 'package:english_center/providers/ScheduleProvider.dart';
 import 'package:english_center/screen/tabs/schedules/DetalSchedule.dart';
 import 'package:english_center/services/ScheduleService.dart';
 import 'package:english_center/util/ParseUtil.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import '../../util/Utils.dart';
@@ -23,7 +25,6 @@ class _ScheduleScreen extends State<ScheduleScreen> {
   DateTime? _rangeStart;
   DateTime? _rangeEnd;
   late final ValueNotifier<List<Schedule>> _schedules;
-  Map<String, List<Schedule>> schedules = <String, List<Schedule>>{};
 
   @override
   void initState() {
@@ -35,7 +36,8 @@ class _ScheduleScreen extends State<ScheduleScreen> {
   }
 
   void gets(DateTime dateTime) {
-    schedules = <String, List<Schedule>>{};
+    ScheduleProvider scheduleProvider = Provider.of<ScheduleProvider>(context, listen: false);
+    scheduleProvider.set(<String, List<Schedule>>{});
     DateTime start;
     DateTime end;
     if (_calendarFormat == CalendarFormat.month) {
@@ -61,9 +63,10 @@ class _ScheduleScreen extends State<ScheduleScreen> {
           DateTime datetime =
               DateTime.fromMillisecondsSinceEpoch(schedule.start!);
           String key = '${datetime.year}-${datetime.month}-${datetime.day}';
-          List<Schedule> a = schedules[key] ?? [];
+          List<Schedule> a = scheduleProvider.schedules[key] ?? [];
           a.add(schedule);
-          schedules.putIfAbsent(key, () => a);
+          scheduleProvider.putIfAbsent(key, a);
+          _schedules.value = _getEventsForDay(_focusedDay);
           setState(() {});
         }
       }
@@ -79,7 +82,7 @@ class _ScheduleScreen extends State<ScheduleScreen> {
   List<Schedule> _getEventsForDay(DateTime day) {
     // Implementation example
 
-    return schedules['${day.year}-${day.month}-${day.day}'] ?? [];
+    return Provider.of<ScheduleProvider>(context, listen: false).schedules[getKey(day)] ?? [];
   }
 
   List<Schedule> _getEventsForRange(DateTime start, DateTime end) {
@@ -121,6 +124,10 @@ class _ScheduleScreen extends State<ScheduleScreen> {
     } else if (end != null) {
       _schedules.value = _getEventsForDay(end);
     }
+  }
+  
+  String getKey(DateTime day) {
+    return '${day.year}-${day.month}-${day.day}';
   }
 
   @override
@@ -217,8 +224,7 @@ class _ScheduleScreen extends State<ScheduleScreen> {
                         onTap: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => DetailSchedule(value[index])),
-                          );
+                            MaterialPageRoute(builder: (context) => DetailSchedule(getKey(_selectedDay!), index)));
                         },
                         title: Text('${value[index].title} - ${value[index].room} (${timestampToString(value[index].start!)})'),
                       ),

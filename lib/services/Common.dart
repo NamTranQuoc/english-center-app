@@ -12,13 +12,13 @@ Future<Response> postUnauthenticated(String endpoint, Object body) async {
   final http.Response response = await http.post(
       Uri.parse(endpoint),
       headers: <String, String>{
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json; charset=utf-8',
       },
       body: jsonEncode(body));
 
   dismiss();
   if (response.statusCode == 200) {
-    Response result = Response.fromJson(jsonDecode(response.body));
+    Response result = Response.fromJson(jsonDecode(utf8.decode(response.bodyBytes)));
     if (result.code != 9999) {
       showError(result.message!);
       throw Exception(result.message);
@@ -35,14 +35,14 @@ Future<Response> postAuthenticated(String endpoint, Object body) async {
   final http.Response response = await http.post(
       Uri.parse(endpoint),
       headers: <String, String>{
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json; charset=utf-8',
         'Authorization': 'Bearer $token'
       },
       body: jsonEncode(body));
 
   dismiss();
   if (response.statusCode == 200) {
-    Response result = Response.fromJson(jsonDecode(response.body));
+    Response result = Response.fromJson(jsonDecode(utf8.decode(response.bodyBytes)));
     if (result.code != 9999) {
       showError(result.message!);
       throw Exception(result.message);
@@ -59,13 +59,13 @@ Future<Response> putUnauthenticated(String endpoint, Object body) async {
   final http.Response response = await http.put(
       Uri.parse(endpoint),
       headers: <String, String>{
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json; charset=utf-8',
       },
       body: jsonEncode(body));
 
   dismiss();
   if (response.statusCode == 200) {
-    Response result = Response.fromJson(jsonDecode(response.body));
+    Response result = Response.fromJson(jsonDecode(utf8.decode(response.bodyBytes)));
     if (result.code != 9999) {
       showError(result.message!);
       throw Exception(result.message);
@@ -82,14 +82,14 @@ Future<Response> putAuthenticated(String endpoint, Object body) async {
   final http.Response response = await http.put(
       Uri.parse(endpoint),
       headers: <String, String>{
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json; charset=utf-8',
         'Authorization': 'Bearer $token'
       },
       body: jsonEncode(body));
 
   dismiss();
   if (response.statusCode == 200) {
-    Response result = Response.fromJson(jsonDecode(response.body));
+    Response result = Response.fromJson(jsonDecode(utf8.decode(response.bodyBytes)));
     if (result.code != 9999) {
       showError(result.message!);
       throw Exception(result.message);
@@ -106,12 +106,12 @@ Future<Response> getUnauthenticated(String endpoint, Object body) async {
   final http.Response response = await http.get(
       Uri.parse(endpoint),
       headers: <String, String>{
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json; charset=utf-8',
       });
 
   dismiss();
   if (response.statusCode == 200) {
-    Response result = Response.fromJson(jsonDecode(response.body));
+    Response result = Response.fromJson(jsonDecode(utf8.decode(response.bodyBytes)));
     if (result.code != 9999) {
       showError(result.message!);
       throw Exception(result.message);
@@ -128,13 +128,13 @@ Future<Response> getAuthenticated(String endpoint) async {
   final http.Response response = await http.get(
       Uri.parse(endpoint),
       headers: <String, String>{
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json; charset=utf-8',
         'Authorization': 'Bearer $token'
       });
 
   dismiss();
   if (response.statusCode == 200) {
-    Response result = Response.fromJson(jsonDecode(response.body));
+    Response result = Response.fromJson(jsonDecode(utf8.decode(response.bodyBytes)));
     if (result.code != 9999) {
       showError(result.message!);
       throw Exception(result.message);

@@ -11,3 +11,10 @@ Future<Response> getClassroomAbsent(String scheduleId) async {
     "schedule_id": scheduleId
   });
 }
+
+Future<Response> registerAbsent(String scheduleId, String classroomId) async {
+  return postAuthenticated('${endpoint}register_absent', {
+    "schedule_id": scheduleId,
+    "classroom_id": classroomId
+  });
+}
