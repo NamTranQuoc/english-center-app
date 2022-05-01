@@ -42,6 +42,7 @@ flutter:
     - images/VN.svg
     - images/Toeic.jpg
     - images/Ielts.png
+    - images/logo.png
   generate: true
   fonts:
     - family: Nunito
