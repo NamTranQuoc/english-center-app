@@ -1,5 +1,6 @@
 import 'package:english_center/components/button/ButtonCustom.dart';
 import 'package:english_center/components/cardItem/Carditem.dart';
+import 'package:english_center/domain/Course.dart';
 import 'package:english_center/util/FirebaseApi.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -7,6 +8,10 @@ import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:english_center/components/circleItem/CircleItem.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:english_center/services/StudyProgram.dart';
+import 'package:english_center/domain/StudyProgram.dart';
+import 'package:english_center/services/Course.dart';
+import 'package:english_center/domain/Course.dart';
 
 class HomeScreen extends StatefulWidget {
   static const routeName = '/home';
@@ -17,18 +22,11 @@ class HomeScreen extends StatefulWidget {
   _HomeScreen createState() => _HomeScreen();
 }
 
-class StudyProgram {
-  final String categoryName;
-  final String categoryId;
-  final String categoryUrlImage;
-  StudyProgram(this.categoryName, this.categoryId, this.categoryUrlImage);
-}
-
-class Course {
+/*class Course {
   final String courseName;
   final String courseId;
   Course( this.courseName, this.courseId);
-}
+}*/
 
 class Class {
   final String name;
@@ -40,30 +38,30 @@ class Class {
 }
 
 class _HomeScreen extends State<HomeScreen> {
+
+  @override
+  void initState() {
+    super.initState();
+
+    gets();
+  }
+
+  List<StudyProgram> _studyPrograms = [];
+  void gets() {
+    getStudyProgram().then((value) {
+      if (value.code == 9999) {
+        List<Map<String, dynamic>> list = List.from(value.payload);
+        for (var element in list) {
+          StudyProgram studyProgram = StudyProgram.fromJson(element);
+          _studyPrograms.add(studyProgram);
+          setState(() {});
+        }
+      }
+    });
+  }
+
   UploadTask? task;
   File? file;
-  final List<StudyProgram> _studyProgram = [
-     StudyProgram("Toeic", "Toeic", "abc"),
-     StudyProgram("Ielts", "Ielts", "abc"),
-     StudyProgram("Giao tiếp", "Giao tiếp", "abc"),
-     StudyProgram("Trẻ em", "Trẻ em", "abc"),
-     StudyProgram("Cơ bản", "Cơ bản", "abc"),
-     StudyProgram("Nâng cao", "Nâng cao", "abc"),
-  ];
-  final List<Course> _courseToeic = [
-    Course("Toeic 500", "Toeic500"),
-    Course("Toeic 600", "Toeic600"),
-    Course("Toeic 700", "Toeic700"),
-    Course("Toeic 800", "Toeic800"),
-    Course("Toeic 900", "Toeic900"),
-  ];
-  final List<Course> _courseIelts = [
-    Course("Ielts 5.0", "Ielts"),
-    Course("Ielts 6.0", "Ielts"),
-    Course("Ielts 7.0", "Ielts"),
-    Course("Ielts 8.0", "Ielts"),
-    Course("Ielts 8.5", "Ielts"),
-  ];
   final List<Class> _class = [
     Class("Toeic 500", "15", "3000000", "T2 T3 T4"),
     Class("Ielts 7.0", "10", "9000000", "T2 T4 T6"),
@@ -104,28 +102,34 @@ class _HomeScreen extends State<HomeScreen> {
   String categorySelect = "";
   String previousSelect = "empty";
 
-  Widget scrollList(){
+  List<Course> _courses = [];
+  void getCourseByStudy(String id) {
+    getCourseByStudyProgram(id).then((value) {
+      if (value.code == 9999) {
+        List<Map<String, dynamic>> list = List.from(value.payload);
+        for (var element in list) {
+          Course course = Course.fromJson(element);
+          _courses.add(course);
+          setState(() {});
+        }
+      }
+    });
+  }
+
+  Widget scrollList(String id){
     if(categorySelect != "" && categorySelect != previousSelect)
       {
-        List<Course> abc = [];
-        if(categorySelect == "Toeic")
-          {
-            abc = _courseToeic;
-          }
-        else
-          {
-            abc = _courseIelts;
-          }
+        getCourseByStudy(id);
         return Container(
           margin: const EdgeInsets.symmetric(vertical: 2, horizontal: 10),
           height: 50,
           child: ListView.builder(
-            itemCount: abc.length,
+            itemCount: _courses.length,
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index){
               return CardItem(
-                  abc[index].courseName,
-                  abc[index].courseId,
+                  _courses[index].name!,
+                  _courses[index].id!,
                       (categoryName){
                     setState(() {
                       previousSelect = categorySelect;
@@ -166,23 +170,23 @@ class _HomeScreen extends State<HomeScreen> {
             margin: const EdgeInsets.symmetric(vertical: 2, horizontal: 10),
             height: 50,
             child: ListView.builder(
-              itemCount: _studyProgram.length,
+              itemCount: _studyPrograms.length,
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index){
                 return CardItem(
-                    _studyProgram[index].categoryName,
-                    _studyProgram[index].categoryId,
-                        (categoryName){
+                    _studyPrograms[index].name!,
+                    _studyPrograms[index].id!,
+                        (categoryId){
                       setState(() {
                         previousSelect = categorySelect;
-                        categorySelect = categoryName;
+                        categorySelect = categoryId;
                       });
                     }
                 );
               },
             ),
           ),
-          scrollList(),
+          scrollList(categorySelect),
           Expanded(
             child: ListView.builder(
                 itemCount: _class.length,

@@ -1,5 +1,6 @@
 
 import 'package:english_center/screen/tabs/Home.dart';
+import 'package:english_center/screen/tabs/DashBoard.dart';
 import 'package:english_center/screen/tabs/More.dart';
 import 'package:english_center/screen/tabs/Schedule.dart';
 import 'package:flutter/material.dart';
@@ -106,7 +107,7 @@ class _HomeState extends State<MainScreen> with SingleTickerProviderStateMixin {
         controller: tabController,
         children: [
           ScheduleScreen(),
-          HomeScreen(),
+          DashBoardScreen(),
           MoreScreen(),
         ],
       ),
