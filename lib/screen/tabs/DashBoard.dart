@@ -30,12 +30,12 @@ class Class {
 
 class _DashBoardScreen extends State<DashBoardScreen> {
 
-  @override
+  /*@override
   void initState() {
     super.initState();
 
     gets();
-  }
+  }*/
 
   List<StudyProgram> _studyPrograms = [];
   void gets() {
@@ -93,7 +93,7 @@ class _DashBoardScreen extends State<DashBoardScreen> {
               child: StaggeredGridView.countBuilder(
                 padding: EdgeInsets.all(0),
                 crossAxisCount: 2,
-                itemCount: _studyPrograms.length,
+                itemCount: categories.length,
                 crossAxisSpacing: 20,
                 mainAxisSpacing: 20,
                 itemBuilder: (context, index) {
@@ -102,7 +102,7 @@ class _DashBoardScreen extends State<DashBoardScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => DetailStudyProgram(_studyPrograms[index]),
+                          builder: (context) => DetailStudyProgram(),
                         ),
                       );
                     },
@@ -120,7 +120,7 @@ class _DashBoardScreen extends State<DashBoardScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text(
-                            _studyPrograms[index].name!,
+                            categories[index].name,
                             style: kTitleTextStyle,
                           ),
                           Text(

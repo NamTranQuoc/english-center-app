@@ -3,25 +3,23 @@ import 'package:english_center/domain/StudyProgram.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../../components/cardItem/Carditem.dart';
+import '../../../model/Course.dart';
+import 'DetailClass.dart';
+
 class DetailStudyProgram extends StatefulWidget {
   static const routeName = '/detail_studyProgram';
 
-  final StudyProgram studyProgram;
+  // final StudyProgram studyProgram;
 
-  DetailStudyProgram(this.studyProgram);
+  DetailStudyProgram();
 
   @override
   _DetailsScreen createState() => _DetailsScreen();
 }
 
 class _DetailsScreen extends State<DetailStudyProgram> {
-  String name = "";
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    name = widget.studyProgram.name!;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +63,7 @@ class _DetailsScreen extends State<DetailStudyProgram> {
                     ),
                   ),
                   const SizedBox(height: 16),
-                  Text(name, style: kHeadingextStyle),
+                  const Text("Toeic", style: kHeadingextStyle),
                   const SizedBox(height: 16),
                   Row(
                     children: <Widget>[
@@ -79,23 +77,6 @@ class _DetailsScreen extends State<DetailStudyProgram> {
                     ],
                   ),
                   const SizedBox(height: 20),
-                  RichText(
-                    text: TextSpan(
-                      children: [
-                        TextSpan(
-                          text: "\$50 ",
-                          style: kHeadingextStyle.copyWith(fontSize: 32),
-                        ),
-                        TextSpan(
-                          text: "\$70",
-                          style: TextStyle(
-                            color: kTextColor.withOpacity(.5),
-                            decoration: TextDecoration.lineThrough,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
                 ],
               ),
             ),
@@ -109,12 +90,95 @@ class _DetailsScreen extends State<DetailStudyProgram> {
                 ),
                 child: Stack(
                   children: <Widget>[
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children:  const <Widget>[
+                        Text("Class available", style: kTitleTextStyle),
+                        SizedBox(height: 30),
+                      ],
+                    ),
                     Padding(
                       padding: const EdgeInsets.all(30),
-                      child: Column(
+                      child: ListView.builder(
+                        itemCount: courses.length,
+                        scrollDirection: Axis.vertical,
+                        itemBuilder: (context, index){
+                          /*return CardItem(
+                              courses[index].name!,
+                              courses[index].name!,
+                                  (categoryId){
+                                setState(() {});
+                              }
+                          );*/
+                          return Padding(
+                            padding: const EdgeInsets.only(bottom: 30),
+                            child: Row(
+                              children: <Widget>[
+                                Text(
+                                  courses[index].numOfCourses.toString(),
+                                  style: kHeadingextStyle.copyWith(
+                                    color: kTextColor.withOpacity(.15),
+                                    fontSize: 32,
+                                  ),
+                                ),
+                                const SizedBox(width: 8),
+                                RichText(
+                                  text: TextSpan(
+                                    children: [
+                                      TextSpan(
+                                        text: courses[index].name + "\n",
+                                        style: kSubtitleTextSyule.copyWith(
+                                          fontWeight: FontWeight.w600,
+                                          height: 1.5,
+                                        ),
+                                      ),
+                                      TextSpan(
+                                        text: courses[index].numberStudent.toString() + " students --- ",
+                                        style: TextStyle(
+                                          color: kTextColor.withOpacity(.5),
+                                          fontSize: 18,
+                                        ),
+                                      ),
+                                      TextSpan(
+                                        text: courses[index].dateStart,
+                                        style: TextStyle(
+                                          color: kTextColor.withOpacity(.5),
+                                          fontSize: 18,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                const Spacer(),
+                                Container(
+                                  margin: const EdgeInsets.only(left: 20),
+                                  height: 40,
+                                  width: 40,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: kGreenColor.withOpacity(1),
+                                  ),
+                                  child: IconButton(
+                                    icon: Icon(Icons.add),
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => DetailsClassScreen(),
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                )
+                              ],
+                            ),
+                          );
+                        },
+                      ),
+                      /*child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          const Text("Course Content", style: kTitleTextStyle),
+                          const Text("Class available", style: kTitleTextStyle),
                           const SizedBox(height: 30),
                           CourseContent(
                             number: "01",
@@ -139,9 +203,9 @@ class _DetailsScreen extends State<DetailStudyProgram> {
                             title: "Customer Perspective",
                           ),
                         ],
-                      ),
+                      ),*/
                     ),
-                    Positioned(
+                    /*Positioned(
                       right: 0,
                       left: 0,
                       bottom: 0,
@@ -194,7 +258,7 @@ class _DetailsScreen extends State<DetailStudyProgram> {
                           ],
                         ),
                       ),
-                    ),
+                    ),*/
                   ],
                 ),
               ),
