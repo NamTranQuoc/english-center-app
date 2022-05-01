@@ -35,7 +35,6 @@ class _ScheduleScreen extends State<ScheduleScreen> {
   }
 
   void gets(DateTime dateTime) {
-    print('a: ${dateTime}');
     schedules = <String, List<Schedule>>{};
     DateTime start;
     DateTime end;
