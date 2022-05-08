@@ -50,6 +50,17 @@ class _LoginScreen extends State<LoginScreen> {
     }
   }
 
+  onLoginWithGoogle() {
+    loginWithGoogle().then((value) {
+      if (value.code == 9999) {
+        widget.storage.setToken(value.payload);
+        Navigator.of(context).push(MaterialPageRoute(builder: (_) {
+          return MainScreen();
+        }));
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -82,7 +93,7 @@ class _LoginScreen extends State<LoginScreen> {
                     return SignUpScreen();
                   }));
                 }),
-                ButtonCustom(AppLocalizations.of(context).loginWithGoogle, Colors.green, () {}),
+                ButtonCustom(AppLocalizations.of(context).loginWithGoogle, Colors.green, onLoginWithGoogle),
               ],
             )));
   }

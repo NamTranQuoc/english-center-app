@@ -1,8 +1,10 @@
 import 'dart:async';
 
+import 'package:english_center/components/message/Notification.dart';
 import 'package:english_center/services/Common.dart';
 import 'package:english_center/services/Response.dart';
 import 'package:english_center/util/Enums.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 final endpoint = '${Common.host}/auth/';
 
@@ -30,5 +32,22 @@ Future<Response> forgetPassword(String newPassword, String confirmPassword, Stri
     "new_password": newPassword,
     "code": code,
     "username": email
+  });
+}
+
+Future<Response> loginWithGoogle() async {
+  GoogleSignIn _googleSignIn = GoogleSignIn(
+    scopes: [
+      'email',
+      'https://www.googleapis.com/auth/contacts.readonly',
+    ],
+  );
+  GoogleSignInAccount? googleSignInAccount = await _googleSignIn.signIn();
+
+  return postUnauthenticated('${endpoint}sign_with_google', {
+    "avatar": googleSignInAccount!.photoUrl,
+    "email": googleSignInAccount.email,
+    "name": googleSignInAccount.displayName,
+    "phone_number": null
   });
 }
