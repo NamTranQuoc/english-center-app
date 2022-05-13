@@ -1,5 +1,5 @@
 
-import 'package:english_center/screen/tabs/Home.dart';
+import 'package:english_center/screen/tabs/RegisExam.dart';
 import 'package:english_center/screen/tabs/DashBoard.dart';
 import 'package:english_center/screen/tabs/More.dart';
 import 'package:english_center/screen/tabs/Schedule.dart';
@@ -20,7 +20,7 @@ class MainScreen extends StatefulWidget {
 class _HomeState extends State<MainScreen> with SingleTickerProviderStateMixin {
   int tabIndex = 1;
   var language = "";
-  late TabController tabController = TabController(length: 3, initialIndex: tabIndex, vsync: this);
+  late TabController tabController = TabController(length: 4, initialIndex: tabIndex, vsync: this);
 
   @override
   Widget build(BuildContext context) {
@@ -112,6 +112,7 @@ class _HomeState extends State<MainScreen> with SingleTickerProviderStateMixin {
         children: [
           ScheduleScreen(),
           DashBoardScreen(),
+          RegisExam(),
           MoreScreen(),
         ],
       ),
@@ -119,4 +120,4 @@ class _HomeState extends State<MainScreen> with SingleTickerProviderStateMixin {
   }
 }
 
-enum _SelectedTab { schedule, home, person }
+enum _SelectedTab { schedule, home, regis, person }

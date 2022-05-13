@@ -11,9 +11,8 @@ import '../../../services/Course.dart';
 class RegisExam extends StatefulWidget {
   static const routeName = '/detail_studyProgram';
 
-  final StudyProgram studyProgram;
 
-  RegisExam(this.studyProgram);
+  RegisExam();
 
   @override
   _RegisExamScreen createState() => _RegisExamScreen();
@@ -21,12 +20,12 @@ class RegisExam extends StatefulWidget {
 
 class _RegisExamScreen extends State<RegisExam> {
 
-  @override
+  /*@override
   void initState() {
     super.initState();
 
     getCourseByStudy(widget.studyProgram.id!);
-  }
+  }*/
 
   List<Course> _courses = [];
   void getCourseByStudy(String id) {
@@ -62,14 +61,6 @@ class _RegisExamScreen extends State<RegisExam> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      SvgPicture.asset("assets/icons/arrow-left.svg"),
-                      SvgPicture.asset("assets/icons/more-vertical.svg"),
-                    ],
-                  ),
-                  const SizedBox(height: 30),
                   ClipPath(
                     clipper: BestSellerClipper(),
                     child: Container(
@@ -85,7 +76,7 @@ class _RegisExamScreen extends State<RegisExam> {
                     ),
                   ),
                   const SizedBox(height: 16),
-                  Text(widget.studyProgram.name!, style: kHeadingextStyle),
+                  Text("hardcode", style: kHeadingextStyle),
                   const SizedBox(height: 16),
                   Row(
                     children: <Widget>[
@@ -119,7 +110,7 @@ class _RegisExamScreen extends State<RegisExam> {
                     Padding(
                       padding: const EdgeInsets.all(30),
                       child: ListView.builder(
-                        itemCount: _courses.length,
+                        itemCount: 1,
                         scrollDirection: Axis.vertical,
                         itemBuilder: (context, index){
                           /*return CardItem(
@@ -145,21 +136,21 @@ class _RegisExamScreen extends State<RegisExam> {
                                   text: TextSpan(
                                     children: [
                                       TextSpan(
-                                        text: _courses[index].name! + "\n",
+                                        text: "hardcode" + "\n",
                                         style: kSubtitleTextSyule.copyWith(
                                           fontWeight: FontWeight.w600,
                                           height: 1.5,
                                         ),
                                       ),
                                       TextSpan(
-                                        text: "Ngày thi: " + _courses[index].numberOfClass.toString() + "\n",
+                                        text: "Ngày thi: " + "hardcode" + "\n",
                                         style: TextStyle(
                                           color: kTextColor.withOpacity(.5),
                                           fontSize: 18,
                                         ),
                                       ),
                                       TextSpan(
-                                        text: "Ca thi: " + _courses[index].tuition.toString() + " vnđ",
+                                        text: "Ca thi: " + "hardcode",
                                         style: TextStyle(
                                           color: kTextColor.withOpacity(.5),
                                           fontSize: 18,
