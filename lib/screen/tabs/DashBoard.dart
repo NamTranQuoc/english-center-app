@@ -30,12 +30,12 @@ class Class {
 
 class _DashBoardScreen extends State<DashBoardScreen> {
 
-  /*@override
+  @override
   void initState() {
     super.initState();
 
     gets();
-  }*/
+  }
 
   List<StudyProgram> _studyPrograms = [];
   void gets() {
@@ -74,16 +74,16 @@ class _DashBoardScreen extends State<DashBoardScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            const Text("Hey Phuc,", style: kHeadingextStyle),
+            const Text("Chào Nam,", style: kHeadingextStyle),
             const Padding(padding: EdgeInsets.only(bottom: 10.0)),
-            const Text("Find a course you want to learn", style: kSubheadingextStyle),
+            const Text("Hãy tìm khóa học mà bạn muốn", style: kSubheadingextStyle),
             const SizedBox(height: 20,),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                const Text("Study program", style: kTitleTextStyle),
+                const Text("Chương trình học", style: kTitleTextStyle),
                 Text(
-                  "See All",
+                  "Xem tất cả",
                   style: kSubtitleTextSyule.copyWith(color: kBlueColor),
                 ),
               ],
@@ -93,7 +93,7 @@ class _DashBoardScreen extends State<DashBoardScreen> {
               child: StaggeredGridView.countBuilder(
                 padding: EdgeInsets.all(0),
                 crossAxisCount: 2,
-                itemCount: categories.length,
+                itemCount: _studyPrograms.length,
                 crossAxisSpacing: 20,
                 mainAxisSpacing: 20,
                 itemBuilder: (context, index) {
@@ -102,7 +102,7 @@ class _DashBoardScreen extends State<DashBoardScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => DetailStudyProgram(),
+                          builder: (context) => DetailStudyProgram(_studyPrograms[index]),
                         ),
                       );
                     },
@@ -120,11 +120,11 @@ class _DashBoardScreen extends State<DashBoardScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text(
-                            categories[index].name,
+                            _studyPrograms[index].name.toString(),
                             style: kTitleTextStyle,
                           ),
                           Text(
-                            '${categories[index].numOfCourses} Courses',
+                            '${_studyPrograms[index].numberOfCourse} Courses',
                             style: TextStyle(
                               color: kTextColor.withOpacity(.5),
                             ),

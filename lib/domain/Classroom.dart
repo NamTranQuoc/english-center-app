@@ -1,5 +1,5 @@
 
-class ClassStudy {
+class Classroom {
   final String? name;
   final String? id;
   final int? maxStudent;
@@ -10,7 +10,7 @@ class ClassStudy {
   final List<dynamic>? dow;
 
 
-  ClassStudy({
+  Classroom({
     this.name,
     this.id,
     this.maxStudent,
@@ -21,8 +21,8 @@ class ClassStudy {
     this.dow,
   });
 
-  factory ClassStudy.fromJson(Map<String, dynamic> json) {
-    return ClassStudy(
+  factory Classroom.fromJson(Map<String, dynamic> json) {
+    return Classroom(
       name: json['name'],
       id: json['_id'],
       maxStudent: json['max_student'],

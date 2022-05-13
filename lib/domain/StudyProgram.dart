@@ -5,6 +5,7 @@ class StudyProgram {
   final String? status;
   final String? description;
   final int? createDate;
+  final int? numberOfCourse;
 
 
   StudyProgram({
@@ -13,6 +14,7 @@ class StudyProgram {
     this.status,
     this.description,
     this.createDate,
+    this.numberOfCourse,
   });
 
   factory StudyProgram.fromJson(Map<String, dynamic> json) {
@@ -22,6 +24,7 @@ class StudyProgram {
         status: json['status'],
         description: json['description'],
         createDate: json['create_date'],
+        numberOfCourse: json['number_of_course'],
     );
   }
 }

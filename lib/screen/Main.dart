@@ -46,15 +46,15 @@ class _HomeState extends State<MainScreen> with SingleTickerProviderStateMixin {
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.search),
-            onPressed: (){
-              print("search");
-            },
-          ),
-          IconButton(
             icon: const Icon(Icons.notifications_none),
             onPressed: (){
               print("notification");
+            },
+          ),
+          IconButton(
+            icon: const Icon(Icons.search),
+            onPressed: (){
+              print("search");
             },
           ),
         ],
@@ -75,11 +75,15 @@ class _HomeState extends State<MainScreen> with SingleTickerProviderStateMixin {
         activeIcons: const [
           Icon(Icons.schedule_sharp, color: Colors.blue),
           Icon(Icons.home, color: Colors.blue),
+          Icon(Icons.check, color: Colors.blue),
+          Icon(Icons.chat, color: Colors.blue),
           Icon(Icons.menu, color: Colors.blue),
         ],
         inactiveIcons: const [
           Icon(Icons.schedule_sharp, color: Colors.black),
           Icon(Icons.home, color: Colors.black),
+          Icon(Icons.check, color: Colors.blue),
+          Icon(Icons.chat, color: Colors.blue),
           Icon(Icons.menu, color: Colors.black),
         ],
         color: Colors.white,

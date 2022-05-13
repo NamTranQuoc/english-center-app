@@ -1,24 +1,47 @@
 import 'package:english_center/constants.dart';
+import 'package:english_center/domain/Course.dart';
 import 'package:english_center/domain/StudyProgram.dart';
+import 'package:english_center/screen/tabs/course/DetailCourse.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../../components/cardItem/Carditem.dart';
-import '../../../model/Course.dart';
+import 'package:english_center/services/Course.dart';
+import '../../../services/Course.dart';
 import 'DetailClass.dart';
 
 class DetailStudyProgram extends StatefulWidget {
   static const routeName = '/detail_studyProgram';
 
-  // final StudyProgram studyProgram;
+  final StudyProgram studyProgram;
 
-  DetailStudyProgram();
+  DetailStudyProgram(this.studyProgram);
 
   @override
   _DetailsScreen createState() => _DetailsScreen();
 }
 
 class _DetailsScreen extends State<DetailStudyProgram> {
+
+  @override
+  void initState() {
+    super.initState();
+
+    getCourseByStudy(widget.studyProgram.id!);
+  }
+
+  List<Course> _courses = [];
+  void getCourseByStudy(String id) {
+    getCourseByStudyProgram(id).then((value) {
+      if (value.code == 9999) {
+        List<Map<String, dynamic>> list = List.from(value.payload);
+        for (var element in list) {
+          Course course = Course.fromJson(element);
+          _courses.add(course);
+          setState(() {});
+        }
+      }
+    });
+  }
 
 
   @override
@@ -54,16 +77,16 @@ class _DetailsScreen extends State<DetailStudyProgram> {
                       color: kBestSellerColor,
                       padding: const EdgeInsets.only(
                           left: 10, top: 5, right: 20, bottom: 5),
-                      child: Text(
-                        "BestSeller".toUpperCase(),
-                        style: const TextStyle(
+                      child: const Text(
+                        "Thông tin chương trình học",
+                        style: TextStyle(
                           fontWeight: FontWeight.w600,
                         ),
                       ),
                     ),
                   ),
                   const SizedBox(height: 16),
-                  const Text("Toeic", style: kHeadingextStyle),
+                  Text(widget.studyProgram.name!, style: kHeadingextStyle),
                   const SizedBox(height: 16),
                   Row(
                     children: <Widget>[
@@ -90,17 +113,14 @@ class _DetailsScreen extends State<DetailStudyProgram> {
                 ),
                 child: Stack(
                   children: <Widget>[
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children:  const <Widget>[
-                        Text("Class available", style: kTitleTextStyle),
-                        SizedBox(height: 30),
-                      ],
+                    Container(
+                      padding: const EdgeInsets.only(left: 30, top: 5),
+                      child: const Text("Danh sách khóa học", style: kTitleTextStyle),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(30),
                       child: ListView.builder(
-                        itemCount: courses.length,
+                        itemCount: _courses.length,
                         scrollDirection: Axis.vertical,
                         itemBuilder: (context, index){
                           /*return CardItem(
@@ -115,7 +135,7 @@ class _DetailsScreen extends State<DetailStudyProgram> {
                             child: Row(
                               children: <Widget>[
                                 Text(
-                                  courses[index].numOfCourses.toString(),
+                                  (index + 1).toString(),
                                   style: kHeadingextStyle.copyWith(
                                     color: kTextColor.withOpacity(.15),
                                     fontSize: 32,
@@ -126,21 +146,21 @@ class _DetailsScreen extends State<DetailStudyProgram> {
                                   text: TextSpan(
                                     children: [
                                       TextSpan(
-                                        text: courses[index].name + "\n",
+                                        text: _courses[index].name! + "\n",
                                         style: kSubtitleTextSyule.copyWith(
                                           fontWeight: FontWeight.w600,
                                           height: 1.5,
                                         ),
                                       ),
                                       TextSpan(
-                                        text: courses[index].numberStudent.toString() + " students --- ",
+                                        text: "Số lớp: " + _courses[index].numberOfClass.toString() + "\n",
                                         style: TextStyle(
                                           color: kTextColor.withOpacity(.5),
                                           fontSize: 18,
                                         ),
                                       ),
                                       TextSpan(
-                                        text: courses[index].dateStart,
+                                        text: "Học phí: " + _courses[index].tuition.toString() + " vnđ",
                                         style: TextStyle(
                                           color: kTextColor.withOpacity(.5),
                                           fontSize: 18,
@@ -164,7 +184,7 @@ class _DetailsScreen extends State<DetailStudyProgram> {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) => DetailsClassScreen(),
+                                          builder: (context) => DetailCourse(_courses[index]),
                                         ),
                                       );
                                     },

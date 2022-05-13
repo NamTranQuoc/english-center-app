@@ -7,5 +7,5 @@ import 'package:english_center/util/Enums.dart';
 final endpoint = '${Common.host}/course/';
 
 Future<Response> getCourseByStudyProgram(String id) async {
-  return getAuthenticated('${endpoint}get_by_category_id/$id');
+  return getAuthenticated('${endpoint}get_by_study_program?id=$id');
 }
