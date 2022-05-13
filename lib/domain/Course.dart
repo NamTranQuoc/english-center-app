@@ -10,6 +10,7 @@ class Course {
   final int? inputScore;
   final int? outputScore;
   final String? status;
+  final int? numberOfClass;
 
 
   Course({
@@ -23,6 +24,7 @@ class Course {
     this.inputScore,
     this.outputScore,
     this.status,
+    this.numberOfClass,
   });
 
   factory Course.fromJson(Map<String, dynamic> json) {
@@ -37,6 +39,7 @@ class Course {
       inputScore: json['input_score'],
       outputScore: json['output_score'],
       status: json['status'],
+      numberOfClass: json['number_of_class'],
     );
   }
 }

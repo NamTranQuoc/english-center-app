@@ -1,42 +1,44 @@
 import 'package:english_center/constants.dart';
+import 'package:english_center/domain/Classroom.dart';
 import 'package:english_center/domain/Course.dart';
 import 'package:english_center/domain/StudyProgram.dart';
-import 'package:english_center/screen/tabs/course/DetailCourse.dart';
+import 'package:english_center/screen/tabs/classroom/DetailClassRoom.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:english_center/services/Course.dart';
+import '../../../services/ClassStudy.dart';
 import '../../../services/Course.dart';
-import 'DetailClass.dart';
+import '../../../util/ParseUtil.dart';
 
-class DetailStudyProgram extends StatefulWidget {
-  static const routeName = '/detail_studyProgram';
+class DetailCourse extends StatefulWidget {
+  static const routeName = '/detail_course';
 
-  final StudyProgram studyProgram;
+  final Course course;
 
-  DetailStudyProgram(this.studyProgram);
+  DetailCourse(this.course);
 
   @override
-  _DetailsScreen createState() => _DetailsScreen();
+  _DetailCourseScreen createState() => _DetailCourseScreen();
 }
 
-class _DetailsScreen extends State<DetailStudyProgram> {
+class _DetailCourseScreen extends State<DetailCourse> {
 
   @override
   void initState() {
     super.initState();
 
-    getCourseByStudy(widget.studyProgram.id!);
+    getClassByCourse(widget.course.id!);
   }
 
-  List<Course> _courses = [];
-  void getCourseByStudy(String id) {
-    getCourseByStudyProgram(id).then((value) {
+  List<Classroom> _class = [];
+  void getClassByCourse(String id) {
+    getClassRoomByCourse(id).then((value) {
       if (value.code == 9999) {
         List<Map<String, dynamic>> list = List.from(value.payload);
         for (var element in list) {
-          Course course = Course.fromJson(element);
-          _courses.add(course);
+          Classroom classStudy = Classroom.fromJson(element);
+          _class.add(classStudy);
           setState(() {});
         }
       }
@@ -78,7 +80,7 @@ class _DetailsScreen extends State<DetailStudyProgram> {
                       padding: const EdgeInsets.only(
                           left: 10, top: 5, right: 20, bottom: 5),
                       child: const Text(
-                        "Thông tin chương trình học",
+                        "Thông tin khóa học",
                         style: TextStyle(
                           fontWeight: FontWeight.w600,
                         ),
@@ -86,7 +88,7 @@ class _DetailsScreen extends State<DetailStudyProgram> {
                     ),
                   ),
                   const SizedBox(height: 16),
-                  Text(widget.studyProgram.name!, style: kHeadingextStyle),
+                  Text(widget.course.name!, style: kHeadingextStyle),
                   const SizedBox(height: 16),
                   Row(
                     children: <Widget>[
@@ -115,12 +117,12 @@ class _DetailsScreen extends State<DetailStudyProgram> {
                   children: <Widget>[
                     Container(
                       padding: const EdgeInsets.only(left: 30, top: 5),
-                      child: const Text("Danh sách khóa học", style: kTitleTextStyle),
+                      child: const Text("Danh sách lớp học", style: kTitleTextStyle),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(30),
                       child: ListView.builder(
-                        itemCount: _courses.length,
+                        itemCount: _class.length,
                         scrollDirection: Axis.vertical,
                         itemBuilder: (context, index){
                           /*return CardItem(
@@ -146,21 +148,21 @@ class _DetailsScreen extends State<DetailStudyProgram> {
                                   text: TextSpan(
                                     children: [
                                       TextSpan(
-                                        text: _courses[index].name! + "\n",
+                                        text: _class[index].name! + "\n",
                                         style: kSubtitleTextSyule.copyWith(
                                           fontWeight: FontWeight.w600,
                                           height: 1.5,
                                         ),
                                       ),
                                       TextSpan(
-                                        text: "Số lớp: " + _courses[index].numberOfClass.toString() + "\n",
+                                        text: "Ngày khai giảng: " + timestampToDate(_class[index].startDate!) + "\n",
                                         style: TextStyle(
                                           color: kTextColor.withOpacity(.5),
                                           fontSize: 18,
                                         ),
                                       ),
                                       TextSpan(
-                                        text: "Học phí: " + _courses[index].tuition.toString() + " vnđ",
+                                        text: "Lịch học: " + listToString(_class[index].dow!),
                                         style: TextStyle(
                                           color: kTextColor.withOpacity(.5),
                                           fontSize: 18,
@@ -184,7 +186,7 @@ class _DetailsScreen extends State<DetailStudyProgram> {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) => DetailCourse(_courses[index]),
+                                          builder: (context) => DetailClassRoom(_class[index]),
                                         ),
                                       );
                                     },

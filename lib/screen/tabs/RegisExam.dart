@@ -7,20 +7,19 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:english_center/services/Course.dart';
 import '../../../services/Course.dart';
-import 'DetailClass.dart';
 
-class DetailStudyProgram extends StatefulWidget {
+class RegisExam extends StatefulWidget {
   static const routeName = '/detail_studyProgram';
 
   final StudyProgram studyProgram;
 
-  DetailStudyProgram(this.studyProgram);
+  RegisExam(this.studyProgram);
 
   @override
-  _DetailsScreen createState() => _DetailsScreen();
+  _RegisExamScreen createState() => _RegisExamScreen();
 }
 
-class _DetailsScreen extends State<DetailStudyProgram> {
+class _RegisExamScreen extends State<RegisExam> {
 
   @override
   void initState() {
@@ -78,7 +77,7 @@ class _DetailsScreen extends State<DetailStudyProgram> {
                       padding: const EdgeInsets.only(
                           left: 10, top: 5, right: 20, bottom: 5),
                       child: const Text(
-                        "Thông tin chương trình học",
+                        "Thông tin lịch kiểm tra",
                         style: TextStyle(
                           fontWeight: FontWeight.w600,
                         ),
@@ -115,7 +114,7 @@ class _DetailsScreen extends State<DetailStudyProgram> {
                   children: <Widget>[
                     Container(
                       padding: const EdgeInsets.only(left: 30, top: 5),
-                      child: const Text("Danh sách khóa học", style: kTitleTextStyle),
+                      child: const Text("Danh sách lịch kiểm tra", style: kTitleTextStyle),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(30),
@@ -153,14 +152,14 @@ class _DetailsScreen extends State<DetailStudyProgram> {
                                         ),
                                       ),
                                       TextSpan(
-                                        text: "Số lớp: " + _courses[index].numberOfClass.toString() + "\n",
+                                        text: "Ngày thi: " + _courses[index].numberOfClass.toString() + "\n",
                                         style: TextStyle(
                                           color: kTextColor.withOpacity(.5),
                                           fontSize: 18,
                                         ),
                                       ),
                                       TextSpan(
-                                        text: "Học phí: " + _courses[index].tuition.toString() + " vnđ",
+                                        text: "Ca thi: " + _courses[index].tuition.toString() + " vnđ",
                                         style: TextStyle(
                                           color: kTextColor.withOpacity(.5),
                                           fontSize: 18,
@@ -195,90 +194,7 @@ class _DetailsScreen extends State<DetailStudyProgram> {
                           );
                         },
                       ),
-                      /*child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          const Text("Class available", style: kTitleTextStyle),
-                          const SizedBox(height: 30),
-                          CourseContent(
-                            number: "01",
-                            duration: 5.35,
-                            title: "Welcome to the Course",
-                            isDone: true,
-                          ),
-                          CourseContent(
-                            number: '02',
-                            duration: 19.04,
-                            title: "Design Thinking - Intro",
-                            isDone: true,
-                          ),
-                          CourseContent(
-                            number: '03',
-                            duration: 15.35,
-                            title: "Design Thinking Process",
-                          ),
-                          CourseContent(
-                            number: '04',
-                            duration: 5.35,
-                            title: "Customer Perspective",
-                          ),
-                        ],
-                      ),*/
                     ),
-                    /*Positioned(
-                      right: 0,
-                      left: 0,
-                      bottom: 0,
-                      child: Container(
-                        padding: const EdgeInsets.all(20),
-                        height: 100,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(40),
-                          boxShadow: [
-                            BoxShadow(
-                              offset: const Offset(0, 4),
-                              blurRadius: 50,
-                              color: kTextColor.withOpacity(.1),
-                            ),
-                          ],
-                        ),
-                        child: Row(
-                          children: <Widget>[
-                            Container(
-                              padding: const EdgeInsets.all(14),
-                              height: 56,
-                              width: 80,
-                              decoration: BoxDecoration(
-                                color: const Color(0xFFFFEDEE),
-                                borderRadius: BorderRadius.circular(40),
-                              ),
-                              child: SvgPicture.asset(
-                                  "assets/icons/shopping-bag.svg"),
-                            ),
-                            const SizedBox(width: 20),
-                            Expanded(
-                              child: Container(
-                                alignment: Alignment.center,
-                                height: 56,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(40),
-                                  color: kBlueColor,
-                                ),
-                                child: Text(
-                                  "Buy Now",
-                                  style: kSubtitleTextSyule.copyWith(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),*/
                   ],
                 ),
               ),
