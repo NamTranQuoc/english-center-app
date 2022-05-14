@@ -1,7 +1,7 @@
 
-import 'package:english_center/screen/tabs/RegisExam.dart';
 import 'package:english_center/screen/tabs/DashBoard.dart';
 import 'package:english_center/screen/tabs/More.dart';
+import 'package:english_center/screen/tabs/RegisExam.dart';
 import 'package:english_center/screen/tabs/Schedule.dart';
 import 'package:flutter/material.dart';
 import 'package:circle_nav_bar/circle_nav_bar.dart';
@@ -76,14 +76,14 @@ class _HomeState extends State<MainScreen> with SingleTickerProviderStateMixin {
           Icon(Icons.schedule_sharp, color: Colors.blue),
           Icon(Icons.home, color: Colors.blue),
           Icon(Icons.check, color: Colors.blue),
-          Icon(Icons.chat, color: Colors.blue),
+          // Icon(Icons.chat, color: Colors.blue),
           Icon(Icons.menu, color: Colors.blue),
         ],
         inactiveIcons: const [
           Icon(Icons.schedule_sharp, color: Colors.black),
           Icon(Icons.home, color: Colors.black),
-          Icon(Icons.check, color: Colors.blue),
-          Icon(Icons.chat, color: Colors.blue),
+          Icon(Icons.check, color: Colors.black),
+          // Icon(Icons.chat, color: Colors.blue),
           Icon(Icons.menu, color: Colors.black),
         ],
         color: Colors.white,
@@ -112,7 +112,7 @@ class _HomeState extends State<MainScreen> with SingleTickerProviderStateMixin {
         children: [
           ScheduleScreen(),
           DashBoardScreen(),
-          RegisExam(),
+          RegisExamScreen(),
           MoreScreen(),
         ],
       ),
