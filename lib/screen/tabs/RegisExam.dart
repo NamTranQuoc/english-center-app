@@ -1,46 +1,130 @@
 import 'package:english_center/constants.dart';
-import 'package:english_center/domain/Course.dart';
-import 'package:english_center/domain/StudyProgram.dart';
-import 'package:english_center/screen/tabs/course/DetailCourse.dart';
+import 'package:english_center/domain/RegisExamScreen.dart';
+import 'package:english_center/screen/tabs/regisExam/DetailRegisExam.dart';
+import 'package:english_center/services/RegisExam.dart';
+import 'package:english_center/util/ParseUtil.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:http/http.dart';
 
-import 'package:english_center/services/Course.dart';
-import '../../../services/Course.dart';
-
-class RegisExam extends StatefulWidget {
+class RegisExamScreen extends StatefulWidget {
   static const routeName = '/detail_studyProgram';
 
 
-  RegisExam();
+  RegisExamScreen();
 
   @override
   _RegisExamScreen createState() => _RegisExamScreen();
 }
 
-class _RegisExamScreen extends State<RegisExam> {
-
-  /*@override
+class _RegisExamScreen extends State<RegisExamScreen> {
+  @override
   void initState() {
     super.initState();
 
-    getCourseByStudy(widget.studyProgram.id!);
-  }*/
+    gets();
+  }
 
-  List<Course> _courses = [];
-  void getCourseByStudy(String id) {
-    getCourseByStudyProgram(id).then((value) {
+  void gets() {
+    getRegister().then((value) {
       if (value.code == 9999) {
         List<Map<String, dynamic>> list = List.from(value.payload);
         for (var element in list) {
-          Course course = Course.fromJson(element);
-          _courses.add(course);
+          RegisExam regisExam = RegisExam.fromJson(element);
+          exam.add(regisExam);
           setState(() {});
         }
       }
     });
   }
 
+  Widget getDisplay() {
+    if (exam.length > 0) {
+      return Padding(
+        padding: const EdgeInsets.all(30),
+        child: ListView.builder(
+          itemCount: 1,
+          scrollDirection: Axis.vertical,
+          itemBuilder: (context, index){
+            /*return CardItem(
+                              courses[index].name!,
+                              courses[index].name!,
+                                  (categoryId){
+                                setState(() {});
+                              }
+                          );*/
+            return Padding(
+              padding: const EdgeInsets.only(bottom: 30, top: 40),
+              child: Row(
+                children: <Widget>[
+                  Text(
+                    (index + 1).toString(),
+                    style: kHeadingextStyle.copyWith(
+                      color: kTextColor.withOpacity(.15),
+                      fontSize: 32,
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: exam[index].code.toString() + "\n",
+                          style: kSubtitleTextSyule.copyWith(
+                            fontWeight: FontWeight.w600,
+                            height: 1.5,
+                          ),
+                        ),
+                        TextSpan(
+                          text: "Giờ bắt đầu: " + timestampToString(exam[index].startTime!) + "\n",
+                          style: TextStyle(
+                            color: kTextColor.withOpacity(.5),
+                            fontSize: 18,
+                          ),
+                        ),
+                        TextSpan(
+                          text: "Giờ kết thúc: " + timestampToString(exam[index].endTime!),
+                          style: TextStyle(
+                            color: kTextColor.withOpacity(.5),
+                            fontSize: 18,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const Spacer(),
+                  Container(
+                    margin: const EdgeInsets.only(left: 20),
+                    height: 40,
+                    width: 40,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: kGreenColor.withOpacity(1),
+                    ),
+                    child: IconButton(
+                      icon: Icon(Icons.add),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => DetailRegisExam(exam[index]),
+                          ),
+                        );
+                      },
+                    ),
+                  )
+                ],
+              ),
+            );
+          },
+        ),
+      );
+    } else {
+      return Container();
+    }
+  }
+
+  List<RegisExam> exam = [];
 
   @override
   Widget build(BuildContext context) {
@@ -70,23 +154,24 @@ class _RegisExamScreen extends State<RegisExam> {
                       child: const Text(
                         "Thông tin lịch kiểm tra",
                         style: TextStyle(
-                          fontWeight: FontWeight.w600,
+                          fontWeight: FontWeight.w900,
+                          fontSize: 20
                         ),
                       ),
                     ),
                   ),
                   const SizedBox(height: 16),
-                  Text("hardcode", style: kHeadingextStyle),
-                  const SizedBox(height: 16),
+                  // Text("", style: kHeadingextStyle),
+                  // const SizedBox(height: 16),
                   Row(
                     children: <Widget>[
-                      SvgPicture.asset("assets/icons/person.svg"),
-                      const SizedBox(width: 5),
-                      const Text("18K"),
-                      const SizedBox(width: 20),
-                      SvgPicture.asset("assets/icons/star.svg"),
-                      const SizedBox(width: 5),
-                      const Text("4.8")
+                      // SvgPicture.asset("assets/icons/person.svg"),
+                      // const SizedBox(width: 5),
+                      // const Text("18K"),
+                      // const SizedBox(width: 20),
+                      // SvgPicture.asset("assets/icons/star.svg"),
+                      // const SizedBox(width: 5),
+                      // const Text("4.8")
                     ],
                   ),
                   const SizedBox(height: 20),
@@ -104,88 +189,10 @@ class _RegisExamScreen extends State<RegisExam> {
                 child: Stack(
                   children: <Widget>[
                     Container(
-                      padding: const EdgeInsets.only(left: 30, top: 5),
+                      padding: const EdgeInsets.only(left: 25, top: 25),
                       child: const Text("Danh sách lịch kiểm tra", style: kTitleTextStyle),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(30),
-                      child: ListView.builder(
-                        itemCount: 1,
-                        scrollDirection: Axis.vertical,
-                        itemBuilder: (context, index){
-                          /*return CardItem(
-                              courses[index].name!,
-                              courses[index].name!,
-                                  (categoryId){
-                                setState(() {});
-                              }
-                          );*/
-                          return Padding(
-                            padding: const EdgeInsets.only(bottom: 30),
-                            child: Row(
-                              children: <Widget>[
-                                Text(
-                                  (index + 1).toString(),
-                                  style: kHeadingextStyle.copyWith(
-                                    color: kTextColor.withOpacity(.15),
-                                    fontSize: 32,
-                                  ),
-                                ),
-                                const SizedBox(width: 8),
-                                RichText(
-                                  text: TextSpan(
-                                    children: [
-                                      TextSpan(
-                                        text: "hardcode" + "\n",
-                                        style: kSubtitleTextSyule.copyWith(
-                                          fontWeight: FontWeight.w600,
-                                          height: 1.5,
-                                        ),
-                                      ),
-                                      TextSpan(
-                                        text: "Ngày thi: " + "hardcode" + "\n",
-                                        style: TextStyle(
-                                          color: kTextColor.withOpacity(.5),
-                                          fontSize: 18,
-                                        ),
-                                      ),
-                                      TextSpan(
-                                        text: "Ca thi: " + "hardcode",
-                                        style: TextStyle(
-                                          color: kTextColor.withOpacity(.5),
-                                          fontSize: 18,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                const Spacer(),
-                                Container(
-                                  margin: const EdgeInsets.only(left: 20),
-                                  height: 40,
-                                  width: 40,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: kGreenColor.withOpacity(1),
-                                  ),
-                                  child: IconButton(
-                                    icon: Icon(Icons.add),
-                                    onPressed: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => DetailCourse(_courses[index]),
-                                        ),
-                                      );
-                                    },
-                                  ),
-                                )
-                              ],
-                            ),
-                          );
-                        },
-                      ),
-                    ),
+                    getDisplay(),
                   ],
                 ),
               ),
