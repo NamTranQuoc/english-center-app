@@ -8,7 +8,7 @@ class DetailsClassScreen extends StatelessWidget {
     return Scaffold(
       body: Container(
         width: double.infinity,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: Color(0xFFF5F4EF),
           image: DecorationImage(
             image: AssetImage("assets/images/ux_big.png"),
@@ -18,7 +18,7 @@ class DetailsClassScreen extends StatelessWidget {
         child: Column(
           children: <Widget>[
             Padding(
-              padding: EdgeInsets.only(left: 20, top: 50, right: 20),
+              padding: const EdgeInsets.only(left: 20, top: 50, right: 20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[

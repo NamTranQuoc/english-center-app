@@ -2,8 +2,6 @@ import 'dart:ui';
 import 'package:english_center/components/button/ButtonCustom.dart';
 import 'package:english_center/components/message/Notification.dart';
 import 'package:english_center/domain/Classroom.dart';
-import 'package:english_center/domain/Schedule.dart';
-import 'package:english_center/screen/tabs/Schedule.dart';
 import 'package:english_center/util/ParseUtil.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
