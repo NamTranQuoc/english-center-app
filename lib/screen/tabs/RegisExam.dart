@@ -43,7 +43,7 @@ class _RegisExamScreen extends State<RegisExamScreen> {
       return Padding(
         padding: const EdgeInsets.all(30),
         child: ListView.builder(
-          itemCount: 1,
+          itemCount: exam.length,
           scrollDirection: Axis.vertical,
           itemBuilder: (context, index){
             /*return CardItem(
