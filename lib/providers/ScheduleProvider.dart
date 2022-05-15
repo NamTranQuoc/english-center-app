@@ -16,5 +16,7 @@ class ScheduleProvider extends ChangeNotifier {
 
   void putIfAbsent(key, value) {
     _schedules.putIfAbsent(key, () => value);
+
+    notifyListeners();
   }
 }

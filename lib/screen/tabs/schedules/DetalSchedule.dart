@@ -73,7 +73,7 @@ class _DetailSchedule extends State<DetailSchedule> {
   }
 
   Widget viewAbsent() {
-    if (!schedule.tookPlace!) {
+    if (!schedule.isExam! && !schedule.tookPlace!) {
       if (!f) {
         classroomAbsents = {};
         absentId = "";
@@ -112,6 +112,173 @@ class _DetailSchedule extends State<DetailSchedule> {
     return Container();
   }
 
+  List<Widget> display() {
+    if (!schedule.isExam!) {
+      return [
+        Row(
+          children: [
+            Text(
+                '${AppLocalizations
+                    .of(context)
+                    .className}: ',
+                style: const TextStyle(fontSize: 18)),
+            Text(schedule.title ?? "",
+                style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold)),
+          ],
+        ),
+        Container(
+          margin: const EdgeInsets.fromLTRB(0, 0, 0, 15),
+        ),
+        Row(
+          children: [
+            Text(
+                '${AppLocalizations
+                    .of(context)
+                    .session}: ',
+                style: const TextStyle(fontSize: 18)),
+            Text(schedule.session!.toString(),
+                style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold)),
+          ],
+        ),
+        Container(
+          margin: const EdgeInsets.fromLTRB(0, 0, 0, 15),
+        ),
+        Row(
+          children: [
+            Text(
+                '${AppLocalizations
+                    .of(context)
+                    .startTime}: ',
+                style: const TextStyle(fontSize: 18)),
+            Text(timestampToString(schedule.start!),
+                style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold)),
+          ],
+        ),
+        Container(
+          margin: const EdgeInsets.fromLTRB(0, 0, 0, 15),
+        ),
+        Row(
+          children: [
+            Text(
+                '${AppLocalizations
+                    .of(context)
+                    .endTime}: ',
+                style: const TextStyle(fontSize: 18)),
+            Text(timestampToString(schedule.end!),
+                style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold)),
+          ],
+        ),
+        Container(
+          margin: const EdgeInsets.fromLTRB(0, 0, 0, 15),
+        ),
+        Row(
+          children: [
+            Text('${AppLocalizations.of(context).room}: ',
+                style: const TextStyle(fontSize: 18)),
+            Text(schedule.room ?? "",
+                style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold)),
+          ],
+        ),
+        Container(
+          margin: const EdgeInsets.fromLTRB(0, 0, 0, 15),
+        ),
+        Row(
+          children: [
+            Text(
+                '${AppLocalizations.of(context).teacher}: ',
+                style: const TextStyle(fontSize: 18)),
+            Text(schedule.teacher ?? "",
+                style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold)),
+          ],
+        ),];
+    } else {
+      return [
+        Row(
+        children: [
+          Text(
+              'Tên buổi thi: ',
+              style: const TextStyle(fontSize: 18)),
+          Text(schedule.title ?? "",
+              style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold)),
+        ],
+      ),
+        Container(
+          margin: const EdgeInsets.fromLTRB(0, 0, 0, 15),
+        ),
+        Row(
+          children: [
+            Text(
+                '${AppLocalizations
+                    .of(context)
+                    .startTime}: ',
+                style: const TextStyle(fontSize: 18)),
+            Text(timestampToString(schedule.start!),
+                style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold)),
+          ],
+        ),
+        Container(
+          margin: const EdgeInsets.fromLTRB(0, 0, 0, 15),
+        ),
+        Row(
+          children: [
+            Text(
+                '${AppLocalizations
+                    .of(context)
+                    .endTime}: ',
+                style: const TextStyle(fontSize: 18)),
+            Text(timestampToString(schedule.end!),
+                style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold)),
+          ],
+        ),
+        Container(
+          margin: const EdgeInsets.fromLTRB(0, 0, 0, 15),
+        ),
+        Row(
+          children: [
+            Text('${AppLocalizations.of(context).room}: ',
+                style: const TextStyle(fontSize: 18)),
+            Text(schedule.room ?? "",
+                style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold)),
+          ],
+        ),
+        Container(
+          margin: const EdgeInsets.fromLTRB(0, 0, 0, 15),
+        ),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+                'Giám thị: ',
+                style: const TextStyle(fontSize: 18)),
+            Text(schedule.teacher ?? "",
+                style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold)),
+          ],
+        ),];
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -132,88 +299,7 @@ class _DetailSchedule extends State<DetailSchedule> {
                             border: Border.all(color: Colors.blueAccent),
                             borderRadius: BorderRadius.circular(20)),
                         child: Column(
-                          children: [
-                            Row(
-                              children: [
-                                Text(
-                                    '${AppLocalizations.of(context).className}: ',
-                                    style: const TextStyle(fontSize: 18)),
-                                Text(schedule.title ?? "",
-                                    style: const TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold)),
-                              ],
-                            ),
-                            Container(
-                              margin: const EdgeInsets.fromLTRB(0, 0, 0, 15),
-                            ),
-                            Row(
-                              children: [
-                                Text(
-                                    '${AppLocalizations.of(context).session}: ',
-                                    style: const TextStyle(fontSize: 18)),
-                                Text(schedule.session!.toString(),
-                                    style: const TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold)),
-                              ],
-                            ),
-                            Container(
-                              margin: const EdgeInsets.fromLTRB(0, 0, 0, 15),
-                            ),
-                            Row(
-                              children: [
-                                Text(
-                                    '${AppLocalizations.of(context).startTime}: ',
-                                    style: const TextStyle(fontSize: 18)),
-                                Text(timestampToString(schedule.start!),
-                                    style: const TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold)),
-                              ],
-                            ),
-                            Container(
-                              margin: const EdgeInsets.fromLTRB(0, 0, 0, 15),
-                            ),
-                            Row(
-                              children: [
-                                Text(
-                                    '${AppLocalizations.of(context).endTime}: ',
-                                    style: const TextStyle(fontSize: 18)),
-                                Text(timestampToString(schedule.end!),
-                                    style: const TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold)),
-                              ],
-                            ),
-                            Container(
-                              margin: const EdgeInsets.fromLTRB(0, 0, 0, 15),
-                            ),
-                            Row(
-                              children: [
-                                Text('${AppLocalizations.of(context).room}: ',
-                                    style: const TextStyle(fontSize: 18)),
-                                Text(schedule.room ?? "",
-                                    style: const TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold)),
-                              ],
-                            ),
-                            Container(
-                              margin: const EdgeInsets.fromLTRB(0, 0, 0, 15),
-                            ),
-                            Row(
-                              children: [
-                                Text(
-                                    '${AppLocalizations.of(context).teacher}: ',
-                                    style: const TextStyle(fontSize: 18)),
-                                Text(schedule.teacher ?? "",
-                                    style: const TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold)),
-                              ],
-                            ),
-                          ],
+                          children: display(),
                         ),
                       ),
                     ],

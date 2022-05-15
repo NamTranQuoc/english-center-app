@@ -7,6 +7,7 @@ import 'package:english_center/screen/tabs/more/ChangePassword.dart';
 import 'package:english_center/screen/tabs/more/UpdateInformation.dart';
 import 'package:english_center/services/MemberService.dart';
 import 'package:english_center/util/LocalStorage.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
@@ -60,10 +61,14 @@ class _MoreScreen extends State<MoreScreen> {
                 ),
                 ButtonCustom(AppLocalizations.of(context).updateInformation,
                     Colors.lightBlueAccent, () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => UpdateInformation(Provider.of<MemberProvider>(context).currentMember)),
-                  );
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(builder: (context) => UpdateInformation(Provider.of<MemberProvider>(context).currentMember)),
+                  // );
+                      FirebaseMessaging.instance.getToken().then((value) {
+                        String? token = value;
+                        print("aa: " + token!);
+                      });
                 }),
                 ButtonCustom(AppLocalizations.of(context).changePassword,
                     Colors.lightBlueAccent, () {
