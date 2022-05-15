@@ -1,14 +1,10 @@
 import 'package:english_center/constants.dart';
 import 'package:english_center/domain/Classroom.dart';
 import 'package:english_center/domain/Course.dart';
-import 'package:english_center/domain/StudyProgram.dart';
 import 'package:english_center/screen/tabs/classroom/DetailClassRoom.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
-import 'package:english_center/services/Course.dart';
 import '../../../services/ClassStudy.dart';
-import '../../../services/Course.dart';
 import '../../../util/ParseUtil.dart';
 
 class DetailCourse extends StatefulWidget {
@@ -197,90 +193,7 @@ class _DetailCourseScreen extends State<DetailCourse> {
                           );
                         },
                       ),
-                      /*child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          const Text("Class available", style: kTitleTextStyle),
-                          const SizedBox(height: 30),
-                          CourseContent(
-                            number: "01",
-                            duration: 5.35,
-                            title: "Welcome to the Course",
-                            isDone: true,
-                          ),
-                          CourseContent(
-                            number: '02',
-                            duration: 19.04,
-                            title: "Design Thinking - Intro",
-                            isDone: true,
-                          ),
-                          CourseContent(
-                            number: '03',
-                            duration: 15.35,
-                            title: "Design Thinking Process",
-                          ),
-                          CourseContent(
-                            number: '04',
-                            duration: 5.35,
-                            title: "Customer Perspective",
-                          ),
-                        ],
-                      ),*/
                     ),
-                    /*Positioned(
-                      right: 0,
-                      left: 0,
-                      bottom: 0,
-                      child: Container(
-                        padding: const EdgeInsets.all(20),
-                        height: 100,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(40),
-                          boxShadow: [
-                            BoxShadow(
-                              offset: const Offset(0, 4),
-                              blurRadius: 50,
-                              color: kTextColor.withOpacity(.1),
-                            ),
-                          ],
-                        ),
-                        child: Row(
-                          children: <Widget>[
-                            Container(
-                              padding: const EdgeInsets.all(14),
-                              height: 56,
-                              width: 80,
-                              decoration: BoxDecoration(
-                                color: const Color(0xFFFFEDEE),
-                                borderRadius: BorderRadius.circular(40),
-                              ),
-                              child: SvgPicture.asset(
-                                  "assets/icons/shopping-bag.svg"),
-                            ),
-                            const SizedBox(width: 20),
-                            Expanded(
-                              child: Container(
-                                alignment: Alignment.center,
-                                height: 56,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(40),
-                                  color: kBlueColor,
-                                ),
-                                child: Text(
-                                  "Buy Now",
-                                  style: kSubtitleTextSyule.copyWith(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),*/
                   ],
                 ),
               ),

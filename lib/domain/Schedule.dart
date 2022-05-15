@@ -12,6 +12,7 @@ class Schedule {
   final bool? tookPlace;
   final String? classroomId;
   final bool? isAbsent;
+  final bool? isExam;
 
 
   Schedule({
@@ -26,7 +27,8 @@ class Schedule {
       this.maxStudent,
       this.tookPlace,
       this.classroomId,
-      this.isAbsent});
+      this.isAbsent,
+      this.isExam});
 
   factory Schedule.fromJson(Map<String, dynamic> json) {
     return Schedule(
@@ -41,6 +43,7 @@ class Schedule {
         maxStudent: json['maxStudent'],
         tookPlace: json['took_place'],
         classroomId: json['classroom_id'],
-        isAbsent: json['is_absent']);
+        isAbsent: json['is_absent'],
+        isExam: json['is_exam']);
   }
 }
