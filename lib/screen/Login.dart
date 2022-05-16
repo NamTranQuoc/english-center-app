@@ -8,6 +8,9 @@ import 'package:english_center/screen/Main.dart';
 import 'package:english_center/screen/Signup.dart';
 import 'package:english_center/screen/forget_password/RequestPassword.dart';
 import 'package:english_center/services/AuthService.dart';
+import 'package:english_center/services/Common.dart';
+import 'package:english_center/util/Enums.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -43,6 +46,11 @@ class _LoginScreen extends State<LoginScreen> {
       formGlobalKey.currentState!.save();
       login(usernameController.text, passwordController.text).then((value) {
         widget.storage.setToken(value.payload);
+        FirebaseMessaging.instance.getToken().then((v) {
+          if (v != null) {
+            postAuthenticated('${Common.host}/auth/login_success?token=$v', {}, token: value.payload, loader: false);
+          }
+        });
         Navigator.of(context).push(MaterialPageRoute(builder: (_) {
           return MainScreen();
         }));

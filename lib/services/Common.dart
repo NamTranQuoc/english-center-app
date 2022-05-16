@@ -29,18 +29,22 @@ Future<Response> postUnauthenticated(String endpoint, Object body) async {
   }
 }
 
-Future<Response> postAuthenticated(String endpoint, Object body) async {
-  showLoader();
-  String token = await LocalStorage().getToken();
+Future<Response> postAuthenticated(String endpoint, Object body, {String? token, bool? loader}) async {
+  if (loader != false) {
+    showLoader();
+  }
+  String _token = token ?? await LocalStorage().getToken();
   final http.Response response = await http.post(
       Uri.parse(endpoint),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=utf-8',
-        'Authorization': 'Bearer $token'
+        'Authorization': 'Bearer $_token'
       },
       body: jsonEncode(body));
 
-  dismiss();
+  if (loader != false) {
+    dismiss();
+  }
   if (response.statusCode == 200) {
     Response result = Response.fromJson(jsonDecode(utf8.decode(response.bodyBytes)));
     if (result.code != 9999) {
@@ -76,18 +80,22 @@ Future<Response> putUnauthenticated(String endpoint, Object body) async {
   }
 }
 
-Future<Response> putAuthenticated(String endpoint, Object body) async {
-  showLoader();
-  String token = await LocalStorage().getToken();
+Future<Response> putAuthenticated(String endpoint, Object body, {String? token, bool? loader}) async {
+  if (loader != false) {
+    showLoader();
+  }
+  String _token = await LocalStorage().getToken();
   final http.Response response = await http.put(
       Uri.parse(endpoint),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=utf-8',
-        'Authorization': 'Bearer $token'
+        'Authorization': 'Bearer $_token'
       },
       body: jsonEncode(body));
 
-  dismiss();
+  if (loader != false) {
+    dismiss();
+  }
   if (response.statusCode == 200) {
     Response result = Response.fromJson(jsonDecode(utf8.decode(response.bodyBytes)));
     if (result.code != 9999) {
@@ -122,17 +130,21 @@ Future<Response> getUnauthenticated(String endpoint, Object body) async {
   }
 }
 
-Future<Response> getAuthenticated(String endpoint) async {
-  showLoader();
-  String token = await LocalStorage().getToken();
+Future<Response> getAuthenticated(String endpoint, {String? token, bool? loader}) async {
+  if (loader != false) {
+    showLoader();
+  }
+  String _token = await LocalStorage().getToken();
   final http.Response response = await http.get(
       Uri.parse(endpoint),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=utf-8',
-        'Authorization': 'Bearer $token'
+        'Authorization': 'Bearer $_token'
       });
 
-  dismiss();
+  if (loader != false) {
+    dismiss();
+  }
   if (response.statusCode == 200) {
     Response result = Response.fromJson(jsonDecode(utf8.decode(response.bodyBytes)));
     if (result.code != 9999) {
