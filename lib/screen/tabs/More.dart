@@ -5,7 +5,9 @@ import 'package:english_center/providers/MemberProvider.dart';
 import 'package:english_center/screen/Login.dart';
 import 'package:english_center/screen/tabs/more/ChangePassword.dart';
 import 'package:english_center/screen/tabs/more/UpdateInformation.dart';
+import 'package:english_center/services/Common.dart';
 import 'package:english_center/services/MemberService.dart';
+import 'package:english_center/util/Enums.dart';
 import 'package:english_center/util/LocalStorage.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -61,14 +63,13 @@ class _MoreScreen extends State<MoreScreen> {
                 ),
                 ButtonCustom(AppLocalizations.of(context).updateInformation,
                     Colors.lightBlueAccent, () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(builder: (context) => UpdateInformation(Provider.of<MemberProvider>(context).currentMember)),
-                  // );
-                      FirebaseMessaging.instance.getToken().then((value) {
-                        String? token = value;
-                        print("aa: " + token!);
-                      });
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => UpdateInformation(
+                            Provider.of<MemberProvider>(context)
+                                .currentMember)),
+                  );
                 }),
                 ButtonCustom(AppLocalizations.of(context).changePassword,
                     Colors.lightBlueAccent, () {
@@ -80,12 +81,21 @@ class _MoreScreen extends State<MoreScreen> {
                 ButtonCustom(
                     AppLocalizations.of(context).logOut, Colors.lightBlueAccent,
                     () {
-                  widget.storage.cleanToken();
-                  Provider.of<MemberProvider>(context, listen: false)
-                      .set(Member.fromJson({}));
-                  Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-                    return LoginScreen();
-                  }));
+                  FirebaseMessaging.instance.getToken().then((v) {
+                    if (v != null) {
+                      postAuthenticated(
+                              '${Common.host}/auth/logout?token=$v', {})
+                          .then((value) {
+                        widget.storage.cleanToken();
+                        Provider.of<MemberProvider>(context, listen: false)
+                            .set(Member.fromJson({}));
+                        Navigator.of(context)
+                            .push(MaterialPageRoute(builder: (_) {
+                          return LoginScreen();
+                        }));
+                      });
+                    }
+                  });
                 }),
               ],
             )));
