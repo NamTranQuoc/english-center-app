@@ -4,6 +4,7 @@ import 'package:english_center/domain/Member.dart';
 import 'package:english_center/providers/MemberProvider.dart';
 import 'package:english_center/screen/Login.dart';
 import 'package:english_center/screen/tabs/more/ChangePassword.dart';
+import 'package:english_center/screen/tabs/more/MyCourse.dart';
 import 'package:english_center/screen/tabs/more/UpdateInformation.dart';
 import 'package:english_center/services/Common.dart';
 import 'package:english_center/services/MemberService.dart';
@@ -71,6 +72,13 @@ class _MoreScreen extends State<MoreScreen> {
                                 .currentMember)),
                   );
                 }),
+                ButtonCustom("Lớp học của tôi",
+                    Colors.lightBlueAccent, () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => MyCourseScreen()),
+                      );
+                    }),
                 ButtonCustom(AppLocalizations.of(context).changePassword,
                     Colors.lightBlueAccent, () {
                   Navigator.push(
