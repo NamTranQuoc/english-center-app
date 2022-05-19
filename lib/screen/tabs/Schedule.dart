@@ -59,6 +59,7 @@ class _ScheduleScreen extends State<ScheduleScreen> {
       if (value.code == 9999) {
         List<Map<String, dynamic>> list = List.from(value.payload);
         for (var element in list) {
+          print(element);
           Schedule schedule = Schedule.fromJson(element);
           DateTime datetime =
               DateTime.fromMillisecondsSinceEpoch(schedule.start!);

@@ -40,7 +40,7 @@ class Schedule {
         end: json['end'],
         session: json['session'],
         courseId: json['course_id'],
-        maxStudent: json['maxStudent'],
+        maxStudent: json['max_student'],
         tookPlace: json['took_place'],
         classroomId: json['classroom_id'],
         isAbsent: json['is_absent'],
