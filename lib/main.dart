@@ -4,6 +4,10 @@ import 'package:english_center/providers/ScheduleProvider.dart';
 import 'package:english_center/screen/Login.dart';
 import 'package:english_center/screen/Main.dart';
 import 'package:english_center/screen/Signup.dart';
+import 'package:english_center/screen/tabs/Home.dart';
+import 'package:english_center/screen/tabs/More.dart';
+import 'package:english_center/screen/tabs/more/ChangePassword.dart';
+import 'package:english_center/screen/tabs/schedules/DetalSchedule.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -29,14 +33,9 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 }
 
 void main() async {
-
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-
-  await flutterLocalNotificationsPlugin
-      .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
-      ?.createNotificationChannel(channel);
 
   await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
     alert: true,
@@ -50,65 +49,12 @@ void main() async {
       ChangeNotifierProvider(create: (context) => CommandProvider()),
       ChangeNotifierProvider(create: (context) => ScheduleProvider()),
     ],
-    child: MyApp(),
+    child: const MyApp(),
   ),);
 }
 
-class MyApp extends StatefulWidget {
-  static const routeName = '/schedule';
-
-  @override
-  _MyApp createState() => _MyApp();
-}
-
-class _MyApp extends State<MyApp> {
-
-  @override
-  void initState() {
-    super.initState();
-    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-      print('A new onMessageOpenedApp event was !');
-      RemoteNotification? notification = message.notification;
-      AndroidNotification? android = message.notification?.android;
-      if (notification != null && android != null) {
-        flutterLocalNotificationsPlugin.show(
-            notification.hashCode,
-            notification.title,
-            notification.body,
-            NotificationDetails(
-              android: AndroidNotificationDetails(
-                channel.id,
-                channel.name,
-                channel.description,
-                color: Colors.blue,
-                playSound: true,
-                icon: '@mipmap/ic_launcher',
-              ),
-            ));
-      }
-    });
-
-    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-      print('A new onMessageOpenedApp event was published!');
-      RemoteNotification? notification = message.notification;
-      AndroidNotification? android = message.notification?.android;
-      if (notification != null && android != null) {
-        showDialog(
-            context: context,
-            builder: (_) {
-              return AlertDialog(
-                title: Text(notification.title!),
-                content: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [Text(notification.body!)],
-                  ),
-                ),
-              );
-            });
-      }
-    });
-  }
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
