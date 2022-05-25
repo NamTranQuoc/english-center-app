@@ -6,9 +6,10 @@ class Logo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    /*return Container(
         height: 100,
         margin: const EdgeInsets.fromLTRB(10, 10, 10, 20),
-        child: Image.asset('images/logo.png', width: 200, height: 200,));
+        child: Image.asset('images/logo.png', width: 200, height: 200,));*/
+    return Image.asset('images/logo.png', width: 200, height: 200,);
   }
 }

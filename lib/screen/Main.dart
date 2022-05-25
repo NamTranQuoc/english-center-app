@@ -109,7 +109,7 @@ class _HomeState extends State<MainScreen> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      /*appBar: AppBar(
         leading:
         IconButton(
           onPressed: (){
@@ -154,7 +154,7 @@ class _HomeState extends State<MainScreen> with SingleTickerProviderStateMixin {
         ),
         elevation: 20,
         titleSpacing: 4,
-      ),
+      ),*/
       bottomNavigationBar: CircleNavBar(
         activeIcons: const [
           Icon(Icons.schedule_sharp, color: Colors.blue),

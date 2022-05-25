@@ -1,18 +1,9 @@
-import 'package:english_center/components/button/ButtonCustom.dart';
-import 'package:english_center/components/upload/AvatarCustom.dart';
 import 'package:english_center/domain/Member.dart';
 import 'package:english_center/providers/MemberProvider.dart';
-import 'package:english_center/screen/Login.dart';
-import 'package:english_center/screen/tabs/more/ChangePassword.dart';
-import 'package:english_center/screen/tabs/more/MyCourse.dart';
-import 'package:english_center/screen/tabs/more/UpdateInformation.dart';
-import 'package:english_center/services/Common.dart';
+import 'package:english_center/screen/tabs/profileComponents/body.dart';
 import 'package:english_center/services/MemberService.dart';
-import 'package:english_center/util/Enums.dart';
 import 'package:english_center/util/LocalStorage.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 class MoreScreen extends StatefulWidget {
@@ -27,7 +18,6 @@ class MoreScreen extends StatefulWidget {
 
 class _MoreScreen extends State<MoreScreen> {
   int selectedIndex = 0;
-
   @override
   void initState() {
     // TODO: implement initState
@@ -46,66 +36,7 @@ class _MoreScreen extends State<MoreScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Padding(
-            padding: const EdgeInsets.fromLTRB(10, 50, 10, 10),
-            child: ListView(
-              children: <Widget>[
-                AvatarCustom(),
-                Container(
-                  margin: const EdgeInsets.fromLTRB(10, 10, 10, 20),
-                  alignment: Alignment.center,
-                  child: Consumer<MemberProvider>(
-                    builder: (context, provider, child) {
-                      return Text(provider.currentMember.name ?? '',
-                          style: const TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold));
-                    },
-                  ),
-                ),
-                ButtonCustom(AppLocalizations.of(context).updateInformation,
-                    Colors.lightBlueAccent, () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => UpdateInformation(
-                            Provider.of<MemberProvider>(context)
-                                .currentMember)),
-                  );
-                }),
-                ButtonCustom("Lớp học của tôi",
-                    Colors.lightBlueAccent, () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => MyCourseScreen()),
-                      );
-                    }),
-                ButtonCustom(AppLocalizations.of(context).changePassword,
-                    Colors.lightBlueAccent, () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => ChangePassword()),
-                  );
-                }),
-                ButtonCustom(
-                    AppLocalizations.of(context).logOut, Colors.lightBlueAccent,
-                    () {
-                  FirebaseMessaging.instance.getToken().then((v) {
-                    if (v != null) {
-                      postAuthenticated(
-                              '${Common.host}/auth/logout?token=$v', {})
-                          .then((value) {
-                        widget.storage.cleanToken();
-                        Provider.of<MemberProvider>(context, listen: false)
-                            .set(Member.fromJson({}));
-                        Navigator.of(context)
-                            .push(MaterialPageRoute(builder: (_) {
-                          return LoginScreen();
-                        }));
-                      });
-                    }
-                  });
-                }),
-              ],
-            )));
+      body: BodyScreen(),
+    );
   }
 }

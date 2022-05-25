@@ -4,8 +4,6 @@ import 'package:english_center/screen/tabs/regisExam/DetailRegisExam.dart';
 import 'package:english_center/services/RegisExam.dart';
 import 'package:english_center/util/ParseUtil.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:http/http.dart';
 
 class RegisExamScreen extends StatefulWidget {
   static const routeName = '/detail_studyProgram';
@@ -46,21 +44,14 @@ class _RegisExamScreen extends State<RegisExamScreen> {
           itemCount: exam.length,
           scrollDirection: Axis.vertical,
           itemBuilder: (context, index){
-            /*return CardItem(
-                              courses[index].name!,
-                              courses[index].name!,
-                                  (categoryId){
-                                setState(() {});
-                              }
-                          );*/
             return Padding(
-              padding: const EdgeInsets.only(bottom: 30, top: 40),
+              padding: const EdgeInsets.only(bottom: 15, top: 15),
               child: Row(
                 children: <Widget>[
                   Text(
                     (index + 1).toString(),
                     style: kHeadingextStyle.copyWith(
-                      color: kTextColor.withOpacity(.15),
+                      color: kTextColor.withOpacity(.45),
                       fontSize: 32,
                     ),
                   ),
@@ -78,14 +69,14 @@ class _RegisExamScreen extends State<RegisExamScreen> {
                         TextSpan(
                           text: "Giờ bắt đầu: " + timestampToString(exam[index].startTime!) + "\n",
                           style: TextStyle(
-                            color: kTextColor.withOpacity(.5),
+                            color: kTextColor.withOpacity(.8),
                             fontSize: 18,
                           ),
                         ),
                         TextSpan(
                           text: "Giờ kết thúc: " + timestampToString(exam[index].endTime!),
                           style: TextStyle(
-                            color: kTextColor.withOpacity(.5),
+                            color: kTextColor.withOpacity(.8),
                             fontSize: 18,
                           ),
                         ),
@@ -141,7 +132,7 @@ class _RegisExamScreen extends State<RegisExamScreen> {
         child: Column(
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.only(left: 20, top: 50, right: 20),
+              padding: const EdgeInsets.only(left: 20, top: 70, right: 20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
@@ -154,8 +145,8 @@ class _RegisExamScreen extends State<RegisExamScreen> {
                       child: const Text(
                         "Thông tin lịch kiểm tra",
                         style: TextStyle(
-                          fontWeight: FontWeight.w900,
-                          fontSize: 20
+                          fontWeight: FontWeight.w800,
+                          fontSize: 24
                         ),
                       ),
                     ),
@@ -164,21 +155,13 @@ class _RegisExamScreen extends State<RegisExamScreen> {
                   // Text("", style: kHeadingextStyle),
                   // const SizedBox(height: 16),
                   Row(
-                    children: <Widget>[
-                      // SvgPicture.asset("assets/icons/person.svg"),
-                      // const SizedBox(width: 5),
-                      // const Text("18K"),
-                      // const SizedBox(width: 20),
-                      // SvgPicture.asset("assets/icons/star.svg"),
-                      // const SizedBox(width: 5),
-                      // const Text("4.8")
-                    ],
+                    children: <Widget>[],
                   ),
                   const SizedBox(height: 20),
                 ],
               ),
             ),
-            const SizedBox(height: 60),
+            const SizedBox(height: 90),
             Expanded(
               child: Container(
                 width: double.infinity,
