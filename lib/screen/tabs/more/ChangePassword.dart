@@ -1,3 +1,4 @@
+import 'package:english_center/components/background/background.dart';
 import 'package:english_center/components/button/ButtonCustom.dart';
 import 'package:english_center/components/input/InputPassword.dart';
 import 'package:english_center/services/AuthService.dart';
@@ -35,30 +36,67 @@ class _ChangePassword extends State<ChangePassword> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text(''),
-        ),
-        body: Padding(
-            padding: const EdgeInsets.fromLTRB(10, 50, 10, 10),
-            child: ListView(
-              children: <Widget>[
-                Form(
-                  key: formGlobalKey,
-                  child: Column(
-                    children: [
-                      InputPassword(AppLocalizations.of(context).oldPassword,
-                          oldPassword),
-                      InputPassword(AppLocalizations.of(context).newPassword,
-                          newPassword),
-                      InputPassword(
-                          AppLocalizations.of(context).confirmPassword,
-                          confirmPassword),
-                    ],
+        body: Background(
+          isShowIcon: true,
+          child: Padding(
+              padding: const EdgeInsets.fromLTRB(10, 50, 10, 10),
+              child: ListView(
+                children: <Widget>[
+                  Form(
+                    key: formGlobalKey,
+                    child: Column(
+                      children: [
+                        Container(
+                          alignment: Alignment.centerLeft,
+                          padding: const EdgeInsets.symmetric(horizontal: 30),
+                          child: const Text(
+                            "Đổi mật khẩu",
+                            style: TextStyle(
+                              fontSize: 32,
+                              color: Color(0xFF2661FA),
+                              fontWeight: FontWeight.bold,
+                            ),
+                            textAlign: TextAlign.left,
+                          ),
+                        ),
+                        const SizedBox(height: 40.0),
+                        InputPassword(AppLocalizations.of(context).oldPassword,
+                            oldPassword),
+                        InputPassword(AppLocalizations.of(context).newPassword,
+                            newPassword),
+                        InputPassword(
+                            AppLocalizations.of(context).confirmPassword,
+                            confirmPassword),
+                      ],
+                    ),
                   ),
-                ),
-                ButtonCustom(AppLocalizations.of(context).update,
-                    Colors.lightBlueAccent, onSubmit),
-              ],
-            )));
+                  Padding(  padding: const EdgeInsets.symmetric(horizontal: 8),
+                    child: Row(
+                      children: [Expanded(child:  ElevatedButton(
+                        style: ElevatedButton.styleFrom(primary: Color(0xFF2661FA),),
+
+                        onPressed: () {
+                          onSubmit();
+                        },
+                        child: Container(
+                          alignment: Alignment.center,
+                          height: 50.0,
+
+                          padding: const EdgeInsets.all(0),
+                          child: Text(
+                            AppLocalizations.of(context).update,
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                                fontWeight: FontWeight.bold
+                            ),
+                          ),
+                        ),
+                      ),)],
+                    ),
+                  ),
+                ],
+              )),
+        )
+    );
   }
 }
