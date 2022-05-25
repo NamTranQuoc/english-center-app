@@ -1,3 +1,4 @@
+import 'package:english_center/screen/tabs/more/ChangeLanguage.dart';
 import 'package:english_center/screen/tabs/profileComponents/profile_menu.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -93,7 +94,14 @@ class _BodyScreen extends State<BodyScreen> {
           ProfileMenu(
             text: "Ngôn ngữ",
             icon: "assets/icons/language.svg",
-            press: () {},
+            press:
+                () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => ChangeLanguage(),
+              ));
+            },
           ),
           ProfileMenu(
             text: AppLocalizations.of(context).logOut,

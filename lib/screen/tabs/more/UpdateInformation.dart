@@ -117,6 +117,7 @@ class _UpdateInformation extends State<UpdateInformation> {
                         ],
                       ),
                     ),
+                    const SizedBox(height: 20,),
                     Padding(  padding: const EdgeInsets.symmetric(horizontal: 8),
                       child: Row(
                         children: [Expanded(child:  ElevatedButton(

@@ -1,34 +1,40 @@
 import 'package:english_center/components/background/background.dart';
 import 'package:english_center/components/input/InputPassword.dart';
-import 'package:english_center/services/AuthService.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
-class ChangePassword extends StatefulWidget {
-  static const routeName = '/change_password';
+import '../../../components/select/SelectCustom.dart';
+import '../../../providers/CommonProvider.dart';
 
-  ChangePassword();
+class ChangeLanguage extends StatefulWidget {
+  static const routeName = '/change_language';
+
+  ChangeLanguage();
 
   @override
-  _ChangePassword createState() => _ChangePassword();
+  _ChangeLanguage createState() => _ChangeLanguage();
 }
 
-class _ChangePassword extends State<ChangePassword> {
+class _ChangeLanguage extends State<ChangeLanguage> {
   final formGlobalKey = GlobalKey<FormState>();
 
-  TextEditingController oldPassword = TextEditingController();
-  TextEditingController newPassword = TextEditingController();
-  TextEditingController confirmPassword = TextEditingController();
+  List<String> languages = ['Việt Nam', 'English'];
+  String language = "Việt Nam";
+
+  /*@override
+  void initState() {
+    super.initState();
+    CommandProvider provider = Provider.of<CommandProvider>(context, listen: false);
+    language =  != null ? widget.member.gender! : "";
+  }*/
 
   onSubmit() {
-    if (formGlobalKey.currentState!.validate()) {
-      formGlobalKey.currentState!.save();
-      changePassword(oldPassword.text, newPassword.text, confirmPassword.text).then((value) {
-        print(value.code);
-        if(value.code == 9999) {
-          Navigator.pop(context);
-        }
-      });
+    CommandProvider provider = Provider.of<CommandProvider>(context, listen: false);
+    if (language == 'Việt Nam') {
+      provider.set(const Locale('vi', ''));
+    } else {
+      provider.set(const Locale('en', ''));
     }
   }
 
@@ -49,7 +55,7 @@ class _ChangePassword extends State<ChangePassword> {
                           alignment: Alignment.centerLeft,
                           padding: const EdgeInsets.symmetric(horizontal: 30),
                           child: const Text(
-                            "Đổi mật khẩu",
+                            "Đổi ngôn ngữ",
                             style: TextStyle(
                               fontSize: 32,
                               color: Color(0xFF2661FA),
@@ -59,13 +65,9 @@ class _ChangePassword extends State<ChangePassword> {
                           ),
                         ),
                         const SizedBox(height: 40.0),
-                        InputPassword(AppLocalizations.of(context).oldPassword,
-                            oldPassword),
-                        InputPassword(AppLocalizations.of(context).newPassword,
-                            newPassword),
-                        InputPassword(
-                            AppLocalizations.of(context).confirmPassword,
-                            confirmPassword),
+                        SelectCustom(language, languages, "Ngôn ngữ", (val) {setState(() {
+                          language = val;
+                        });}),
                       ],
                     ),
                   ),
