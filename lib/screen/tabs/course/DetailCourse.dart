@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../services/ClassStudy.dart';
 import '../../../util/ParseUtil.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DetailCourse extends StatefulWidget {
   static const routeName = '/detail_course';
@@ -72,9 +73,9 @@ class _DetailCourseScreen extends State<DetailCourse> {
                       color: kBestSellerColor,
                       padding: const EdgeInsets.only(
                           left: 10, top: 5, right: 20, bottom: 5),
-                      child: const Text(
-                        "Thông tin khóa học",
-                        style: TextStyle(
+                      child: Text(
+                        AppLocalizations.of(context).labelCourseInfo,
+                        style: const TextStyle(
                             fontWeight: FontWeight.w800,
                             fontSize: 24
                         ),
@@ -111,7 +112,7 @@ class _DetailCourseScreen extends State<DetailCourse> {
                   children: <Widget>[
                     Container(
                       padding: const EdgeInsets.only(left: 25, top: 25),
-                      child: const Text("Danh sách lớp học", style: kTitleTextStyle),
+                      child: Text(AppLocalizations.of(context).labelClassList, style: kTitleTextStyle),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(30),
@@ -142,14 +143,14 @@ class _DetailCourseScreen extends State<DetailCourse> {
                                         ),
                                       ),
                                       TextSpan(
-                                        text: "Ngày khai giảng: " + timestampToDate(_class[index].startDate!) + "\n",
+                                        text: AppLocalizations.of(context).labelDateStart + ": " + timestampToDate(_class[index].startDate!) + "\n",
                                         style: TextStyle(
                                           color: kTextColor.withOpacity(.8),
                                           fontSize: 18,
                                         ),
                                       ),
                                       TextSpan(
-                                        text: "Lịch học: " + listToString(_class[index].dow!),
+                                        text: AppLocalizations.of(context).labelSchedule + ": " + listToString(_class[index].dow!),
                                         style: TextStyle(
                                           color: kTextColor.withOpacity(.8),
                                           fontSize: 18,

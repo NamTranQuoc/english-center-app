@@ -92,9 +92,9 @@ class _LoginScreen extends State<LoginScreen> {
               Container(
                 alignment: Alignment.centerLeft,
                 padding: const EdgeInsets.symmetric(horizontal: 30),
-                child: const Text(
-                  "LOGIN",
-                  style: TextStyle(
+                child: Text(
+                  AppLocalizations.of(context).login,
+                  style: const TextStyle(
                     fontSize: 32,
                     color: Color(0xFF2661FA),
                     fontWeight: FontWeight.bold,
@@ -151,7 +151,11 @@ class _LoginScreen extends State<LoginScreen> {
                       ),
                     ),
                     ElevatedButton(
-                      style: ElevatedButton.styleFrom(primary: const Color(0xFF2661FA),),
+                      style: ElevatedButton.styleFrom(
+                          primary: const Color(0xFF2661FA),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(13.0),
+                          )),
 
                       onPressed: () {
                         onLogin();
@@ -161,10 +165,10 @@ class _LoginScreen extends State<LoginScreen> {
                         height: 50.0,
                         width: size.width * 0.5,
                         padding: const EdgeInsets.all(0),
-                        child: const Text(
-                          "LOGIN",
+                        child: Text(
+                          AppLocalizations.of(context).labelLogin,
                           textAlign: TextAlign.center,
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontWeight: FontWeight.bold
                           ),
                         ),
@@ -176,14 +180,14 @@ class _LoginScreen extends State<LoginScreen> {
 
               Container(
                 alignment: Alignment.centerRight,
-                margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                margin: const EdgeInsets.symmetric(horizontal: 50, vertical: 10),
                 child: GestureDetector(
                   onTap: () => {
                     Navigator.push(context, MaterialPageRoute(builder: (context) => SignUpScreen()))
                   },
-                  child: const Text(
-                    "Don't Have an Account? Sign up",
-                    style: TextStyle(
+                  child: Text(
+                    AppLocalizations.of(context).labelDontHaveAccount,
+                    style: const TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.bold,
                         color: Color(0xFF2661FA)

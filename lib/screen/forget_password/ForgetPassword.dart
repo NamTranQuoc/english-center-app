@@ -76,10 +76,10 @@ class _ForgetPassword extends State<ForgetPassword> {
                         height: 50.0,
                         width: size.width * 0.5,
                         padding: const EdgeInsets.all(0),
-                        child: const Text(
-                          "Thay đổi",
+                        child: Text(
+                          AppLocalizations.of(context).restore,
                           textAlign: TextAlign.center,
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontWeight: FontWeight.bold
                           ),
                         ),

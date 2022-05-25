@@ -65,7 +65,7 @@ class _BodyScreen extends State<BodyScreen> {
             },
           ),
           ProfileMenu(
-            text: "Lớp học của tôi",
+            text: AppLocalizations.of(context).labelMyCourse,
             icon: "assets/icons/folder.svg",
             press:
                 () {
@@ -87,12 +87,12 @@ class _BodyScreen extends State<BodyScreen> {
             },
           ),
           ProfileMenu(
-            text: "Điểm số",
+            text: AppLocalizations.of(context).labelScore,
             icon: "assets/icons/Question mark.svg",
             press: () {},
           ),
           ProfileMenu(
-            text: "Ngôn ngữ",
+            text: AppLocalizations.of(context).labelLanguage,
             icon: "assets/icons/language.svg",
             press:
                 () {

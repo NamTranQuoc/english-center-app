@@ -1,5 +1,4 @@
 import 'package:english_center/components/background/background.dart';
-import 'package:english_center/components/input/InputPassword.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
@@ -22,12 +21,16 @@ class _ChangeLanguage extends State<ChangeLanguage> {
   List<String> languages = ['Việt Nam', 'English'];
   String language = "Việt Nam";
 
-  /*@override
+  @override
   void initState() {
     super.initState();
     CommandProvider provider = Provider.of<CommandProvider>(context, listen: false);
-    language =  != null ? widget.member.gender! : "";
-  }*/
+    if(provider.currentLocale.languageCode == 'vi') {
+      language = "Việt Nam";
+    } else {
+      language = "English";
+    }
+  }
 
   onSubmit() {
     CommandProvider provider = Provider.of<CommandProvider>(context, listen: false);
@@ -54,9 +57,9 @@ class _ChangeLanguage extends State<ChangeLanguage> {
                         Container(
                           alignment: Alignment.centerLeft,
                           padding: const EdgeInsets.symmetric(horizontal: 30),
-                          child: const Text(
-                            "Đổi ngôn ngữ",
-                            style: TextStyle(
+                          child: Text(
+                            AppLocalizations.of(context).changeLanguage,
+                            style: const TextStyle(
                               fontSize: 32,
                               color: Color(0xFF2661FA),
                               fontWeight: FontWeight.bold,
@@ -65,7 +68,7 @@ class _ChangeLanguage extends State<ChangeLanguage> {
                           ),
                         ),
                         const SizedBox(height: 40.0),
-                        SelectCustom(language, languages, "Ngôn ngữ", (val) {setState(() {
+                        SelectCustom(language, languages, AppLocalizations.of(context).labelLanguage, (val) {setState(() {
                           language = val;
                         });}),
                       ],

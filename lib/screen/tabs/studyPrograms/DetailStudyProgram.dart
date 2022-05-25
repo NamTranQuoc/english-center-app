@@ -4,7 +4,7 @@ import 'package:english_center/domain/StudyProgram.dart';
 import 'package:english_center/screen/tabs/course/DetailCourse.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:english_center/services/Course.dart';
 import '../../../services/Course.dart';
 
@@ -72,9 +72,9 @@ class _DetailsScreen extends State<DetailStudyProgram> {
                       color: kBestSellerColor,
                       padding: const EdgeInsets.only(
                           left: 10, top: 5, right: 20, bottom: 5),
-                      child: const Text(
-                        "Thông tin chương trình học",
-                        style: TextStyle(
+                      child: Text(
+                        AppLocalizations.of(context).labelStudyProgramInfo,
+                        style: const TextStyle(
                             fontWeight: FontWeight.w800,
                             fontSize: 24
                         ),
@@ -111,7 +111,7 @@ class _DetailsScreen extends State<DetailStudyProgram> {
                   children: <Widget>[
                     Container(
                       padding: const EdgeInsets.only(left: 25, top: 25),
-                      child: const Text("Danh sách khóa học", style: kTitleTextStyle),
+                      child: Text(AppLocalizations.of(context).labelCourseList, style: kTitleTextStyle),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(30),
@@ -142,14 +142,14 @@ class _DetailsScreen extends State<DetailStudyProgram> {
                                         ),
                                       ),
                                       TextSpan(
-                                        text: "Số lớp: " + _courses[index].numberOfClass.toString() + "\n",
+                                        text: AppLocalizations.of(context).labelNumberClass + _courses[index].numberOfClass.toString() + "\n",
                                         style: TextStyle(
                                           color: kTextColor.withOpacity(.8),
                                           fontSize: 18,
                                         ),
                                       ),
                                       TextSpan(
-                                        text: "Học phí: " + _courses[index].tuition.toString() + " vnđ",
+                                        text: AppLocalizations.of(context).labelPrice + ": " + _courses[index].tuition.toString() + " vnđ",
                                         style: TextStyle(
                                           color: kTextColor.withOpacity(.8),
                                           fontSize: 18,

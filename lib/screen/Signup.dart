@@ -62,9 +62,9 @@ class _SignUpScreen extends State<SignUpScreen> {
                     Container(
                       alignment: Alignment.centerLeft,
                       padding: const EdgeInsets.symmetric(horizontal: 30),
-                      child: const Text(
-                        "SIGN UP",
-                        style: TextStyle(
+                      child: Text(
+                        AppLocalizations.of(context).labelSignUp,
+                        style: const TextStyle(
                           fontSize: 32,
                           color: Color(0xFF2661FA),
                           fontWeight: FontWeight.bold,
@@ -100,10 +100,15 @@ class _SignUpScreen extends State<SignUpScreen> {
                   ],
                 ),
               ),
+              const SizedBox(height: 20,),
              Padding(  padding: const EdgeInsets.symmetric(horizontal: 8),
                child: Row(
                  children: [Expanded(child:  ElevatedButton(
-                   style: ElevatedButton.styleFrom(primary: Color(0xFF2661FA),),
+                   style: ElevatedButton.styleFrom(
+                       primary: const Color(0xFF2661FA),
+                       shape: RoundedRectangleBorder(
+                         borderRadius: BorderRadius.circular(13.0),
+                       )),
 
                    onPressed: () {
                      onSignUp();
@@ -113,10 +118,10 @@ class _SignUpScreen extends State<SignUpScreen> {
                      height: 50.0,
 
                      padding: const EdgeInsets.all(0),
-                     child: const Text(
-                       "LOGIN",
+                     child: Text(
+                       AppLocalizations.of(context).signUp,
                        textAlign: TextAlign.center,
-                       style: TextStyle(
+                       style: const TextStyle(
                            fontWeight: FontWeight.bold
                        ),
                      ),

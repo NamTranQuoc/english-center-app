@@ -44,12 +44,26 @@ class _RequestPassword extends State<RequestPassword> {
               .symmetric(horizontal: 16,),
               children: <Widget>[
                 const Padding(
-                  padding: EdgeInsets.only(top: 200.0),
+                  padding: EdgeInsets.only(top: 130.0),
                 ),
                 Form(
                   key: formGlobalKey,
                   child: Column(
                     children: [
+                      Container(
+                        alignment: Alignment.centerLeft,
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: Text(
+                          AppLocalizations.of(context).labelForgetPassword,
+                          style: const TextStyle(
+                            fontSize: 32,
+                            color: Color(0xFF2661FA),
+                            fontWeight: FontWeight.bold,
+                          ),
+                          textAlign: TextAlign.left,
+                        ),
+                      ),
+                      SizedBox(height: 40,),
                       InputCustom(
                           AppLocalizations.of(context).email,
                           email,
@@ -65,7 +79,11 @@ class _RequestPassword extends State<RequestPassword> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: <Widget>[
                       ElevatedButton(
-                        style: ElevatedButton.styleFrom(primary: Color(0xFF2661FA),),
+                        style: ElevatedButton.styleFrom(
+                            primary: const Color(0xFF2661FA),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(13.0),
+                            )),
 
                         onPressed: () {
                           onSubmit();
@@ -75,10 +93,10 @@ class _RequestPassword extends State<RequestPassword> {
                           height: 50.0,
                           width: size.width * 0.5,
                           padding: const EdgeInsets.all(0),
-                          child: const Text(
-                            "Gửi",
+                          child: Text(
+                            AppLocalizations.of(context).send,
                             textAlign: TextAlign.center,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontWeight: FontWeight.bold
                             ),
                           ),

@@ -48,9 +48,9 @@ class _ChangePassword extends State<ChangePassword> {
                         Container(
                           alignment: Alignment.centerLeft,
                           padding: const EdgeInsets.symmetric(horizontal: 30),
-                          child: const Text(
-                            "Đổi mật khẩu",
-                            style: TextStyle(
+                          child: Text(
+                            AppLocalizations.of(context).changePasswordV2,
+                            style: const TextStyle(
                               fontSize: 32,
                               color: Color(0xFF2661FA),
                               fontWeight: FontWeight.bold,

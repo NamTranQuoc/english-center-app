@@ -4,6 +4,7 @@ import 'package:english_center/screen/tabs/regisExam/DetailRegisExam.dart';
 import 'package:english_center/services/RegisExam.dart';
 import 'package:english_center/util/ParseUtil.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RegisExamScreen extends StatefulWidget {
   static const routeName = '/detail_studyProgram';
@@ -67,14 +68,14 @@ class _RegisExamScreen extends State<RegisExamScreen> {
                           ),
                         ),
                         TextSpan(
-                          text: "Giờ bắt đầu: " + timestampToString(exam[index].startTime!) + "\n",
+                          text: AppLocalizations.of(context).labelStart + timestampToString(exam[index].startTime!) + "\n",
                           style: TextStyle(
                             color: kTextColor.withOpacity(.8),
                             fontSize: 18,
                           ),
                         ),
                         TextSpan(
-                          text: "Giờ kết thúc: " + timestampToString(exam[index].endTime!),
+                          text: AppLocalizations.of(context).labelEnd + timestampToString(exam[index].endTime!),
                           style: TextStyle(
                             color: kTextColor.withOpacity(.8),
                             fontSize: 18,
@@ -142,9 +143,9 @@ class _RegisExamScreen extends State<RegisExamScreen> {
                       color: kBestSellerColor,
                       padding: const EdgeInsets.only(
                           left: 10, top: 5, right: 20, bottom: 5),
-                      child: const Text(
-                        "Thông tin lịch kiểm tra",
-                        style: TextStyle(
+                      child: Text(
+                        AppLocalizations.of(context).labelExamInfo,
+                        style: const TextStyle(
                           fontWeight: FontWeight.w800,
                           fontSize: 24
                         ),
@@ -173,7 +174,7 @@ class _RegisExamScreen extends State<RegisExamScreen> {
                   children: <Widget>[
                     Container(
                       padding: const EdgeInsets.only(left: 25, top: 25),
-                      child: const Text("Danh sách lịch kiểm tra", style: kTitleTextStyle),
+                      child: Text(AppLocalizations.of(context).labelExamList, style: kTitleTextStyle),
                     ),
                     getDisplay(),
                   ],

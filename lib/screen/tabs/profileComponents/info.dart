@@ -45,7 +45,7 @@ class _InfoScreen extends State<InfoScreen> {
             clipper: CustomShape(),
             child: Container(
               height: defaultSize * 15, //150
-              color: const Color(0xFF2661FA),
+              color: const Color(0xFF9DB7FA),
             ),
           ),
           Center(
