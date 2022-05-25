@@ -132,6 +132,7 @@ class _RegisExamScreen extends State<RegisExamScreen> {
         ),
         child: Column(
           children: <Widget>[
+            const SizedBox(height: 20,),
             Padding(
               padding: const EdgeInsets.only(left: 20, top: 70, right: 20),
               child: Column(

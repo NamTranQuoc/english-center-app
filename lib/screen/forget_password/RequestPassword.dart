@@ -78,26 +78,36 @@ class _RequestPassword extends State<RequestPassword> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: <Widget>[
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            primary: const Color(0xFF2661FA),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(13.0),
-                            )),
-
-                        onPressed: () {
-                          onSubmit();
-                        },
-                        child: Container(
-                          alignment: Alignment.center,
-                          height: 50.0,
-                          width: size.width * 0.5,
+                      Container(
+                        alignment: Alignment.centerRight,
+                        // margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                        child: RaisedButton(
+                          onPressed: () {
+                            onSubmit();
+                          },
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(80.0)),
+                          textColor: Colors.white,
                           padding: const EdgeInsets.all(0),
-                          child: Text(
-                            AppLocalizations.of(context).send,
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(
-                                fontWeight: FontWeight.bold
+                          child: Container(
+                            alignment: Alignment.center,
+                            height: 50.0,
+                            width: 240,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(80.0),
+                                gradient: const LinearGradient(
+                                    colors: [
+                                      Color(0xFF2661FA),
+                                      Color(0xFF6685E3),
+                                    ]
+                                )
+                            ),
+                            padding: const EdgeInsets.all(0),
+                            child: Text(
+                              AppLocalizations.of(context).send,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold
+                              ),
                             ),
                           ),
                         ),

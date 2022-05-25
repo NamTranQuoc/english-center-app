@@ -90,7 +90,9 @@ class _UpdateInformation extends State<UpdateInformation> {
                         builder: (context, provider, child) {
                           return Text(provider.currentMember.email ?? '',
                               style: const TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold));
+                                fontWeight: FontWeight.w500,
+                                color: Color(0xFF8492A2),
+                              ));
                         },
                       ),
                     ),
@@ -120,30 +122,44 @@ class _UpdateInformation extends State<UpdateInformation> {
                     const SizedBox(height: 20,),
                     Padding(  padding: const EdgeInsets.symmetric(horizontal: 8),
                       child: Row(
-                        children: [Expanded(child:  ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              primary: const Color(0xFF2661FA),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(13.0),
-                              )),
-
-                          onPressed: () {
-                            onSubmit();
-                          },
-                          child: Container(
-                            alignment: Alignment.center,
-                            height: 50.0,
-
-                            padding: const EdgeInsets.all(0),
-                            child: Text(
-                              AppLocalizations.of(context).update,
-                              textAlign: TextAlign.center,
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.bold
+                        children: [
+                          Expanded(
+                            child:  Container(
+                              alignment: Alignment.center,
+                              // margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                              child: RaisedButton(
+                                onPressed: () {
+                                  onSubmit();
+                                },
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(80.0)),
+                                textColor: Colors.white,
+                                padding: const EdgeInsets.all(0),
+                                child: Container(
+                                  alignment: Alignment.center,
+                                  height: 50.0,
+                                  width: 240,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(80.0),
+                                      gradient: const LinearGradient(
+                                          colors: [
+                                            Color(0xFF2661FA),
+                                            Color(0xFF6685E3),
+                                          ]
+                                      )
+                                  ),
+                                  padding: const EdgeInsets.all(0),
+                                  child: Text(
+                                    AppLocalizations.of(context).update,
+                                    textAlign: TextAlign.center,
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.bold
+                                    ),
+                                  ),
+                                ),
                               ),
                             ),
-                          ),
-                        ),)],
+                          )
+                        ],
                       ),
                     ),
                   ],

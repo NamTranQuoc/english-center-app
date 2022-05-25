@@ -48,6 +48,7 @@ class _BodyScreen extends State<BodyScreen> {
     return SingleChildScrollView(
       child: Column(
         children: <Widget>[
+          const SizedBox(height: 20,),
           InfoScreen(),
           const SizedBox(height: 20), //20
           ProfileMenu(

@@ -90,7 +90,7 @@ class _InfoScreen extends State<InfoScreen> {
                     builder: (context, provider, child) {
                       return Text(provider.currentMember.email ?? '',
                           style: const TextStyle(
-                            fontWeight: FontWeight.w400,
+                            fontWeight: FontWeight.w500,
                             color: Color(0xFF8492A2),
                           ));
                     },
