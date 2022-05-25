@@ -38,7 +38,7 @@ class _LoginScreen extends State<LoginScreen> {
     });
   }
 
-  onLogin() {
+  /*onLogin() {
     if (formGlobalKey.currentState!.validate()) {
       formGlobalKey.currentState!.save();
       login(usernameController.text, passwordController.text).then((value) {
@@ -53,6 +53,20 @@ class _LoginScreen extends State<LoginScreen> {
         }));
       });
     }
+  }*/
+
+  onLogin() {
+      login(usernameController.text, passwordController.text).then((value) {
+        widget.storage.setToken(value.payload);
+        FirebaseMessaging.instance.getToken().then((v) {
+          if (v != null) {
+            postAuthenticated('${Common.host}/auth/login_success?token=$v', {}, token: value.payload, loader: false);
+          }
+        });
+        Navigator.of(context).push(MaterialPageRoute(builder: (_) {
+          return MainScreen();
+        }));
+      });
   }
 
   onLoginWithGoogle() {
@@ -137,7 +151,7 @@ class _LoginScreen extends State<LoginScreen> {
                       ),
                     ),
                     ElevatedButton(
-                      style: ElevatedButton.styleFrom(primary: Color(0xFF2661FA),),
+                      style: ElevatedButton.styleFrom(primary: const Color(0xFF2661FA),),
 
                       onPressed: () {
                         onLogin();
