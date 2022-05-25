@@ -78,7 +78,11 @@ class _ChangeLanguage extends State<ChangeLanguage> {
                   Padding(  padding: const EdgeInsets.symmetric(horizontal: 8),
                     child: Row(
                       children: [Expanded(child:  ElevatedButton(
-                        style: ElevatedButton.styleFrom(primary: Color(0xFF2661FA),),
+                        style: ElevatedButton.styleFrom(
+                            primary: const Color(0xFF2661FA),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(13.0),
+                            )),
 
                         onPressed: () {
                           onSubmit();
