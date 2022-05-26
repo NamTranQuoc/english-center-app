@@ -1,21 +1,18 @@
-import 'package:english_center/components/Image/Logo.dart';
 import 'package:english_center/components/button/ButtonCustom.dart';
 import 'package:english_center/components/input/InputCustom.dart';
-import 'package:english_center/components/input/InputPassword.dart';
 import 'package:english_center/components/picker/DatePicker.dart';
 import 'package:english_center/components/select/SelectCustom.dart';
 import 'package:english_center/components/upload/AvatarCustom.dart';
 import 'package:english_center/domain/Member.dart';
 import 'package:english_center/providers/MemberProvider.dart';
-import 'package:english_center/screen/Login.dart';
-import 'package:english_center/screen/tabs/More.dart';
-import 'package:english_center/services/AuthService.dart';
 import 'package:english_center/services/MemberService.dart';
 import 'package:english_center/util/ParseUtil.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+
+import '../../../components/background/background.dart';
 
 class UpdateInformation extends StatefulWidget {
   static const routeName = '/update_information';
@@ -79,51 +76,94 @@ class _UpdateInformation extends State<UpdateInformation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text(''),
-        ),
-        body: Padding(
-            padding: const EdgeInsets.fromLTRB(10, 50, 10, 10),
-            child: ListView(
-              children: <Widget>[
-                AvatarCustom(),
-                Container(
-                  margin: const EdgeInsets.fromLTRB(10, 10, 10, 20),
-                  alignment: Alignment.center,
-                  child: Consumer<MemberProvider>(
-                    builder: (context, provider, child) {
-                      return Text(provider.currentMember.email ?? '',
-                          style: const TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold));
-                    },
-                  ),
-                ),
-                Form(
-                  key: formGlobalKey,
-                  child: Column(
-                    children: [
-                      InputCustom(
-                          AppLocalizations.of(context).name,
-                          name,
-                          InputType.REQUEST,
-                          AppLocalizations.of(context).validateErrorFormat),
-                      InputCustom(
-                          AppLocalizations.of(context).nickName,
-                          nickName,
-                          InputType.NONE,
-                          AppLocalizations.of(context).validateErrorFormat),
-                      InputCustom(AppLocalizations.of(context).phoneNumber, phone, InputType.PHONE,
-                          AppLocalizations.of(context).validateErrorFormat),
-                      SelectCustom(gender, genders, AppLocalizations.of(context).gender, (val) {setState(() {
-                        gender = val;
-                      });}),
-                      DatePicker(AppLocalizations.of(context).dob, dob, initDOB),
-                    ],
-                  ),
-                ),
-                ButtonCustom(AppLocalizations.of(context).update,
-                    Colors.lightBlueAccent, onSubmit),
-              ],
-            )));
+        body: Background(
+            isShowIcon: true,
+            child: Padding(
+                padding: const EdgeInsets.fromLTRB(10, 50, 10, 10),
+                child: ListView(
+                  children: <Widget>[
+                    AvatarCustom(),
+                    Container(
+                      margin: const EdgeInsets.fromLTRB(10, 10, 10, 20),
+                      alignment: Alignment.center,
+                      child: Consumer<MemberProvider>(
+                        builder: (context, provider, child) {
+                          return Text(provider.currentMember.email ?? '',
+                              style: const TextStyle(
+                                fontWeight: FontWeight.w500,
+                                color: Color(0xFF8492A2),
+                              ));
+                        },
+                      ),
+                    ),
+                    Form(
+                      key: formGlobalKey,
+                      child: Column(
+                        children: [
+                          InputCustom(
+                              AppLocalizations.of(context).name,
+                              name,
+                              InputType.REQUEST,
+                              AppLocalizations.of(context).validateErrorFormat),
+                          InputCustom(
+                              AppLocalizations.of(context).nickName,
+                              nickName,
+                              InputType.NONE,
+                              AppLocalizations.of(context).validateErrorFormat),
+                          InputCustom(AppLocalizations.of(context).phoneNumber, phone, InputType.PHONE,
+                              AppLocalizations.of(context).validateErrorFormat),
+                          SelectCustom(gender, genders, AppLocalizations.of(context).gender, (val) {setState(() {
+                            gender = val;
+                          });}),
+                          DatePicker(AppLocalizations.of(context).dob, dob, initDOB),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 20,),
+                    Padding(  padding: const EdgeInsets.symmetric(horizontal: 8),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child:  Container(
+                              alignment: Alignment.center,
+                              // margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                              child: RaisedButton(
+                                onPressed: () {
+                                  onSubmit();
+                                },
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(80.0)),
+                                textColor: Colors.white,
+                                padding: const EdgeInsets.all(0),
+                                child: Container(
+                                  alignment: Alignment.center,
+                                  height: 50.0,
+                                  width: 240,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(80.0),
+                                      gradient: const LinearGradient(
+                                          colors: [
+                                            Color(0xFF2661FA),
+                                            Color(0xFF6685E3),
+                                          ]
+                                      )
+                                  ),
+                                  padding: const EdgeInsets.all(0),
+                                  child: Text(
+                                    AppLocalizations.of(context).update,
+                                    textAlign: TextAlign.center,
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.bold
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ],
+                )))
+    );
   }
 }

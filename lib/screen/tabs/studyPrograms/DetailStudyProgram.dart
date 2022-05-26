@@ -4,7 +4,7 @@ import 'package:english_center/domain/StudyProgram.dart';
 import 'package:english_center/screen/tabs/course/DetailCourse.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:english_center/services/Course.dart';
 import '../../../services/Course.dart';
 
@@ -58,28 +58,25 @@ class _DetailsScreen extends State<DetailStudyProgram> {
         child: Column(
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.only(left: 20, top: 50, right: 20),
+              padding: const EdgeInsets.only(left: 20, top: 70, right: 20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      SvgPicture.asset("assets/icons/arrow-left.svg"),
-                      SvgPicture.asset("assets/icons/more-vertical.svg"),
-                    ],
+                    children: <Widget>[],
                   ),
-                  const SizedBox(height: 30),
                   ClipPath(
                     clipper: BestSellerClipper(),
                     child: Container(
                       color: kBestSellerColor,
                       padding: const EdgeInsets.only(
                           left: 10, top: 5, right: 20, bottom: 5),
-                      child: const Text(
-                        "Thông tin chương trình học",
-                        style: TextStyle(
-                          fontWeight: FontWeight.w600,
+                      child: Text(
+                        AppLocalizations.of(context).labelStudyProgramInfo,
+                        style: const TextStyle(
+                            fontWeight: FontWeight.w800,
+                            fontSize: 24
                         ),
                       ),
                     ),
@@ -113,8 +110,8 @@ class _DetailsScreen extends State<DetailStudyProgram> {
                 child: Stack(
                   children: <Widget>[
                     Container(
-                      padding: const EdgeInsets.only(left: 30, top: 5),
-                      child: const Text("Danh sách khóa học", style: kTitleTextStyle),
+                      padding: const EdgeInsets.only(left: 25, top: 25),
+                      child: Text(AppLocalizations.of(context).labelCourseList, style: kTitleTextStyle),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(30),
@@ -122,13 +119,6 @@ class _DetailsScreen extends State<DetailStudyProgram> {
                         itemCount: _courses.length,
                         scrollDirection: Axis.vertical,
                         itemBuilder: (context, index){
-                          /*return CardItem(
-                              courses[index].name!,
-                              courses[index].name!,
-                                  (categoryId){
-                                setState(() {});
-                              }
-                          );*/
                           return Padding(
                             padding: const EdgeInsets.only(bottom: 30),
                             child: Row(
@@ -136,7 +126,7 @@ class _DetailsScreen extends State<DetailStudyProgram> {
                                 Text(
                                   (index + 1).toString(),
                                   style: kHeadingextStyle.copyWith(
-                                    color: kTextColor.withOpacity(.15),
+                                    color: kTextColor.withOpacity(.45),
                                     fontSize: 32,
                                   ),
                                 ),
@@ -152,16 +142,16 @@ class _DetailsScreen extends State<DetailStudyProgram> {
                                         ),
                                       ),
                                       TextSpan(
-                                        text: "Số lớp: " + _courses[index].numberOfClass.toString() + "\n",
+                                        text: AppLocalizations.of(context).labelNumberClass + _courses[index].numberOfClass.toString() + "\n",
                                         style: TextStyle(
-                                          color: kTextColor.withOpacity(.5),
+                                          color: kTextColor.withOpacity(.8),
                                           fontSize: 18,
                                         ),
                                       ),
                                       TextSpan(
-                                        text: "Học phí: " + _courses[index].tuition.toString() + " vnđ",
+                                        text: AppLocalizations.of(context).labelPrice + ": " + _courses[index].tuition.toString() + " vnđ",
                                         style: TextStyle(
-                                          color: kTextColor.withOpacity(.5),
+                                          color: kTextColor.withOpacity(.8),
                                           fontSize: 18,
                                         ),
                                       ),

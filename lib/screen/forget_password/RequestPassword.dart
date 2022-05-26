@@ -1,5 +1,4 @@
-import 'package:english_center/components/Image/Logo.dart';
-import 'package:english_center/components/button/ButtonCustom.dart';
+import 'package:english_center/components/background/background.dart';
 import 'package:english_center/components/input/InputCustom.dart';
 import 'package:english_center/screen/forget_password/ForgetPassword.dart';
 import 'package:english_center/services/AuthService.dart';
@@ -35,19 +34,36 @@ class _RequestPassword extends State<RequestPassword> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
-        appBar: AppBar(
-          title: const Text(''),
-        ),
-        body: Padding(
-            padding: const EdgeInsets.fromLTRB(10, 50, 10, 10),
+        resizeToAvoidBottomInset: false,
+        body: Background(
+          isShowIcon: true,
             child: ListView(
+              padding: const EdgeInsets
+              .symmetric(horizontal: 16,),
               children: <Widget>[
-                Logo(),
+                const Padding(
+                  padding: EdgeInsets.only(top: 130.0),
+                ),
                 Form(
                   key: formGlobalKey,
                   child: Column(
                     children: [
+                      Container(
+                        alignment: Alignment.centerLeft,
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: Text(
+                          AppLocalizations.of(context).labelForgetPassword,
+                          style: const TextStyle(
+                            fontSize: 32,
+                            color: Color(0xFF2661FA),
+                            fontWeight: FontWeight.bold,
+                          ),
+                          textAlign: TextAlign.left,
+                        ),
+                      ),
+                      SizedBox(height: 40,),
                       InputCustom(
                           AppLocalizations.of(context).email,
                           email,
@@ -56,8 +72,49 @@ class _RequestPassword extends State<RequestPassword> {
                     ],
                   ),
                 ),
-                ButtonCustom(AppLocalizations.of(context).send,
-                    Colors.lightBlueAccent, onSubmit),
+                Container(
+                  alignment: Alignment.centerRight,
+                  margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: <Widget>[
+                      Container(
+                        alignment: Alignment.centerRight,
+                        // margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                        child: RaisedButton(
+                          onPressed: () {
+                            onSubmit();
+                          },
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(80.0)),
+                          textColor: Colors.white,
+                          padding: const EdgeInsets.all(0),
+                          child: Container(
+                            alignment: Alignment.center,
+                            height: 50.0,
+                            width: 240,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(80.0),
+                                gradient: const LinearGradient(
+                                    colors: [
+                                      Color(0xFF2661FA),
+                                      Color(0xFF6685E3),
+                                    ]
+                                )
+                            ),
+                            padding: const EdgeInsets.all(0),
+                            child: Text(
+                              AppLocalizations.of(context).send,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ],
             )));
   }

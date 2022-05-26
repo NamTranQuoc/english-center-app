@@ -8,6 +8,7 @@ import 'package:english_center/services/Course.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:english_center/constants.dart';
 import 'package:english_center/model/category.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DashBoardScreen extends StatefulWidget {
   static const routeName = '/home';
@@ -73,18 +74,15 @@ class _DashBoardScreen extends State<DashBoardScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            const Text("Chào Nam,", style: kHeadingextStyle),
+            const SizedBox(height: 20,),
+            Text( AppLocalizations.of(context).labelHi + " Nam", style: kHeadingextStyle),
             const Padding(padding: EdgeInsets.only(bottom: 10.0)),
-            const Text("Hãy tìm khóa học mà bạn muốn", style: kSubheadingextStyle),
+            Text(AppLocalizations.of(context).labelFindYourCourse, style: kSubheadingextStyle),
             const SizedBox(height: 20,),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                const Text("Chương trình học", style: kTitleTextStyle),
-                Text(
-                  "Xem tất cả",
-                  style: kSubtitleTextSyule.copyWith(color: kBlueColor),
-                ),
+                Text(AppLocalizations.of(context).labelStudy, style: kTitleTextStyle),
               ],
             ),
             const SizedBox(height: 30),
@@ -123,7 +121,7 @@ class _DashBoardScreen extends State<DashBoardScreen> {
                             style: kTitleTextStyle,
                           ),
                           Text(
-                            '${_studyPrograms[index].numberOfCourse} Courses',
+                            '${_studyPrograms[index].numberOfCourse} ' + AppLocalizations.of(context).labelCourse,
                             style: TextStyle(
                               color: kTextColor.withOpacity(.5),
                             ),

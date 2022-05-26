@@ -54,7 +54,7 @@ class _AvatarCustom extends State<AvatarCustom> {
           child: Container(
             width: 170,
             height: 170,
-            padding: const EdgeInsets.all(5),
+            padding: const EdgeInsets.all(2),
             decoration: BoxDecoration(
             border: Border.all(color: Colors.blueAccent),
             borderRadius: BorderRadius.circular(20)),

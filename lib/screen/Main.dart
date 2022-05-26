@@ -6,15 +6,12 @@ import 'package:english_center/screen/tabs/DashBoard.dart';
 import 'package:english_center/screen/tabs/More.dart';
 import 'package:english_center/screen/tabs/RegisExam.dart';
 import 'package:english_center/screen/tabs/Schedule.dart';
-import 'package:english_center/screen/tabs/more/ChangePassword.dart';
 import 'package:english_center/screen/tabs/schedules/DetalSchedule.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:circle_nav_bar/circle_nav_bar.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
-import '../providers/CommonProvider.dart';
 import 'dart:convert';
 
 
@@ -109,7 +106,7 @@ class _HomeState extends State<MainScreen> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      /*appBar: AppBar(
         leading:
         IconButton(
           onPressed: (){
@@ -154,7 +151,7 @@ class _HomeState extends State<MainScreen> with SingleTickerProviderStateMixin {
         ),
         elevation: 20,
         titleSpacing: 4,
-      ),
+      ),*/
       bottomNavigationBar: CircleNavBar(
         activeIcons: const [
           Icon(Icons.schedule_sharp, color: Colors.blue),

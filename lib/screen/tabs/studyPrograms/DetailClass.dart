@@ -24,26 +24,23 @@ class DetailsClassScreen extends StatelessWidget {
                 children: <Widget>[
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      SvgPicture.asset("assets/icons/arrow-left.svg"),
-                      SvgPicture.asset("assets/icons/more-vertical.svg"),
-                    ],
+                    children: <Widget>[],
                   ),
-                  SizedBox(height: 30),
-                  Text("Toeic 500+", style: kHeadingextStyle),
+                  const SizedBox(height: 30),
+                  const Text("Toeic 500+", style: kHeadingextStyle),
                   SizedBox(height: 16),
                   Row(
                     children: <Widget>[
                       SvgPicture.asset("assets/icons/person.svg"),
-                      SizedBox(width: 5),
-                      Text("2k"),
-                      SizedBox(width: 20),
+                      const SizedBox(width: 5),
+                      const Text("2k"),
+                      const SizedBox(width: 20),
                       SvgPicture.asset("assets/icons/star.svg"),
-                      SizedBox(width: 5),
-                      Text("4.5")
+                      const SizedBox(width: 5),
+                      const Text("4.5")
                     ],
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   RichText(
                     text: TextSpan(
                       children: [
@@ -65,7 +62,7 @@ class DetailsClassScreen extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: 60),
+            const SizedBox(height: 60),
             Expanded(
               child: Container(
                 width: double.infinity,
@@ -112,7 +109,7 @@ class DetailsClassScreen extends StatelessWidget {
                       left: 0,
                       bottom: 0,
                       child: Container(
-                        padding: EdgeInsets.all(20),
+                        padding: const EdgeInsets.all(20),
                         height: 100,
                         width: double.infinity,
                         decoration: BoxDecoration(
@@ -120,7 +117,7 @@ class DetailsClassScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(40),
                           boxShadow: [
                             BoxShadow(
-                              offset: Offset(0, 4),
+                              offset: const Offset(0, 4),
                               blurRadius: 50,
                               color: kTextColor.withOpacity(.1),
                             ),
@@ -129,11 +126,11 @@ class DetailsClassScreen extends StatelessWidget {
                         child: Row(
                           children: <Widget>[
                             Container(
-                              padding: EdgeInsets.all(14),
+                              padding: const EdgeInsets.all(14),
                               height: 56,
                               width: 80,
                               decoration: BoxDecoration(
-                                color: Color(0xFFFFEDEE),
+                                color: const Color(0xFFFFEDEE),
                                 borderRadius: BorderRadius.circular(40),
                               ),
                               child: SvgPicture.asset(

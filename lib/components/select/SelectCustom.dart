@@ -24,6 +24,10 @@ class _SelectCustom extends State<SelectCustom> {
         return AppLocalizations.of(context).female;
       case "other":
         return AppLocalizations.of(context).other;
+      case "Việt Nam":
+        return "Việt Nam";
+      case "English":
+        return "English";
     }
     return "null";
   }

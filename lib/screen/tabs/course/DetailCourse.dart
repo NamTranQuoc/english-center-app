@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../services/ClassStudy.dart';
 import '../../../util/ParseUtil.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DetailCourse extends StatefulWidget {
   static const routeName = '/detail_course';
@@ -63,10 +64,7 @@ class _DetailCourseScreen extends State<DetailCourse> {
                 children: <Widget>[
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      SvgPicture.asset("assets/icons/arrow-left.svg"),
-                      SvgPicture.asset("assets/icons/more-vertical.svg"),
-                    ],
+                    children: <Widget>[],
                   ),
                   const SizedBox(height: 30),
                   ClipPath(
@@ -75,10 +73,11 @@ class _DetailCourseScreen extends State<DetailCourse> {
                       color: kBestSellerColor,
                       padding: const EdgeInsets.only(
                           left: 10, top: 5, right: 20, bottom: 5),
-                      child: const Text(
-                        "Thông tin khóa học",
-                        style: TextStyle(
-                          fontWeight: FontWeight.w600,
+                      child: Text(
+                        AppLocalizations.of(context).labelCourseInfo,
+                        style: const TextStyle(
+                            fontWeight: FontWeight.w800,
+                            fontSize: 24
                         ),
                       ),
                     ),
@@ -112,8 +111,8 @@ class _DetailCourseScreen extends State<DetailCourse> {
                 child: Stack(
                   children: <Widget>[
                     Container(
-                      padding: const EdgeInsets.only(left: 30, top: 5),
-                      child: const Text("Danh sách lớp học", style: kTitleTextStyle),
+                      padding: const EdgeInsets.only(left: 25, top: 25),
+                      child: Text(AppLocalizations.of(context).labelClassList, style: kTitleTextStyle),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(30),
@@ -121,13 +120,6 @@ class _DetailCourseScreen extends State<DetailCourse> {
                         itemCount: _class.length,
                         scrollDirection: Axis.vertical,
                         itemBuilder: (context, index){
-                          /*return CardItem(
-                              courses[index].name!,
-                              courses[index].name!,
-                                  (categoryId){
-                                setState(() {});
-                              }
-                          );*/
                           return Padding(
                             padding: const EdgeInsets.only(bottom: 30),
                             child: Row(
@@ -135,7 +127,7 @@ class _DetailCourseScreen extends State<DetailCourse> {
                                 Text(
                                   (index + 1).toString(),
                                   style: kHeadingextStyle.copyWith(
-                                    color: kTextColor.withOpacity(.15),
+                                    color: kTextColor.withOpacity(.45),
                                     fontSize: 32,
                                   ),
                                 ),
@@ -151,16 +143,16 @@ class _DetailCourseScreen extends State<DetailCourse> {
                                         ),
                                       ),
                                       TextSpan(
-                                        text: "Ngày khai giảng: " + timestampToDate(_class[index].startDate!) + "\n",
+                                        text: AppLocalizations.of(context).labelDateStart + ": " + timestampToDate(_class[index].startDate!) + "\n",
                                         style: TextStyle(
-                                          color: kTextColor.withOpacity(.5),
+                                          color: kTextColor.withOpacity(.8),
                                           fontSize: 18,
                                         ),
                                       ),
                                       TextSpan(
-                                        text: "Lịch học: " + listToString(_class[index].dow!),
+                                        text: AppLocalizations.of(context).labelSchedule + ": " + listToString(_class[index].dow!),
                                         style: TextStyle(
-                                          color: kTextColor.withOpacity(.5),
+                                          color: kTextColor.withOpacity(.8),
                                           fontSize: 18,
                                         ),
                                       ),

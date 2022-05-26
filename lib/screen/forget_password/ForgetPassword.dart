@@ -1,5 +1,4 @@
-import 'package:english_center/components/Image/Logo.dart';
-import 'package:english_center/components/button/ButtonCustom.dart';
+import 'package:english_center/components/background/background.dart';
 import 'package:english_center/components/input/InputCustom.dart';
 import 'package:english_center/components/input/InputPassword.dart';
 import 'package:english_center/screen/Login.dart';
@@ -40,35 +39,57 @@ class _ForgetPassword extends State<ForgetPassword> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
-        appBar: AppBar(
-          title: const Text(''),
-        ),
-        body: Padding(
-            padding: const EdgeInsets.fromLTRB(10, 50, 10, 10),
-            child: ListView(
-              children: <Widget>[
-                Logo(),
-                Form(
-                  key: formGlobalKey,
-                  child: Column(
-                    children: [
-                      InputCustom(
-                          "Code",
-                          code,
-                          InputType.REQUEST,
-                          AppLocalizations.of(context).validateErrorFormat),
-                      InputPassword(AppLocalizations.of(context).newPassword,
-                          newPassword),
-                      InputPassword(
-                          AppLocalizations.of(context).confirmPassword,
-                          confirmPassword),
-                    ],
-                  ),
+        body: Background(
+          isShowIcon: true,
+          child: ListView(
+            children: <Widget>[
+              Form(
+                key: formGlobalKey,
+                child: Column(
+                  children: [
+                    InputCustom(
+                      "Code",
+                      code,
+                      InputType.REQUEST,
+                      AppLocalizations.of(context).validateErrorFormat),
+                    InputPassword(AppLocalizations.of(context).newPassword, newPassword),
+                    InputPassword(AppLocalizations.of(context).confirmPassword, confirmPassword),
+                  ],
                 ),
-                ButtonCustom(AppLocalizations.of(context).restore,
-                    Colors.lightBlueAccent, onSubmit),
-              ],
-            )));
+              ),
+              Container(
+                alignment: Alignment.centerRight,
+                margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: <Widget>[
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(primary: Color(0xFF2661FA),),
+
+                      onPressed: () {
+                        onSubmit();
+                      },
+                      child: Container(
+                        alignment: Alignment.center,
+                        height: 50.0,
+                        width: size.width * 0.5,
+                        padding: const EdgeInsets.all(0),
+                        child: Text(
+                          AppLocalizations.of(context).restore,
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              // ButtonCustom(AppLocalizations.of(context).restore, Colors.lightBlueAccent, onSubmit),
+          ],
+    )));
   }
 }
