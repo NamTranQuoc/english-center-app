@@ -59,5 +59,6 @@
     "endTime": "Thời Gian Kết Thúc",
     "teacher": "Giáo Viên",
     "room": "Phòng",
-    "registerAbsent": "Đăng Ký Học Bù"
+    "registerAbsent": "Đăng Ký Học Bù",
+    "report": "Thống Kê"
 }

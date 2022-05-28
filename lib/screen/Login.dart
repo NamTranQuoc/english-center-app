@@ -38,23 +38,6 @@ class _LoginScreen extends State<LoginScreen> {
     });
   }
 
-  /*onLogin() {
-    if (formGlobalKey.currentState!.validate()) {
-      formGlobalKey.currentState!.save();
-      login(usernameController.text, passwordController.text).then((value) {
-        widget.storage.setToken(value.payload);
-        FirebaseMessaging.instance.getToken().then((v) {
-          if (v != null) {
-            postAuthenticated('${Common.host}/auth/login_success?token=$v', {}, token: value.payload, loader: false);
-          }
-        });
-        Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-          return MainScreen();
-        }));
-      });
-    }
-  }*/
-
   onLogin() {
       login(usernameController.text, passwordController.text).then((value) {
         widget.storage.setToken(value.payload);
@@ -73,6 +56,11 @@ class _LoginScreen extends State<LoginScreen> {
     loginWithGoogle().then((value) {
       if (value.code == 9999) {
         widget.storage.setToken(value.payload);
+        FirebaseMessaging.instance.getToken().then((v) {
+          if (v != null) {
+            postAuthenticated('${Common.host}/auth/login_success?token=$v', {}, token: value.payload, loader: false);
+          }
+        });
         Navigator.of(context).push(MaterialPageRoute(builder: (_) {
           return MainScreen();
         }));
@@ -104,18 +92,14 @@ class _LoginScreen extends State<LoginScreen> {
               ),
 
               const Padding(
-                padding: EdgeInsets.only(top: 40.0),
+                padding: EdgeInsets.only(top: 80.0),
               ),
-
-              const SizedBox(height: 40.0),
 
               Container(
                 alignment: Alignment.center,
                 margin: const EdgeInsets.symmetric(horizontal: 30),
                 child: InputCustom(AppLocalizations.of(context).username, usernameController, InputType.REQUEST, AppLocalizations.of(context).validateErrorFormat),
               ),
-
-              SizedBox(height: size.height * 0.03),
 
               Container(
                 alignment: Alignment.center,
@@ -133,26 +117,14 @@ class _LoginScreen extends State<LoginScreen> {
                 }),
               ),
 
-              const SizedBox(height: 20.0),
               Container(
                 alignment: Alignment.centerRight,
-                margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  textDirection: TextDirection.rtl,
                   children: <Widget>[
-                    FloatingActionButton(
-                      onPressed: () {
-                        onLoginWithGoogle();
-                      },
-                      mini: true,
-                      elevation: 2,
-                      child: const Image(
-                        image: AssetImage("assets/images/google.png"),
-                      ),
-                    ),
                     Container(
                       alignment: Alignment.centerRight,
-                      margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                      margin: EdgeInsets.only(right: 50, bottom: 10, left: 20),
                       child: RaisedButton(
                         onPressed: () {
                           onLogin();
@@ -177,13 +149,23 @@ class _LoginScreen extends State<LoginScreen> {
                           child: Text(
                             AppLocalizations.of(context).labelLogin,
                             textAlign: TextAlign.center,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontWeight: FontWeight.bold
                             ),
                           ),
                         ),
                       ),
                     ),
+                    FloatingActionButton(
+                      onPressed: () {
+                        onLoginWithGoogle();
+                      },
+                      mini: true,
+                      elevation: 2,
+                      child: const Image(
+                        image: AssetImage("assets/images/google.png"),
+                      ),
+                    )
                     /*ElevatedButton(
                       style: ElevatedButton.styleFrom(
                           primary: const Color(0xFF2661FA),

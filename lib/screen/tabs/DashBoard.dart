@@ -1,5 +1,8 @@
 import 'package:english_center/domain/Course.dart';
+import 'package:english_center/domain/Member.dart';
+import 'package:english_center/providers/MemberProvider.dart';
 import 'package:english_center/screen/tabs/studyPrograms/DetailStudyProgram.dart';
+import 'package:english_center/services/MemberService.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:english_center/services/StudyProgram.dart';
@@ -9,6 +12,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:english_center/constants.dart';
 import 'package:english_center/model/category.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
 class DashBoardScreen extends StatefulWidget {
   static const routeName = '/home';
@@ -33,7 +37,14 @@ class _DashBoardScreen extends State<DashBoardScreen> {
   @override
   void initState() {
     super.initState();
-
+    MemberProvider memberProvider =
+    Provider.of<MemberProvider>(context, listen: false);
+    if (memberProvider.currentMember.id == null) {
+      getCurrentMember().then((value) {
+        Member member = Member.fromJson(value.payload);
+        memberProvider.set(member);
+      });
+    }
     gets();
   }
 
@@ -65,6 +76,13 @@ class _DashBoardScreen extends State<DashBoardScreen> {
     });
   }
 
+  String getName() {
+    Member member = Provider.of<MemberProvider>(context,).currentMember;
+    if (member.name != null) {
+      return member.name!;
+    }
+    return "User";
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +93,7 @@ class _DashBoardScreen extends State<DashBoardScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             const SizedBox(height: 20,),
-            Text( AppLocalizations.of(context).labelHi + " Nam", style: kHeadingextStyle),
+            Text( AppLocalizations.of(context).labelHi + " " + getName(), style: kHeadingextStyle),
             const Padding(padding: EdgeInsets.only(bottom: 10.0)),
             Text(AppLocalizations.of(context).labelFindYourCourse, style: kSubheadingextStyle),
             const SizedBox(height: 20,),

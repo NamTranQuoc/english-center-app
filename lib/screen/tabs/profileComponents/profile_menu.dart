@@ -9,9 +9,11 @@ class ProfileMenu extends StatelessWidget {
     required this.text,
     required this.icon,
     this.press,
+    this.color
   }) : super(key: key);
 
   final String text, icon;
+  final Color? color;
   final VoidCallback? press;
 
   @override
@@ -31,12 +33,12 @@ class ProfileMenu extends StatelessWidget {
           children: [
             SvgPicture.asset(
               icon,
-              color: Colors.grey[700],
+              color: Colors.black54,
               width: 22,
             ),
             const SizedBox(width: 20),
-            Expanded(child: Text(text)),
-            const Icon(Icons.arrow_forward_ios),
+            Expanded(child: Text(text, style: TextStyle(fontSize: 17, color: color ?? Color(0xFF2661FA)),)),
+            const Icon(Icons.arrow_forward_ios, size: 20, color: Colors.black54,),
           ],
         ),
       ),

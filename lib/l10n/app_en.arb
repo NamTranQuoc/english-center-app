@@ -59,5 +59,6 @@
     "endTime": "End Time",
     "teacher": "Teacher",
     "room": "Room",
-    "registerAbsent": "Register Absent"
+    "registerAbsent": "Register Absent",
+    "report": "Report"
 }

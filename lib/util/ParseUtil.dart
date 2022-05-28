@@ -6,8 +6,8 @@ int stringToTimeStamp(String s) {
 }
 
 
-String timestampToString(int timestamp) {
-  return DateFormat("dd-MM-yyyy hh:mm").format(DateTime.fromMillisecondsSinceEpoch(timestamp));
+String timestampToString(int timestamp, {String? format}) {
+  return DateFormat(format ?? "dd-MM-yyyy HH:mm").format(DateTime.fromMillisecondsSinceEpoch(timestamp));
 }
 
 String timestampToDate(int timestamp) {

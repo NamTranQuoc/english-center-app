@@ -11,6 +11,7 @@ class Member {
   final String? gender;
   final String? type;
   final int? dob;
+  final List<dynamic>? logScore;
 
   const Member(
       {this.id,
@@ -24,7 +25,8 @@ class Member {
       this.note,
       this.gender,
       this.dob,
-      this.type});
+      this.type,
+      this.logScore});
 
   factory Member.fromJson(Map<String, dynamic> json) {
     return Member(
@@ -39,6 +41,7 @@ class Member {
         nickName: json['nick_name'],
         gender: json['gender'],
         dob: json['dob'],
-        type: json['type']);
+        type: json['type'],
+        logScore: json['log_score']);
   }
 }
