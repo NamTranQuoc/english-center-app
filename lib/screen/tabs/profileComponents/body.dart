@@ -1,4 +1,5 @@
 import 'package:english_center/screen/tabs/more/ChangeLanguage.dart';
+import 'package:english_center/screen/tabs/more/ReportScore.dart';
 import 'package:english_center/screen/tabs/profileComponents/profile_menu.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -48,7 +49,7 @@ class _BodyScreen extends State<BodyScreen> {
     return SingleChildScrollView(
       child: Column(
         children: <Widget>[
-          const SizedBox(height: 20,),
+          const SizedBox(height: 30,),
           InfoScreen(),
           const SizedBox(height: 20), //20
           ProfileMenu(
@@ -90,7 +91,13 @@ class _BodyScreen extends State<BodyScreen> {
           ProfileMenu(
             text: AppLocalizations.of(context).labelScore,
             icon: "assets/icons/Question mark.svg",
-            press: () {},
+              press:
+                  () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ReportScore()),
+                );
+              },
           ),
           ProfileMenu(
             text: AppLocalizations.of(context).labelLanguage,
@@ -107,6 +114,7 @@ class _BodyScreen extends State<BodyScreen> {
           ProfileMenu(
             text: AppLocalizations.of(context).logOut,
             icon: "assets/icons/Log out.svg",
+            color: Colors.redAccent,
             press:
                 () {
               FirebaseMessaging.instance.getToken().then((v) {
@@ -126,6 +134,7 @@ class _BodyScreen extends State<BodyScreen> {
               });
             },
           ),
+          SizedBox(height: 20,)
         ],
       ),
     );

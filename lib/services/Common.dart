@@ -3,7 +3,9 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:english_center/services/Response.dart';
+import 'package:english_center/util/Enums.dart';
 import 'package:english_center/util/LocalStorage.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:http/http.dart' as http;
 import '../components/message/Notification.dart';
 
@@ -53,6 +55,11 @@ Future<Response> postAuthenticated(String endpoint, Object body, {String? token,
     }
     return result;
   } else {
+    FirebaseMessaging.instance.getToken().then((v) {
+      if (v != null) {
+        postAuthenticated('${Common.host}/auth/login_success?token=$v', {}, loader: false);
+      }
+    });
     LocalStorage().cleanToken();
     throw Exception('authentication');
   }
@@ -104,6 +111,11 @@ Future<Response> putAuthenticated(String endpoint, Object body, {String? token, 
     }
     return result;
   } else {
+    FirebaseMessaging.instance.getToken().then((v) {
+      if (v != null) {
+        postAuthenticated('${Common.host}/auth/login_success?token=$v', {}, loader: false);
+      }
+    });
     LocalStorage().cleanToken();
     throw Exception('authentication');
   }
@@ -153,6 +165,11 @@ Future<Response> getAuthenticated(String endpoint, {String? token, bool? loader}
     }
     return result;
   } else {
+    FirebaseMessaging.instance.getToken().then((v) {
+      if (v != null) {
+        postAuthenticated('${Common.host}/auth/login_success?token=$v', {}, loader: false);
+      }
+    });
     LocalStorage().cleanToken();
     throw Exception('authentication');
   }

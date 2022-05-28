@@ -41,13 +41,6 @@ class _InfoScreen extends State<InfoScreen> {
       height: defaultSize * 24, // 240
       child: Stack(
         children: <Widget>[
-          ClipPath(
-            clipper: CustomShape(),
-            child: Container(
-              height: defaultSize * 15, //150
-              color: const Color(0xFF9DB7FA),
-            ),
-          ),
           Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
@@ -76,13 +69,13 @@ class _InfoScreen extends State<InfoScreen> {
                     builder: (context, provider, child) {
                       return Text(provider.currentMember.name ?? '',
                           style: const TextStyle(
-                              fontSize: 22,
+                              fontSize: 25,
+                            fontWeight: FontWeight.bold,
                             color: kTextColor,
                           ));
                     },
                   ),
-                ),
-                SizedBox(height: defaultSize / 2), //5
+                ), //5
                 Container(
                   margin: const EdgeInsets.fromLTRB(5, 5, 5, 5),
                   alignment: Alignment.center,
