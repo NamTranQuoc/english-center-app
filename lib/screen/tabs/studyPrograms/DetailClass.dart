@@ -1,6 +1,6 @@
+import 'package:english_center/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:english_center/constants.dart';
 
 class DetailsClassScreen extends StatelessWidget {
   @override
@@ -174,6 +174,7 @@ class CourseContent extends StatelessWidget {
   final String type;
   final String title;
   final bool isDone;
+
   const CourseContent({
     required this.number,
     required this.type,

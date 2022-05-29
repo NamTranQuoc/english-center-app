@@ -28,14 +28,13 @@ class BodyScreen extends StatefulWidget {
 }
 
 class _BodyScreen extends State<BodyScreen> {
-
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
 
     MemberProvider memberProvider =
-    Provider.of<MemberProvider>(context, listen: false);
+        Provider.of<MemberProvider>(context, listen: false);
     if (memberProvider.currentMember.id == null) {
       getCurrentMember().then((value) {
         Member member = Member.fromJson(value.payload);
@@ -49,28 +48,27 @@ class _BodyScreen extends State<BodyScreen> {
     return SingleChildScrollView(
       child: Column(
         children: <Widget>[
-          const SizedBox(height: 30,),
+          const SizedBox(
+            height: 30,
+          ),
           InfoScreen(),
           const SizedBox(height: 20), //20
           ProfileMenu(
             text: AppLocalizations.of(context).updateInformation,
             icon: "assets/icons/User Icon.svg",
-            press:
-                () {
+            press: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
                     builder: (context) => UpdateInformation(
-                        Provider.of<MemberProvider>(context)
-                            .currentMember)),
+                        Provider.of<MemberProvider>(context).currentMember)),
               );
             },
           ),
           ProfileMenu(
             text: AppLocalizations.of(context).labelMyCourse,
             icon: "assets/icons/folder.svg",
-            press:
-                () {
+            press: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => MyCourseScreen()),
@@ -80,8 +78,7 @@ class _BodyScreen extends State<BodyScreen> {
           ProfileMenu(
             text: AppLocalizations.of(context).changePassword,
             icon: "assets/icons/Lock.svg",
-            press:
-                () {
+            press: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => ChangePassword()),
@@ -91,42 +88,37 @@ class _BodyScreen extends State<BodyScreen> {
           ProfileMenu(
             text: AppLocalizations.of(context).labelScore,
             icon: "assets/icons/Question mark.svg",
-              press:
-                  () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => ReportScore()),
-                );
-              },
+            press: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ReportScore()),
+              );
+            },
           ),
           ProfileMenu(
             text: AppLocalizations.of(context).labelLanguage,
             icon: "assets/icons/language.svg",
-            press:
-                () {
+            press: () {
               Navigator.push(
-                context,
-                MaterialPageRoute(
+                  context,
+                  MaterialPageRoute(
                     builder: (context) => ChangeLanguage(),
-              ));
+                  ));
             },
           ),
           ProfileMenu(
             text: AppLocalizations.of(context).logOut,
             icon: "assets/icons/Log out.svg",
             color: Colors.redAccent,
-            press:
-                () {
+            press: () {
               FirebaseMessaging.instance.getToken().then((v) {
                 if (v != null) {
-                  postAuthenticated(
-                      '${Common.host}/auth/logout?token=$v', {})
+                  postAuthenticated('${Common.host}/auth/logout?token=$v', {})
                       .then((value) {
                     widget.storage.cleanToken();
                     Provider.of<MemberProvider>(context, listen: false)
                         .set(Member.fromJson({}));
-                    Navigator.of(context)
-                        .push(MaterialPageRoute(builder: (_) {
+                    Navigator.of(context).push(MaterialPageRoute(builder: (_) {
                       return LoginScreen();
                     }));
                   });
@@ -134,7 +126,9 @@ class _BodyScreen extends State<BodyScreen> {
               });
             },
           ),
-          SizedBox(height: 20,)
+          SizedBox(
+            height: 20,
+          )
         ],
       ),
     );

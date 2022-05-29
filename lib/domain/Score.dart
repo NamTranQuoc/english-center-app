@@ -1,4 +1,3 @@
-
 class Score {
   Score({this.date, this.total, this.read, this.listen});
 

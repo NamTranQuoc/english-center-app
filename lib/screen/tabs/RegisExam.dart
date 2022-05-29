@@ -9,7 +9,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class RegisExamScreen extends StatefulWidget {
   static const routeName = '/detail_studyProgram';
 
-
   RegisExamScreen();
 
   @override
@@ -44,7 +43,7 @@ class _RegisExamScreen extends State<RegisExamScreen> {
         child: ListView.builder(
           itemCount: exam.length,
           scrollDirection: Axis.vertical,
-          itemBuilder: (context, index){
+          itemBuilder: (context, index) {
             return Padding(
               padding: const EdgeInsets.only(bottom: 15, top: 15),
               child: Row(
@@ -68,14 +67,17 @@ class _RegisExamScreen extends State<RegisExamScreen> {
                           ),
                         ),
                         TextSpan(
-                          text: AppLocalizations.of(context).labelStart + timestampToString(exam[index].startTime!) + "\n",
+                          text: AppLocalizations.of(context).labelStart +
+                              timestampToString(exam[index].startTime!) +
+                              "\n",
                           style: TextStyle(
                             color: kTextColor.withOpacity(.8),
                             fontSize: 18,
                           ),
                         ),
                         TextSpan(
-                          text: AppLocalizations.of(context).labelEnd + timestampToString(exam[index].endTime!),
+                          text: AppLocalizations.of(context).labelEnd +
+                              timestampToString(exam[index].endTime!),
                           style: TextStyle(
                             color: kTextColor.withOpacity(.8),
                             fontSize: 18,
@@ -132,7 +134,9 @@ class _RegisExamScreen extends State<RegisExamScreen> {
         ),
         child: Column(
           children: <Widget>[
-            const SizedBox(height: 20,),
+            const SizedBox(
+              height: 20,
+            ),
             Padding(
               padding: const EdgeInsets.only(left: 20, top: 70, right: 20),
               child: Column(
@@ -147,9 +151,7 @@ class _RegisExamScreen extends State<RegisExamScreen> {
                       child: Text(
                         AppLocalizations.of(context).labelExamInfo,
                         style: const TextStyle(
-                          fontWeight: FontWeight.w800,
-                          fontSize: 24
-                        ),
+                            fontWeight: FontWeight.w800, fontSize: 24),
                       ),
                     ),
                   ),
@@ -175,7 +177,8 @@ class _RegisExamScreen extends State<RegisExamScreen> {
                   children: <Widget>[
                     Container(
                       padding: const EdgeInsets.only(left: 25, top: 25),
-                      child: Text(AppLocalizations.of(context).labelExamList, style: kTitleTextStyle),
+                      child: Text(AppLocalizations.of(context).labelExamList,
+                          style: kTitleTextStyle),
                     ),
                     getDisplay(),
                   ],
@@ -194,6 +197,7 @@ class CourseContent extends StatelessWidget {
   final double duration;
   final String title;
   final bool isDone;
+
   CourseContent({
     required this.number,
     required this.duration,

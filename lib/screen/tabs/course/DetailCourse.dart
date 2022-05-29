@@ -3,49 +3,74 @@ import 'package:english_center/domain/Classroom.dart';
 import 'package:english_center/domain/Course.dart';
 import 'package:english_center/screen/tabs/classroom/DetailClassRoom.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../../services/ClassStudy.dart';
 import '../../../util/ParseUtil.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DetailCourse extends StatefulWidget {
   static const routeName = '/detail_course';
 
-  final Course course;
+  final Course? course;
+  final String? keyword;
 
-  DetailCourse(this.course);
+  DetailCourse({this.course, this.keyword});
 
   @override
   _DetailCourseScreen createState() => _DetailCourseScreen();
 }
 
 class _DetailCourseScreen extends State<DetailCourse> {
-
   @override
   void initState() {
     super.initState();
 
-    getClassByCourse(widget.course.id!);
+    getClassByCourse();
   }
 
   List<Classroom> _class = [];
-  void getClassByCourse(String id) {
-    getClassRoomByCourse(id).then((value) {
-      if (value.code == 9999) {
-        List<Map<String, dynamic>> list = List.from(value.payload);
-        for (var element in list) {
-          Classroom classStudy = Classroom.fromJson(element);
-          _class.add(classStudy);
-          setState(() {});
-        }
-      }
-    });
-  }
+  String name = "";
 
+  void getClassByCourse() {
+    if (widget.keyword != null) {
+      name = widget.keyword!;
+      getByKeyword(widget.keyword!).then((value) {
+        if (value.code == 9999) {
+          List<Map<String, dynamic>> list = List.from(value.payload);
+          for (var element in list) {
+            Classroom classStudy = Classroom.fromJson(element);
+            _class.add(classStudy);
+            setState(() {});
+          }
+        }
+      });
+    } else {
+      name = widget.course!.name!;
+      getClassRoomByCourse(widget.course!.id!).then((value) {
+        if (value.code == 9999) {
+          List<Map<String, dynamic>> list = List.from(value.payload);
+          for (var element in list) {
+            Classroom classStudy = Classroom.fromJson(element);
+            _class.add(classStudy);
+            setState(() {});
+          }
+        }
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pop(context);
+        },
+        child: const Icon(Icons.chevron_left, color: Colors.black54),
+        backgroundColor: Colors.white,
+        mini: true,
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
       body: Container(
         width: double.infinity,
         decoration: const BoxDecoration(
@@ -58,15 +83,14 @@ class _DetailCourseScreen extends State<DetailCourse> {
         child: Column(
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.only(left: 20, top: 50, right: 20),
+              padding: const EdgeInsets.only(left: 20, top: 80, right: 20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[],
+                    children: const <Widget>[],
                   ),
-                  const SizedBox(height: 30),
                   ClipPath(
                     clipper: BestSellerClipper(),
                     child: Container(
@@ -76,31 +100,16 @@ class _DetailCourseScreen extends State<DetailCourse> {
                       child: Text(
                         AppLocalizations.of(context).labelCourseInfo,
                         style: const TextStyle(
-                            fontWeight: FontWeight.w800,
-                            fontSize: 24
-                        ),
+                            fontWeight: FontWeight.w800, fontSize: 24),
                       ),
                     ),
                   ),
                   const SizedBox(height: 16),
-                  Text(widget.course.name!, style: kHeadingextStyle),
-                  const SizedBox(height: 16),
-                  Row(
-                    children: <Widget>[
-                      SvgPicture.asset("assets/icons/person.svg"),
-                      const SizedBox(width: 5),
-                      const Text("18K"),
-                      const SizedBox(width: 20),
-                      SvgPicture.asset("assets/icons/star.svg"),
-                      const SizedBox(width: 5),
-                      const Text("4.8")
-                    ],
-                  ),
-                  const SizedBox(height: 20),
+                  Text(name, style: kHeadingextStyle),
                 ],
               ),
             ),
-            const SizedBox(height: 60),
+            const SizedBox(height: 40),
             Expanded(
               child: Container(
                 width: double.infinity,
@@ -112,14 +121,15 @@ class _DetailCourseScreen extends State<DetailCourse> {
                   children: <Widget>[
                     Container(
                       padding: const EdgeInsets.only(left: 25, top: 25),
-                      child: Text(AppLocalizations.of(context).labelClassList, style: kTitleTextStyle),
+                      child: Text(AppLocalizations.of(context).labelClassList,
+                          style: kTitleTextStyle),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(30),
+                      padding: const EdgeInsets.all(35),
                       child: ListView.builder(
                         itemCount: _class.length,
                         scrollDirection: Axis.vertical,
-                        itemBuilder: (context, index){
+                        itemBuilder: (context, index) {
                           return Padding(
                             padding: const EdgeInsets.only(bottom: 30),
                             child: Row(
@@ -131,7 +141,7 @@ class _DetailCourseScreen extends State<DetailCourse> {
                                     fontSize: 32,
                                   ),
                                 ),
-                                const SizedBox(width: 8),
+                                const SizedBox(width: 15),
                                 RichText(
                                   text: TextSpan(
                                     children: [
@@ -143,14 +153,22 @@ class _DetailCourseScreen extends State<DetailCourse> {
                                         ),
                                       ),
                                       TextSpan(
-                                        text: AppLocalizations.of(context).labelDateStart + ": " + timestampToDate(_class[index].startDate!) + "\n",
+                                        text: AppLocalizations.of(context)
+                                                .labelDateStart +
+                                            ": " +
+                                            timestampToDate(
+                                                _class[index].startDate!) +
+                                            "\n",
                                         style: TextStyle(
                                           color: kTextColor.withOpacity(.8),
                                           fontSize: 18,
                                         ),
                                       ),
                                       TextSpan(
-                                        text: AppLocalizations.of(context).labelSchedule + ": " + listToString(_class[index].dow!),
+                                        text: AppLocalizations.of(context)
+                                                .labelSchedule +
+                                            ": " +
+                                            listToString(_class[index].dow!),
                                         style: TextStyle(
                                           color: kTextColor.withOpacity(.8),
                                           fontSize: 18,
@@ -169,12 +187,13 @@ class _DetailCourseScreen extends State<DetailCourse> {
                                     color: kGreenColor.withOpacity(1),
                                   ),
                                   child: IconButton(
-                                    icon: Icon(Icons.add),
+                                    icon: const Icon(Icons.chevron_right),
                                     onPressed: () {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) => DetailClassRoom(_class[index]),
+                                          builder: (context) =>
+                                              DetailClassRoom(_class[index]),
                                         ),
                                       );
                                     },
@@ -192,69 +211,6 @@ class _DetailCourseScreen extends State<DetailCourse> {
             ),
           ],
         ),
-      ),
-    );
-  }
-}
-
-class CourseContent extends StatelessWidget {
-  final String number;
-  final double duration;
-  final String title;
-  final bool isDone;
-  CourseContent({
-    required this.number,
-    required this.duration,
-    required this.title,
-    this.isDone = false,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 30),
-      child: Row(
-        children: <Widget>[
-          Text(
-            number,
-            style: kHeadingextStyle.copyWith(
-              color: kTextColor.withOpacity(.15),
-              fontSize: 32,
-            ),
-          ),
-          const SizedBox(width: 8),
-          RichText(
-            text: TextSpan(
-              children: [
-                TextSpan(
-                  text: "$duration mins\n",
-                  style: TextStyle(
-                    color: kTextColor.withOpacity(.5),
-                    fontSize: 18,
-                  ),
-                ),
-                TextSpan(
-                  text: title,
-                  style: kSubtitleTextSyule.copyWith(
-                    fontWeight: FontWeight.w600,
-                    height: 1.5,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          const Spacer(),
-          Container(
-            margin: const EdgeInsets.only(left: 20),
-            height: 40,
-            width: 40,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: kGreenColor.withOpacity(isDone ? 1 : .5),
-            ),
-            child: const Icon(Icons.play_arrow, color: Colors.white),
-          )
-        ],
       ),
     );
   }

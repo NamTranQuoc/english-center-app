@@ -1,5 +1,3 @@
-
-import 'package:english_center/domain/Member.dart';
 import 'package:english_center/domain/Schedule.dart';
 import 'package:flutter/foundation.dart';
 

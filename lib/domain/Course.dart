@@ -1,4 +1,3 @@
-
 class Course {
   final String? name;
   final String? id;
@@ -11,7 +10,6 @@ class Course {
   final int? outputScore;
   final String? status;
   final int? numberOfClass;
-
 
   Course({
     this.name,

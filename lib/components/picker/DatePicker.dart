@@ -1,7 +1,6 @@
-
+import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 
 class DatePicker extends StatelessWidget {
   final String label;
@@ -11,6 +10,7 @@ class DatePicker extends StatelessWidget {
   DatePicker(this.label, this.dateController, this.initDate);
 
   final _format = DateFormat("dd-MM-yyyy");
+
   @override
   Widget build(BuildContext context) {
     return Container(

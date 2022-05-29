@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class InputCustom extends StatelessWidget {
@@ -8,7 +7,9 @@ class InputCustom extends StatelessWidget {
   final String textError;
   final bool? disable;
 
-  InputCustom(this.label, this.usernameController, this.inputType, this.textError, {this.disable});
+  InputCustom(
+      this.label, this.usernameController, this.inputType, this.textError,
+      {this.disable});
 
   @override
   Widget build(BuildContext context) {

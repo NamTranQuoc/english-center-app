@@ -1,5 +1,4 @@
 import 'package:english_center/domain/Schedule.dart';
-import 'package:english_center/providers/CommonProvider.dart';
 import 'package:english_center/providers/ScheduleProvider.dart';
 import 'package:english_center/screen/tabs/schedules/DetalSchedule.dart';
 import 'package:english_center/services/ScheduleService.dart';
@@ -33,7 +32,8 @@ class _ScheduleScreen extends State<ScheduleScreen> {
 
     _selectedDay = _focusedDay;
     _schedules = ValueNotifier(_getEventsForDay(_selectedDay!));
-    gets(DateTime.now());
+
+    WidgetsBinding.instance?.addPostFrameCallback((_) => gets(DateTime.now()));
   }
 
   void gets(DateTime dateTime) {
@@ -175,7 +175,10 @@ class _ScheduleScreen extends State<ScheduleScreen> {
                 headerMargin: EdgeInsets.only(bottom: 10),
                 headerPadding: EdgeInsets.only(top: 0, bottom: 0),
                 titleCentered: true,
-                titleTextStyle: TextStyle(color: Colors.white, fontSize: 20.0, ),
+                titleTextStyle: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20.0,
+                ),
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [
@@ -233,103 +236,91 @@ class _ScheduleScreen extends State<ScheduleScreen> {
                 return ListView.builder(
                   itemCount: value.length,
                   itemBuilder: (context, index) {
-                    return Container(
-                      margin: const EdgeInsets.symmetric(
-                        horizontal: 12.0,
-                        vertical: 10.0,
-                      ),
-                      decoration: BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.2),
-                            spreadRadius: 5,
-                            blurRadius: 5,
-                            offset: const Offset(
-                                0, 1), // changes position of shadow
-                          ),
-                        ],
-                      ),
-                      child: Row(
-                        children: [
-                          Container(
-                              width: 70.0,
-                              height: 70.0,
+                    return InkWell(
+                      child: Container(
+                        margin: const EdgeInsets.symmetric(
+                          horizontal: 12.0,
+                          vertical: 10.0,
+                        ),
+                        decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.2),
+                              spreadRadius: 5,
+                              blurRadius: 5,
+                              offset: const Offset(
+                                  0, 1), // changes position of shadow
+                            ),
+                          ],
+                        ),
+                        child: Row(
+                          children: [
+                            Container(
+                                width: 70.0,
+                                height: 70.0,
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      '${value[index].session}',
+                                      style: const TextStyle(
+                                          fontSize: 30,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white70),
+                                    ),
+                                  ],
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                ),
+                                decoration: const BoxDecoration(
+                                    borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(10),
+                                        bottomLeft: Radius.circular(10)),
+                                    gradient: LinearGradient(colors: [
+                                      Color(0xFF2661FA),
+                                      Color(0xFF6685E3),
+                                    ]))),
+                            Container(
+                              width: MediaQuery.of(context).size.width - 114,
+                              decoration: const BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(10),
+                                      bottomRight: Radius.circular(10))),
+                              height: 70,
+                              padding: const EdgeInsets.only(left: 10),
                               child: Column(
                                 children: [
                                   Text(
-                                    '${value[index].session}',
+                                    '${value[index].title}',
                                     style: const TextStyle(
-                                        fontSize: 30,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white70),
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
+                                  const SizedBox(
+                                    height: 2,
+                                  ),
+                                  Text('${value[index].room}'),
+                                  const SizedBox(
+                                    height: 3,
+                                  ),
+                                  Text(
+                                      'Bắt đầu: ${timestampToString(value[index].start!, format: 'HH:mm')}')
                                 ],
-                                crossAxisAlignment: CrossAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisAlignment: MainAxisAlignment.center,
                               ),
-                              decoration: const BoxDecoration(
-                                  borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(10),
-                                      bottomLeft: Radius.circular(10)),
-                                  gradient: LinearGradient(colors: [
-                                    Color(0xFF2661FA),
-                                    Color(0xFF6685E3),
-                                  ]))),
-                          Container(
-                            width: MediaQuery.of(context).size.width - 114,
-                            decoration: const BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.only(
-                                    topRight: Radius.circular(10),
-                                    bottomRight: Radius.circular(10))),
-                            height: 70,
-                            padding: const EdgeInsets.only(left: 10),
-                            child: Column(
-                              children: [
-                                Text(
-                                  '${value[index].title}',
-                                  style: const TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                const SizedBox(
-                                  height: 2,
-                                ),
-                                Text('${value[index].room}'),
-                                const SizedBox(
-                                  height: 3,
-                                ),
-                                Text(
-                                    'Bắt đầu: ${timestampToString(value[index].start!, format: 'HH:mm')}')
-                              ],
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                            ),
-                          )
-                        ],
+                            )
+                          ],
+                        ),
                       ),
-                    );
-                    Container(
-                      margin: const EdgeInsets.symmetric(
-                        horizontal: 12.0,
-                        vertical: 4.0,
-                      ),
-                      decoration: BoxDecoration(
-                        border: Border.all(),
-                        borderRadius: BorderRadius.circular(13.0),
-                      ),
-                      child: ListTile(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => DetailSchedule(
-                                      getKey(_selectedDay!), index)));
-                        },
-                        title: Text(
-                            '${value[index].title} - ${value[index].room} (${timestampToString(value[index].start!)})'),
-                      ),
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => DetailSchedule(
+                                    getKey(_selectedDay!), index)));
+                      },
                     );
                   },
                 );

@@ -1,4 +1,6 @@
+import 'dart:convert';
 
+import 'package:circle_nav_bar/circle_nav_bar.dart';
 import 'package:english_center/domain/Schedule.dart';
 import 'package:english_center/main.dart';
 import 'package:english_center/providers/ScheduleProvider.dart';
@@ -9,11 +11,8 @@ import 'package:english_center/screen/tabs/Schedule.dart';
 import 'package:english_center/screen/tabs/schedules/DetalSchedule.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:circle_nav_bar/circle_nav_bar.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:provider/provider.dart';
-import 'dart:convert';
-
 
 class MainScreen extends StatefulWidget {
   static const routeName = '/main';
@@ -25,16 +24,20 @@ class MainScreen extends StatefulWidget {
 class _HomeState extends State<MainScreen> with SingleTickerProviderStateMixin {
   int tabIndex = 1;
   var language = "";
-  late TabController tabController = TabController(length: 4, initialIndex: tabIndex, vsync: this);
+  late TabController tabController =
+      TabController(length: 4, initialIndex: tabIndex, vsync: this);
 
   @override
   void initState() {
     super.initState();
 
-    var initAndroid = const AndroidInitializationSettings("@mipmap/ic_launcher");
-    final InitializationSettings initializationSettings = InitializationSettings(android: initAndroid);
+    var initAndroid =
+        const AndroidInitializationSettings("@mipmap/ic_launcher");
+    final InitializationSettings initializationSettings =
+        InitializationSettings(android: initAndroid);
 
-    flutterLocalNotificationsPlugin.initialize(initializationSettings, onSelectNotification: onSelectNotification);
+    flutterLocalNotificationsPlugin.initialize(initializationSettings,
+        onSelectNotification: onSelectNotification);
 
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       print('onMessage: ' + message.data["id"]);
@@ -55,8 +58,7 @@ class _HomeState extends State<MainScreen> with SingleTickerProviderStateMixin {
                 icon: '@mipmap/ic_launcher',
               ),
             ),
-            payload: json.encode(message.data)
-        );
+            payload: json.encode(message.data));
       }
     });
 
@@ -75,9 +77,12 @@ class _HomeState extends State<MainScreen> with SingleTickerProviderStateMixin {
     Map<String, dynamic> data = json.decode(payload ?? "{}");
     switch (data["type"]) {
       case "schedule":
-        ScheduleProvider scheduleProvider = Provider.of<ScheduleProvider>(context, listen: false);
+      case "exam-schedule":
+        ScheduleProvider scheduleProvider =
+            Provider.of<ScheduleProvider>(context, listen: false);
         scheduleProvider.set(<String, List<Schedule>>{});
-        Schedule schedule = Schedule(title: data['title'],
+        Schedule schedule = Schedule(
+            title: data['title'],
             id: data['id'],
             teacher: data['teacher'],
             room: data['room'],
@@ -90,7 +95,8 @@ class _HomeState extends State<MainScreen> with SingleTickerProviderStateMixin {
             classroomId: data['classroom_id'],
             isAbsent: data['is_absent'] == 'true',
             isExam: data['is_exam'] == 'true');
-        DateTime datetime = DateTime.fromMillisecondsSinceEpoch(schedule.start!);
+        DateTime datetime =
+            DateTime.fromMillisecondsSinceEpoch(schedule.start!);
         String key = '${datetime.year}-${datetime.month}-${datetime.day}';
         List<Schedule> a = [];
         a.add(schedule);
@@ -106,65 +112,17 @@ class _HomeState extends State<MainScreen> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      /*appBar: AppBar(
-        leading:
-        IconButton(
-          onPressed: (){
-            CommandProvider provider = Provider.of<CommandProvider>(context, listen: false);
-            if (provider.currentLocale.languageCode == 'vi') {
-              provider.set(const Locale('en', ''));
-              language = "vi";
-            } else {
-              provider.set(const Locale('vi', ''));
-              language = "en";
-            }
-          },
-          icon: SizedBox(
-            height: 25,
-            width: 35,
-            child: SvgPicture.asset((language == "vi") ? 'images/GB.svg' : 'images/VN.svg')
-          ),
-        ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.notifications_none),
-            onPressed: (){
-              print("notification");
-            },
-          ),
-          IconButton(
-            icon: const Icon(Icons.search),
-            onPressed: (){
-              print("search");
-            },
-          ),
-        ],
-        // backgroundColor: Colors.amber,
-        flexibleSpace: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Colors.purple, Colors.brown],
-              begin: Alignment.bottomRight,
-              end: Alignment.topLeft,
-            )
-          ),
-        ),
-        elevation: 20,
-        titleSpacing: 4,
-      ),*/
       bottomNavigationBar: CircleNavBar(
         activeIcons: const [
           Icon(Icons.schedule_sharp, color: Colors.blue),
           Icon(Icons.home, color: Colors.blue),
           Icon(Icons.check, color: Colors.blue),
-          // Icon(Icons.chat, color: Colors.blue),
           Icon(Icons.menu, color: Colors.blue),
         ],
         inactiveIcons: const [
           Icon(Icons.schedule_sharp, color: Colors.black),
           Icon(Icons.home, color: Colors.black),
           Icon(Icons.check, color: Colors.black),
-          // Icon(Icons.chat, color: Colors.blue),
           Icon(Icons.menu, color: Colors.black),
         ],
         color: Colors.white,
@@ -192,7 +150,7 @@ class _HomeState extends State<MainScreen> with SingleTickerProviderStateMixin {
         controller: tabController,
         children: [
           ScheduleScreen(),
-          DashBoardScreen(),
+          const DashBoardScreen(),
           RegisExamScreen(),
           MoreScreen(),
         ],
@@ -200,5 +158,3 @@ class _HomeState extends State<MainScreen> with SingleTickerProviderStateMixin {
     );
   }
 }
-
-enum _SelectedTab { schedule, home, regis, person }

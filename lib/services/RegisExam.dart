@@ -11,7 +11,5 @@ Future<Response> getRegister() async {
 }
 
 Future<Response> registerExam(String id) async {
-  return postAuthenticated('${endpoint}register_v2', {
-    'exam_id': id
-  });
+  return postAuthenticated('${endpoint}register_v2', {'exam_id': id});
 }

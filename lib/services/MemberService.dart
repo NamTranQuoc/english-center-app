@@ -1,4 +1,3 @@
-
 import 'dart:async';
 
 import 'package:english_center/services/Common.dart';
@@ -11,7 +10,8 @@ Future<Response> getCurrentMember() async {
   return getAuthenticated('${endpoint}get_current');
 }
 
-Future<Response> signUp(String name, String email, String gender, String phoneNumber, int dob) async {
+Future<Response> signUp(String name, String email, String gender,
+    String phoneNumber, int dob) async {
   return postUnauthenticated('${endpoint}add', {
     "name": name,
     "email": email,
@@ -22,7 +22,8 @@ Future<Response> signUp(String name, String email, String gender, String phoneNu
   });
 }
 
-Future<Response> updateMember(String id, String name, String nickName, String phone, String gender, int dob, String type) async {
+Future<Response> updateMember(String id, String name, String nickName,
+    String phone, String gender, int dob, String type) async {
   return putAuthenticated('${endpoint}update', {
     "id": id,
     "name": name,

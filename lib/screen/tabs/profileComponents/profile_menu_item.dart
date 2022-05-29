@@ -5,15 +5,20 @@ class ProfileMenuItem extends StatelessWidget {
   final String iconSrc;
   final String title;
   final VoidCallback press;
-  ProfileMenuItem(this.iconSrc, this.title, this.press,);
+
+  ProfileMenuItem(
+    this.iconSrc,
+    this.title,
+    this.press,
+  );
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: press,
       child: Padding(
-        padding: const EdgeInsets.symmetric(
-            horizontal: 10 * 2, vertical: 10 * 3),
+        padding:
+            const EdgeInsets.symmetric(horizontal: 10 * 2, vertical: 10 * 3),
         child: SafeArea(
           child: Row(
             children: <Widget>[

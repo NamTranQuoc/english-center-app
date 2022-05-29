@@ -1,4 +1,3 @@
-
 class Schedule {
   final String? title;
   final String? id;
@@ -14,9 +13,8 @@ class Schedule {
   final bool? isAbsent;
   final bool? isExam;
 
-
-  Schedule({
-      this.title,
+  Schedule(
+      {this.title,
       this.id,
       this.teacher,
       this.room,
