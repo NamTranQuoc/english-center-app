@@ -6,6 +6,7 @@ import 'package:english_center/util/Enums.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../components/background/background.dart';
 import '../components/button/ButtonText.dart';
 import '../components/input/InputCustom.dart';
@@ -39,17 +40,21 @@ class _LoginScreen extends State<LoginScreen> {
   }
 
   onLogin() {
+    if (formGlobalKey.currentState!.validate()) {
+      formGlobalKey.currentState!.save();
       login(usernameController.text, passwordController.text).then((value) {
         widget.storage.setToken(value.payload);
         FirebaseMessaging.instance.getToken().then((v) {
           if (v != null) {
-            postAuthenticated('${Common.host}/auth/login_success?token=$v', {}, token: value.payload, loader: false);
+            postAuthenticated('${Common.host}/auth/login_success?token=$v', {},
+                token: value.payload, loader: false);
           }
         });
         Navigator.of(context).push(MaterialPageRoute(builder: (_) {
           return MainScreen();
         }));
       });
+    }
   }
 
   onLoginWithGoogle() {
@@ -58,7 +63,8 @@ class _LoginScreen extends State<LoginScreen> {
         widget.storage.setToken(value.payload);
         FirebaseMessaging.instance.getToken().then((v) {
           if (v != null) {
-            postAuthenticated('${Common.host}/auth/login_success?token=$v', {}, token: value.payload, loader: false);
+            postAuthenticated('${Common.host}/auth/login_success?token=$v', {},
+                token: value.payload, loader: false);
           }
         });
         Navigator.of(context).push(MaterialPageRoute(builder: (_) {
@@ -70,151 +76,132 @@ class _LoginScreen extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: Background(
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Container(
-                alignment: Alignment.centerLeft,
-                padding: const EdgeInsets.symmetric(horizontal: 30),
-                child: Text(
-                  AppLocalizations.of(context).login,
-                  style: const TextStyle(
-                    fontSize: 32,
-                    color: Color(0xFF2661FA),
-                    fontWeight: FontWeight.bold,
+          hasButtonBack: false,
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Container(
+                  alignment: Alignment.centerLeft,
+                  padding: const EdgeInsets.symmetric(horizontal: 30),
+                  child: Text(
+                    AppLocalizations.of(context).login,
+                    style: const TextStyle(
+                      fontSize: 32,
+                      color: Color(0xFF2661FA),
+                      fontWeight: FontWeight.bold,
+                    ),
+                    textAlign: TextAlign.left,
                   ),
-                  textAlign: TextAlign.left,
                 ),
-              ),
-
-              const Padding(
-                padding: EdgeInsets.only(top: 80.0),
-              ),
-
-              Container(
-                alignment: Alignment.center,
-                margin: const EdgeInsets.symmetric(horizontal: 30),
-                child: InputCustom(AppLocalizations.of(context).username, usernameController, InputType.REQUEST, AppLocalizations.of(context).validateErrorFormat),
-              ),
-
-              Container(
-                alignment: Alignment.center,
-                margin: const EdgeInsets.symmetric(horizontal: 30),
-                child: InputPassword(AppLocalizations.of(context).password, passwordController),
-              ),
-
-              Container(
-                alignment: Alignment.centerRight,
-                margin: const EdgeInsets.symmetric(horizontal: 30),
-                child: ButtonText(AppLocalizations.of(context).forgetPassword + "?", const TextStyle(color: Color(0xFF2661FA)), () {
-                  Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-                    return RequestPassword();
-                  }));
-                }),
-              ),
-
-              Container(
-                alignment: Alignment.centerRight,
-                child: Row(
-                  textDirection: TextDirection.rtl,
-                  children: <Widget>[
-                    Container(
-                      alignment: Alignment.centerRight,
-                      margin: EdgeInsets.only(right: 50, bottom: 10, left: 20),
-                      child: RaisedButton(
-                        onPressed: () {
-                          onLogin();
-                        },
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(80.0)),
-                        textColor: Colors.white,
-                        padding: const EdgeInsets.all(0),
-                        child: Container(
+                const Padding(
+                  padding: EdgeInsets.only(top: 80.0),
+                ),
+                Form(
+                    key: formGlobalKey,
+                    child: Column(
+                      children: [
+                        Container(
                           alignment: Alignment.center,
-                          height: 50.0,
-                          width: 240,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(80.0),
-                              gradient: const LinearGradient(
-                                  colors: [
-                                    Color(0xFF2661FA),
-                                    Color(0xFF6685E3),
-                                  ]
-                              )
-                          ),
+                          margin: const EdgeInsets.symmetric(horizontal: 30),
+                          child: InputCustom(
+                              AppLocalizations.of(context).username,
+                              usernameController,
+                              InputType.REQUEST,
+                              AppLocalizations.of(context).validateErrorFormat),
+                        ),
+                        Container(
+                          alignment: Alignment.center,
+                          margin: const EdgeInsets.symmetric(horizontal: 30),
+                          child: InputPassword(
+                              AppLocalizations.of(context).password,
+                              passwordController),
+                        ),
+                      ],
+                    )),
+                Container(
+                  alignment: Alignment.centerRight,
+                  margin: const EdgeInsets.symmetric(horizontal: 30),
+                  child: ButtonText(
+                      AppLocalizations.of(context).forgetPassword + "?",
+                      const TextStyle(color: Color(0xFF2661FA)), () {
+                    Navigator.of(context).push(MaterialPageRoute(builder: (_) {
+                      return RequestPassword();
+                    }));
+                  }),
+                ),
+                Container(
+                  alignment: Alignment.centerRight,
+                  child: Row(
+                    textDirection: TextDirection.rtl,
+                    children: <Widget>[
+                      Container(
+                        alignment: Alignment.centerRight,
+                        margin:
+                            EdgeInsets.only(right: 50, bottom: 10, left: 20),
+                        child: RaisedButton(
+                          onPressed: () {
+                            onLogin();
+                          },
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(80.0)),
+                          textColor: Colors.white,
                           padding: const EdgeInsets.all(0),
-                          child: Text(
-                            AppLocalizations.of(context).labelLogin,
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(
-                                fontWeight: FontWeight.bold
+                          child: Container(
+                            alignment: Alignment.center,
+                            height: 50.0,
+                            width: 240,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(80.0),
+                                gradient: const LinearGradient(colors: [
+                                  Color(0xFF2661FA),
+                                  Color(0xFF6685E3),
+                                ])),
+                            padding: const EdgeInsets.all(0),
+                            child: Text(
+                              AppLocalizations.of(context).labelLogin,
+                              textAlign: TextAlign.center,
+                              style:
+                                  const TextStyle(fontWeight: FontWeight.bold),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                    FloatingActionButton(
-                      onPressed: () {
-                        onLoginWithGoogle();
-                      },
-                      mini: true,
-                      elevation: 2,
-                      child: const Image(
-                        image: AssetImage("assets/images/google.png"),
-                      ),
-                    )
-                    /*ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          primary: const Color(0xFF2661FA),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(13.0),
-                          )),
-
-                      onPressed: () {
-                        onLogin();
-                      },
-                      child: Container(
-                        alignment: Alignment.center,
-                        height: 50.0,
-                        width: size.width * 0.5,
-                        padding: const EdgeInsets.all(0),
-                        child: Text(
-                          AppLocalizations.of(context).labelLogin,
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                              fontWeight: FontWeight.bold
-                          ),
-                        ),
-                      ),
-                    ),*/
-                  ],
-                ),
-              ),
-
-              Container(
-                alignment: Alignment.centerRight,
-                margin: const EdgeInsets.symmetric(horizontal: 50, vertical: 10),
-                child: GestureDetector(
-                  onTap: () => {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => SignUpScreen()))
-                  },
-                  child: Text(
-                    AppLocalizations.of(context).labelDontHaveAccount,
-                    style: const TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFF2661FA)
-                    ),
+                      IconButton(
+                        color: Colors.redAccent,
+                        icon: Image.asset("assets/images/google.png"),
+                        onPressed: () {
+                          onLoginWithGoogle();
+                        },
+                      )
+                    ],
                   ),
                 ),
-              )
-            ],
-          ),
-        )
-      ),
+                Container(
+                  alignment: Alignment.centerRight,
+                  margin:
+                      const EdgeInsets.symmetric(horizontal: 50, vertical: 10),
+                  child: GestureDetector(
+                    onTap: () => {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => SignUpScreen()))
+                    },
+                    child: Text(
+                      AppLocalizations.of(context).labelDontHaveAccount,
+                      style: const TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF2661FA)),
+                    ),
+                  ),
+                )
+              ],
+            ),
+          )),
     );
   }
 }

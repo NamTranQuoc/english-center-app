@@ -1,6 +1,4 @@
-
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SelectCustomV2 extends StatefulWidget {
   String item;
@@ -15,7 +13,6 @@ class SelectCustomV2 extends StatefulWidget {
 }
 
 class _SelectCustomV2 extends State<SelectCustomV2> {
-
   List<DropdownMenuItem<String>> getDisplay() {
     List<DropdownMenuItem<String>> list = [];
     widget.list.forEach((key, value) {

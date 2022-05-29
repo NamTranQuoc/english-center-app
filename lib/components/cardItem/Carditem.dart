@@ -4,14 +4,14 @@ class CardItem extends StatelessWidget {
   final String categoryName;
   final String categoryId;
   final StringCallback callback;
-  const CardItem( this.categoryName,  this.categoryId, this.callback);
+
+  const CardItem(this.categoryName, this.categoryId, this.callback);
+
   @override
   Widget build(BuildContext context) {
     bool isSelect = false;
     return Container(
-      margin: const EdgeInsets.symmetric(
-        vertical: 8.0, horizontal: 8.0
-      ),
+      margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
       child: OutlinedButton(
         child: Text(categoryName),
         onPressed: () {

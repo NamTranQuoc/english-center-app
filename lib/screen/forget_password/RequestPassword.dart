@@ -38,10 +38,11 @@ class _RequestPassword extends State<RequestPassword> {
     return Scaffold(
         resizeToAvoidBottomInset: false,
         body: Background(
-          isShowIcon: true,
+            isShowIcon: true,
             child: ListView(
-              padding: const EdgeInsets
-              .symmetric(horizontal: 16,),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 16,
+              ),
               children: <Widget>[
                 const Padding(
                   padding: EdgeInsets.only(top: 130.0),
@@ -63,7 +64,9 @@ class _RequestPassword extends State<RequestPassword> {
                           textAlign: TextAlign.left,
                         ),
                       ),
-                      SizedBox(height: 40,),
+                      SizedBox(
+                        height: 40,
+                      ),
                       InputCustom(
                           AppLocalizations.of(context).email,
                           email,
@@ -74,7 +77,8 @@ class _RequestPassword extends State<RequestPassword> {
                 ),
                 Container(
                   alignment: Alignment.centerRight,
-                  margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                  margin:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: <Widget>[
@@ -85,7 +89,8 @@ class _RequestPassword extends State<RequestPassword> {
                           onPressed: () {
                             onSubmit();
                           },
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(80.0)),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(80.0)),
                           textColor: Colors.white,
                           padding: const EdgeInsets.all(0),
                           child: Container(
@@ -94,20 +99,15 @@ class _RequestPassword extends State<RequestPassword> {
                             width: 240,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(80.0),
-                                gradient: const LinearGradient(
-                                    colors: [
-                                      Color(0xFF2661FA),
-                                      Color(0xFF6685E3),
-                                    ]
-                                )
-                            ),
+                                gradient: const LinearGradient(colors: [
+                                  Color(0xFF2661FA),
+                                  Color(0xFF6685E3),
+                                ])),
                             padding: const EdgeInsets.all(0),
                             child: Text(
                               AppLocalizations.of(context).send,
                               textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold
-                              ),
+                              style: TextStyle(fontWeight: FontWeight.bold),
                             ),
                           ),
                         ),

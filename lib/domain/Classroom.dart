@@ -1,4 +1,3 @@
-
 class Classroom {
   final String? name;
   final String? id;
@@ -8,7 +7,6 @@ class Classroom {
   final String? shiftId;
   final int? startDate;
   final List<dynamic>? dow;
-
 
   Classroom({
     this.name,

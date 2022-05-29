@@ -1,4 +1,3 @@
-
 class Response {
   final int? code;
   final String? message;

@@ -51,31 +51,35 @@ class _AvatarCustom extends State<AvatarCustom> {
   Widget build(BuildContext context) {
     return Center(
         child: InkWell(
-          child: Container(
-            width: 170,
-            height: 170,
-            padding: const EdgeInsets.all(2),
-            decoration: BoxDecoration(
+      child: Container(
+        width: 170,
+        height: 170,
+        padding: const EdgeInsets.all(2),
+        decoration: BoxDecoration(
             border: Border.all(color: Colors.blueAccent),
             borderRadius: BorderRadius.circular(20)),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(20),
-              child: Consumer<MemberProvider>(
-                builder: (context, provider, child) {
-                  return Consumer<MemberProvider>(
-                    builder: (context, provider, child) {
-                      return Image(image: NetworkImage(url == '' ? FirebaseApi.getUrl("images", provider.currentMember.avatar ?? path) : url));
-                    },
-                  );
-                },
-              )
-            ),
-          ),
-          onTap: () async {
-            await selectFile();
-            MemberProvider memberProvider = Provider.of<MemberProvider>(context, listen: false);
-            uploadFile(memberProvider.currentMember.avatar!);
-            },
-        ));
+        child: ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            child: Consumer<MemberProvider>(
+              builder: (context, provider, child) {
+                return Consumer<MemberProvider>(
+                  builder: (context, provider, child) {
+                    return Image(
+                        image: NetworkImage(url == ''
+                            ? FirebaseApi.getUrl(
+                                "images", provider.currentMember.avatar ?? path)
+                            : url));
+                  },
+                );
+              },
+            )),
+      ),
+      onTap: () async {
+        await selectFile();
+        MemberProvider memberProvider =
+            Provider.of<MemberProvider>(context, listen: false);
+        uploadFile(memberProvider.currentMember.avatar!);
+      },
+    ));
   }
 }

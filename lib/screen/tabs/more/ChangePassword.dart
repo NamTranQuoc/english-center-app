@@ -23,9 +23,10 @@ class _ChangePassword extends State<ChangePassword> {
   onSubmit() {
     if (formGlobalKey.currentState!.validate()) {
       formGlobalKey.currentState!.save();
-      changePassword(oldPassword.text, newPassword.text, confirmPassword.text).then((value) {
+      changePassword(oldPassword.text, newPassword.text, confirmPassword.text)
+          .then((value) {
         print(value.code);
-        if(value.code == 9999) {
+        if (value.code == 9999) {
           Navigator.pop(context);
         }
       });
@@ -36,85 +37,83 @@ class _ChangePassword extends State<ChangePassword> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Background(
-          isShowIcon: true,
-          child: Padding(
-              padding: const EdgeInsets.fromLTRB(10, 50, 10, 10),
-              child: ListView(
-                children: <Widget>[
-                  Form(
-                    key: formGlobalKey,
-                    child: Column(
-                      children: [
-                        Container(
-                          alignment: Alignment.centerLeft,
-                          padding: const EdgeInsets.symmetric(horizontal: 30),
-                          child: Text(
-                            AppLocalizations.of(context).changePasswordV2,
-                            style: const TextStyle(
-                              fontSize: 32,
-                              color: Color(0xFF2661FA),
-                              fontWeight: FontWeight.bold,
+      isShowIcon: true,
+      child: Padding(
+          padding: const EdgeInsets.fromLTRB(10, 50, 10, 10),
+          child: ListView(
+            children: <Widget>[
+              Form(
+                key: formGlobalKey,
+                child: Column(
+                  children: [
+                    Container(
+                      alignment: Alignment.centerLeft,
+                      padding: const EdgeInsets.symmetric(horizontal: 30),
+                      child: Text(
+                        AppLocalizations.of(context).changePasswordV2,
+                        style: const TextStyle(
+                          fontSize: 32,
+                          color: Color(0xFF2661FA),
+                          fontWeight: FontWeight.bold,
+                        ),
+                        textAlign: TextAlign.left,
+                      ),
+                    ),
+                    const SizedBox(height: 40.0),
+                    InputPassword(
+                        AppLocalizations.of(context).oldPassword, oldPassword),
+                    InputPassword(
+                        AppLocalizations.of(context).newPassword, newPassword),
+                    InputPassword(AppLocalizations.of(context).confirmPassword,
+                        confirmPassword),
+                  ],
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        alignment: Alignment.center,
+                        // margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                        child: RaisedButton(
+                          onPressed: () {
+                            onSubmit();
+                          },
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(80.0)),
+                          textColor: Colors.white,
+                          padding: const EdgeInsets.all(0),
+                          child: Container(
+                            alignment: Alignment.center,
+                            height: 50.0,
+                            width: 240,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(80.0),
+                                gradient: const LinearGradient(colors: [
+                                  Color(0xFF2661FA),
+                                  Color(0xFF6685E3),
+                                ])),
+                            padding: const EdgeInsets.all(0),
+                            child: Text(
+                              AppLocalizations.of(context).update,
+                              textAlign: TextAlign.center,
+                              style:
+                                  const TextStyle(fontWeight: FontWeight.bold),
                             ),
-                            textAlign: TextAlign.left,
                           ),
                         ),
-                        const SizedBox(height: 40.0),
-                        InputPassword(AppLocalizations.of(context).oldPassword,
-                            oldPassword),
-                        InputPassword(AppLocalizations.of(context).newPassword,
-                            newPassword),
-                        InputPassword(
-                            AppLocalizations.of(context).confirmPassword,
-                            confirmPassword),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 20,),
-                  Padding(  padding: const EdgeInsets.symmetric(horizontal: 8),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child:  Container(
-                            alignment: Alignment.center,
-                            // margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-                            child: RaisedButton(
-                              onPressed: () {
-                                onSubmit();
-                              },
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(80.0)),
-                              textColor: Colors.white,
-                              padding: const EdgeInsets.all(0),
-                              child: Container(
-                                alignment: Alignment.center,
-                                height: 50.0,
-                                width: 240,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(80.0),
-                                    gradient: const LinearGradient(
-                                        colors: [
-                                          Color(0xFF2661FA),
-                                          Color(0xFF6685E3),
-                                        ]
-                                    )
-                                ),
-                                padding: const EdgeInsets.all(0),
-                                child: Text(
-                                  AppLocalizations.of(context).update,
-                                  textAlign: TextAlign.center,
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.bold
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ],
-              )),
-        )
-    );
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ],
+          )),
+    ));
   }
 }

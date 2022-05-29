@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../../constants.dart';
-
 class ProfileMenu extends StatelessWidget {
-  const ProfileMenu({
-    Key? key,
-    required this.text,
-    required this.icon,
-    this.press,
-    this.color
-  }) : super(key: key);
+  const ProfileMenu(
+      {Key? key,
+      required this.text,
+      required this.icon,
+      this.press,
+      this.color})
+      : super(key: key);
 
   final String text, icon;
   final Color? color;
@@ -25,7 +23,7 @@ class ProfileMenu extends StatelessWidget {
           primary: const Color(0xFF2661FA),
           padding: const EdgeInsets.all(20),
           shape:
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
           backgroundColor: Colors.grey[200],
         ),
         onPressed: press,
@@ -37,8 +35,16 @@ class ProfileMenu extends StatelessWidget {
               width: 22,
             ),
             const SizedBox(width: 20),
-            Expanded(child: Text(text, style: TextStyle(fontSize: 17, color: color ?? Color(0xFF2661FA)),)),
-            const Icon(Icons.arrow_forward_ios, size: 20, color: Colors.black54,),
+            Expanded(
+                child: Text(
+              text,
+              style: TextStyle(fontSize: 17, color: color ?? Color(0xFF2661FA)),
+            )),
+            const Icon(
+              Icons.arrow_forward_ios,
+              size: 20,
+              color: Colors.black54,
+            ),
           ],
         ),
       ),

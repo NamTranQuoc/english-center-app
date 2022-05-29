@@ -4,18 +4,16 @@ import 'package:english_center/providers/ScheduleProvider.dart';
 import 'package:english_center/screen/Login.dart';
 import 'package:english_center/screen/Main.dart';
 import 'package:english_center/screen/Signup.dart';
-import 'package:english_center/screen/tabs/Home.dart';
-import 'package:english_center/screen/tabs/More.dart';
-import 'package:english_center/screen/tabs/more/ChangePassword.dart';
-import 'package:english_center/screen/tabs/schedules/DetalSchedule.dart';
+import 'package:english_center/util/LocalStorage.dart';
+import 'package:english_center/util/NavigationService.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:provider/provider.dart';
 
 const AndroidNotificationChannel channel = AndroidNotificationChannel(
     'high_importance_channel', // id
@@ -25,12 +23,14 @@ const AndroidNotificationChannel channel = AndroidNotificationChannel(
     playSound: true);
 
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-FlutterLocalNotificationsPlugin();
+    FlutterLocalNotificationsPlugin();
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
   print('A bg message just showed up :  ${message.messageId}');
 }
+
+bool isFirst = true;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -43,14 +43,16 @@ void main() async {
     sound: true,
   );
 
-  runApp(MultiProvider(
-    providers: [
-      ChangeNotifierProvider(create: (context) => MemberProvider()),
-      ChangeNotifierProvider(create: (context) => CommandProvider()),
-      ChangeNotifierProvider(create: (context) => ScheduleProvider()),
-    ],
-    child: const MyApp(),
-  ),);
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => MemberProvider()),
+        ChangeNotifierProvider(create: (context) => CommandProvider()),
+        ChangeNotifierProvider(create: (context) => ScheduleProvider()),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -58,8 +60,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (isFirst) {
+      LocalStorage().getLanguage().then((value) {
+        CommandProvider commandProvider =
+            Provider.of<CommandProvider>(context, listen: false);
+        commandProvider.set(Locale(value, ''));
+      });
+      isFirst = false;
+    }
+
     return MaterialApp(
       title: 'English center',
+      navigatorKey: NavigationService.navigatorKey,
       initialRoute: LoginScreen.routeName,
       routes: {
         MainScreen.routeName: (context) => MainScreen(),

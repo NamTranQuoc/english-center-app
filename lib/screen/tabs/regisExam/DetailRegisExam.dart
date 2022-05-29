@@ -1,16 +1,11 @@
 import 'dart:ui';
+
 import 'package:english_center/components/button/ButtonCustom.dart';
 import 'package:english_center/components/message/Notification.dart';
-import 'package:english_center/domain/Classroom.dart';
 import 'package:english_center/domain/RegisExamScreen.dart';
-import 'package:english_center/domain/Schedule.dart';
-import 'package:english_center/screen/tabs/Schedule.dart';
 import 'package:english_center/services/RegisExam.dart';
 import 'package:english_center/util/ParseUtil.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
-import '../../../services/Register.dart';
 
 class DetailRegisExam extends StatefulWidget {
   static const routeName = '/detail_class';
@@ -24,7 +19,6 @@ class DetailRegisExam extends StatefulWidget {
 }
 
 class _DetailRegisExam extends State<DetailRegisExam> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,8 +41,7 @@ class _DetailRegisExam extends State<DetailRegisExam> {
                           children: [
                             Row(
                               children: [
-                                Text(
-                                    'Tên: ',
+                                Text('Tên: ',
                                     style: const TextStyle(fontSize: 18)),
                                 Text(widget.regisExam.code ?? "",
                                     style: const TextStyle(
@@ -61,10 +54,11 @@ class _DetailRegisExam extends State<DetailRegisExam> {
                             ),
                             Row(
                               children: [
-                                Text(
-                                    'Thời gian bắt đầu: ',
+                                Text('Thời gian bắt đầu: ',
                                     style: const TextStyle(fontSize: 18)),
-                                Text(timestampToString(widget.regisExam.startTime!),
+                                Text(
+                                    timestampToString(
+                                        widget.regisExam.startTime!),
                                     style: const TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold)),
@@ -75,10 +69,11 @@ class _DetailRegisExam extends State<DetailRegisExam> {
                             ),
                             Row(
                               children: [
-                                Text(
-                                    'Thời gian kết thúc: ',
+                                Text('Thời gian kết thúc: ',
                                     style: const TextStyle(fontSize: 18)),
-                                Text(timestampToString(widget.regisExam.endTime!),
+                                Text(
+                                    timestampToString(
+                                        widget.regisExam.endTime!),
                                     style: const TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold)),
@@ -89,8 +84,7 @@ class _DetailRegisExam extends State<DetailRegisExam> {
                             ),
                             Row(
                               children: [
-                                Text(
-                                    'Số lượng tối thiểu: ',
+                                Text('Số lượng tối thiểu: ',
                                     style: const TextStyle(fontSize: 18)),
                                 Text(widget.regisExam.minQuantity.toString(),
                                     style: const TextStyle(
@@ -103,8 +97,7 @@ class _DetailRegisExam extends State<DetailRegisExam> {
                             ),
                             Row(
                               children: [
-                                Text(
-                                    'Số lượng tối đa: ',
+                                Text('Số lượng tối đa: ',
                                     style: const TextStyle(fontSize: 18)),
                                 Text(widget.regisExam.maxQuantity.toString(),
                                     style: const TextStyle(
@@ -121,9 +114,9 @@ class _DetailRegisExam extends State<DetailRegisExam> {
                 Container(
                   margin: const EdgeInsets.fromLTRB(0, 0, 0, 20),
                 ),
-                ButtonCustom("Ghi danh", Colors.lightBlue, (){
+                ButtonCustom("Ghi danh", Colors.lightBlue, () {
                   registerExam(widget.regisExam.id!).then((value) {
-                    if(value.code == 9999) {
+                    if (value.code == 9999) {
                       showSuccess("Ghi danh thành công");
                     }
                   });

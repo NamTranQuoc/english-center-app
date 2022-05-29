@@ -1,18 +1,21 @@
-
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:english_center/screen/Login.dart';
 import 'package:english_center/services/Response.dart';
 import 'package:english_center/util/Enums.dart';
 import 'package:english_center/util/LocalStorage.dart';
+import 'package:english_center/util/NavigationService.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+
 import '../components/message/Notification.dart';
 
 Future<Response> postUnauthenticated(String endpoint, Object body) async {
   showLoader();
-  final http.Response response = await http.post(
-      Uri.parse(endpoint),
+  final http.Response response = await http.post(Uri.parse(endpoint),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=utf-8',
       },
@@ -20,7 +23,8 @@ Future<Response> postUnauthenticated(String endpoint, Object body) async {
 
   dismiss();
   if (response.statusCode == 200) {
-    Response result = Response.fromJson(jsonDecode(utf8.decode(response.bodyBytes)));
+    Response result =
+        Response.fromJson(jsonDecode(utf8.decode(response.bodyBytes)));
     if (result.code != 9999) {
       showError(result.message!);
       throw Exception(result.message);
@@ -31,13 +35,13 @@ Future<Response> postUnauthenticated(String endpoint, Object body) async {
   }
 }
 
-Future<Response> postAuthenticated(String endpoint, Object body, {String? token, bool? loader}) async {
+Future<Response> postAuthenticated(String endpoint, Object body,
+    {String? token, bool? loader}) async {
   if (loader != false) {
     showLoader();
   }
   String _token = token ?? await LocalStorage().getToken();
-  final http.Response response = await http.post(
-      Uri.parse(endpoint),
+  final http.Response response = await http.post(Uri.parse(endpoint),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=utf-8',
         'Authorization': 'Bearer $_token'
@@ -48,7 +52,8 @@ Future<Response> postAuthenticated(String endpoint, Object body, {String? token,
     dismiss();
   }
   if (response.statusCode == 200) {
-    Response result = Response.fromJson(jsonDecode(utf8.decode(response.bodyBytes)));
+    Response result =
+        Response.fromJson(jsonDecode(utf8.decode(response.bodyBytes)));
     if (result.code != 9999) {
       showError(result.message!);
       throw Exception(result.message);
@@ -57,18 +62,23 @@ Future<Response> postAuthenticated(String endpoint, Object body, {String? token,
   } else {
     FirebaseMessaging.instance.getToken().then((v) {
       if (v != null) {
-        postAuthenticated('${Common.host}/auth/login_success?token=$v', {}, loader: false);
+        postAuthenticated('${Common.host}/auth/login_success?token=$v', {},
+            loader: false);
       }
     });
     LocalStorage().cleanToken();
+    BuildContext? context = NavigationService.navigatorKey.currentContext;
+    Navigator.push(
+      context!,
+      MaterialPageRoute(builder: (context) => LoginScreen()),
+    );
     throw Exception('authentication');
   }
 }
 
 Future<Response> putUnauthenticated(String endpoint, Object body) async {
   showLoader();
-  final http.Response response = await http.put(
-      Uri.parse(endpoint),
+  final http.Response response = await http.put(Uri.parse(endpoint),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=utf-8',
       },
@@ -76,7 +86,8 @@ Future<Response> putUnauthenticated(String endpoint, Object body) async {
 
   dismiss();
   if (response.statusCode == 200) {
-    Response result = Response.fromJson(jsonDecode(utf8.decode(response.bodyBytes)));
+    Response result =
+        Response.fromJson(jsonDecode(utf8.decode(response.bodyBytes)));
     if (result.code != 9999) {
       showError(result.message!);
       throw Exception(result.message);
@@ -87,13 +98,13 @@ Future<Response> putUnauthenticated(String endpoint, Object body) async {
   }
 }
 
-Future<Response> putAuthenticated(String endpoint, Object body, {String? token, bool? loader}) async {
+Future<Response> putAuthenticated(String endpoint, Object body,
+    {String? token, bool? loader}) async {
   if (loader != false) {
     showLoader();
   }
   String _token = await LocalStorage().getToken();
-  final http.Response response = await http.put(
-      Uri.parse(endpoint),
+  final http.Response response = await http.put(Uri.parse(endpoint),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=utf-8',
         'Authorization': 'Bearer $_token'
@@ -104,7 +115,8 @@ Future<Response> putAuthenticated(String endpoint, Object body, {String? token, 
     dismiss();
   }
   if (response.statusCode == 200) {
-    Response result = Response.fromJson(jsonDecode(utf8.decode(response.bodyBytes)));
+    Response result =
+        Response.fromJson(jsonDecode(utf8.decode(response.bodyBytes)));
     if (result.code != 9999) {
       showError(result.message!);
       throw Exception(result.message);
@@ -113,25 +125,31 @@ Future<Response> putAuthenticated(String endpoint, Object body, {String? token, 
   } else {
     FirebaseMessaging.instance.getToken().then((v) {
       if (v != null) {
-        postAuthenticated('${Common.host}/auth/login_success?token=$v', {}, loader: false);
+        postAuthenticated('${Common.host}/auth/login_success?token=$v', {},
+            loader: false);
       }
     });
     LocalStorage().cleanToken();
+    BuildContext? context = NavigationService.navigatorKey.currentContext;
+    Navigator.push(
+      context!,
+      MaterialPageRoute(builder: (context) => LoginScreen()),
+    );
     throw Exception('authentication');
   }
 }
 
 Future<Response> getUnauthenticated(String endpoint, Object body) async {
   showLoader();
-  final http.Response response = await http.get(
-      Uri.parse(endpoint),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=utf-8',
-      });
+  final http.Response response =
+      await http.get(Uri.parse(endpoint), headers: <String, String>{
+    'Content-Type': 'application/json; charset=utf-8',
+  });
 
   dismiss();
   if (response.statusCode == 200) {
-    Response result = Response.fromJson(jsonDecode(utf8.decode(response.bodyBytes)));
+    Response result =
+        Response.fromJson(jsonDecode(utf8.decode(response.bodyBytes)));
     if (result.code != 9999) {
       showError(result.message!);
       throw Exception(result.message);
@@ -142,23 +160,24 @@ Future<Response> getUnauthenticated(String endpoint, Object body) async {
   }
 }
 
-Future<Response> getAuthenticated(String endpoint, {String? token, bool? loader}) async {
+Future<Response> getAuthenticated(String endpoint,
+    {String? token, bool? loader}) async {
   if (loader != false) {
     showLoader();
   }
   String _token = await LocalStorage().getToken();
-  final http.Response response = await http.get(
-      Uri.parse(endpoint),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=utf-8',
-        'Authorization': 'Bearer $_token'
-      });
+  final http.Response response =
+      await http.get(Uri.parse(endpoint), headers: <String, String>{
+    'Content-Type': 'application/json; charset=utf-8',
+    'Authorization': 'Bearer $_token'
+  });
 
   if (loader != false) {
     dismiss();
   }
   if (response.statusCode == 200) {
-    Response result = Response.fromJson(jsonDecode(utf8.decode(response.bodyBytes)));
+    Response result =
+        Response.fromJson(jsonDecode(utf8.decode(response.bodyBytes)));
     if (result.code != 9999) {
       showError(result.message!);
       throw Exception(result.message);
@@ -167,10 +186,16 @@ Future<Response> getAuthenticated(String endpoint, {String? token, bool? loader}
   } else {
     FirebaseMessaging.instance.getToken().then((v) {
       if (v != null) {
-        postAuthenticated('${Common.host}/auth/login_success?token=$v', {}, loader: false);
+        postAuthenticated('${Common.host}/auth/login_success?token=$v', {},
+            loader: false);
       }
     });
     LocalStorage().cleanToken();
+    BuildContext? context = NavigationService.navigatorKey.currentContext;
+    Navigator.push(
+      context!,
+      MaterialPageRoute(builder: (context) => LoginScreen()),
+    );
     throw Exception('authentication');
   }
 }

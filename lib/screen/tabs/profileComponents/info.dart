@@ -18,14 +18,13 @@ class InfoScreen extends StatefulWidget {
 }
 
 class _InfoScreen extends State<InfoScreen> {
-
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
 
     MemberProvider memberProvider =
-    Provider.of<MemberProvider>(context, listen: false);
+        Provider.of<MemberProvider>(context, listen: false);
     if (memberProvider.currentMember.id == null) {
       getCurrentMember().then((value) {
         Member member = Member.fromJson(value.payload);
@@ -69,7 +68,7 @@ class _InfoScreen extends State<InfoScreen> {
                     builder: (context, provider, child) {
                       return Text(provider.currentMember.name ?? '',
                           style: const TextStyle(
-                              fontSize: 25,
+                            fontSize: 25,
                             fontWeight: FontWeight.bold,
                             color: kTextColor,
                           ));

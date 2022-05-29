@@ -7,8 +7,6 @@ import 'package:english_center/util/Enums.dart';
 final endpoint = '${Common.host}/register/';
 
 Future<Response> registerClassroom(String classId) async {
-  return postAuthenticated('${endpoint}add_v2', {
-    "class_id": classId,
-    "status": "unpaid"
-  });
+  return postAuthenticated(
+      '${endpoint}add_v2', {"class_id": classId, "status": "unpaid"});
 }

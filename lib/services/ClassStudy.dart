@@ -9,3 +9,7 @@ final endpoint = '${Common.host}/class/';
 Future<Response> getClassRoomByCourse(String id) async {
   return getAuthenticated('${endpoint}get_by_course_id/$id');
 }
+
+Future<Response> getByKeyword(String keyword) async {
+  return getAuthenticated('${endpoint}get_by_keyword?keyword=$keyword');
+}

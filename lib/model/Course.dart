@@ -1,4 +1,3 @@
-
 class Course {
   final String name;
   final int numOfCourses;
@@ -6,7 +5,8 @@ class Course {
   final int numberStudent;
   final String dateStart;
 
-  Course(this.name, this.numOfCourses, this.image, this.numberStudent, this.dateStart);
+  Course(this.name, this.numOfCourses, this.image, this.numberStudent,
+      this.dateStart);
 }
 
 List<Course> courses = [

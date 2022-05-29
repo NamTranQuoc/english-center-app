@@ -1,4 +1,3 @@
-
 class RegisExam {
   final String? id;
   final int? startTime;
@@ -7,14 +6,13 @@ class RegisExam {
   final int? maxQuantity;
   final int? minQuantity;
 
-  RegisExam({
-    this.id,
-    this.startTime,
-    this.endTime,
-    this.code,
-    this.maxQuantity,
-    this.minQuantity
-  });
+  RegisExam(
+      {this.id,
+      this.startTime,
+      this.endTime,
+      this.code,
+      this.maxQuantity,
+      this.minQuantity});
 
   factory RegisExam.fromJson(Map<String, dynamic> json) {
     return RegisExam(

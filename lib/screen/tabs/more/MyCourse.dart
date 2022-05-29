@@ -1,5 +1,4 @@
 import 'package:english_center/constants.dart';
-import 'package:english_center/domain/MyCourse.dart';
 import 'package:english_center/screen/tabs/regisExam/DetailRegisExam.dart';
 import 'package:english_center/services/RegisExam.dart';
 import 'package:english_center/util/ParseUtil.dart';
@@ -9,7 +8,6 @@ import '../../../domain/RegisExamScreen.dart';
 
 class MyCourseScreen extends StatefulWidget {
   static const routeName = '/my_course';
-
 
   MyCourseScreen();
 
@@ -49,7 +47,7 @@ class _MyCourseScreen extends State<MyCourseScreen> {
           child: ListView.builder(
             itemCount: exam.length,
             scrollDirection: Axis.vertical,
-            itemBuilder: (context, index){
+            itemBuilder: (context, index) {
               /*return CardItem(
                               courses[index].name!,
                               courses[index].name!,
@@ -80,14 +78,17 @@ class _MyCourseScreen extends State<MyCourseScreen> {
                             ),
                           ),
                           TextSpan(
-                            text: "Giờ bắt đầu: " + timestampToString(exam[index].startTime!) + "\n",
+                            text: "Giờ bắt đầu: " +
+                                timestampToString(exam[index].startTime!) +
+                                "\n",
                             style: TextStyle(
                               color: kTextColor.withOpacity(.5),
                               fontSize: 18,
                             ),
                           ),
                           TextSpan(
-                            text: "Giờ kết thúc: " + timestampToString(exam[index].endTime!),
+                            text: "Giờ kết thúc: " +
+                                timestampToString(exam[index].endTime!),
                             style: TextStyle(
                               color: kTextColor.withOpacity(.5),
                               fontSize: 18,
@@ -111,7 +112,8 @@ class _MyCourseScreen extends State<MyCourseScreen> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => DetailRegisExam(exam[index]),
+                              builder: (context) =>
+                                  DetailRegisExam(exam[index]),
                             ),
                           );
                         },
@@ -159,9 +161,7 @@ class _MyCourseScreen extends State<MyCourseScreen> {
                       child: const Text(
                         "Khóa học của tôi",
                         style: TextStyle(
-                            fontWeight: FontWeight.w900,
-                            fontSize: 20
-                        ),
+                            fontWeight: FontWeight.w900, fontSize: 20),
                       ),
                     ),
                   ),
@@ -187,7 +187,8 @@ class _MyCourseScreen extends State<MyCourseScreen> {
                   children: <Widget>[
                     Container(
                       padding: const EdgeInsets.only(left: 25, top: 25),
-                      child: const Text("Danh sách lịch kiểm tra", style: kTitleTextStyle),
+                      child: const Text("Danh sách lịch kiểm tra",
+                          style: kTitleTextStyle),
                     ),
                     getDisplay(),
                   ],
@@ -206,6 +207,7 @@ class CourseContent extends StatelessWidget {
   final double duration;
   final String title;
   final bool isDone;
+
   CourseContent({
     required this.number,
     required this.duration,
