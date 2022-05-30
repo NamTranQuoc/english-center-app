@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 import 'package:english_center/components/background/background.dart';
-import 'package:english_center/components/button/ButtonCustom.dart';
 import 'package:english_center/components/button/ButtonText.dart';
 import 'package:english_center/components/message/Notification.dart';
 import 'package:english_center/components/select/SelectCustomV2.dart';
@@ -108,8 +107,34 @@ class _DetailSchedule extends State<DetailSchedule> {
                 absentId = val;
               });
             }),
-            ButtonCustom(AppLocalizations.of(context).registerAbsent,
-                Colors.blue, onSubmit),
+            Container(
+              alignment: Alignment.center,
+              // margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+              child: RaisedButton(
+                onPressed: onSubmit,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(80.0)),
+                textColor: Colors.white,
+                padding: const EdgeInsets.all(0),
+                child: Container(
+                  alignment: Alignment.center,
+                  height: 50.0,
+                  width: 240,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(80.0),
+                      gradient: const LinearGradient(colors: [
+                        Color(0xFF2661FA),
+                        Color(0xFF6685E3),
+                      ])),
+                  padding: const EdgeInsets.all(0),
+                  child: Text(
+                    AppLocalizations.of(context).registerAbsent,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ),
+            )
           ],
         );
       }
@@ -194,7 +219,7 @@ class _DetailSchedule extends State<DetailSchedule> {
       return [
         Row(
           children: [
-            Text(AppLocalizations.of(context).examName,
+            Text(AppLocalizations.of(context).examName + ": ",
                 style: const TextStyle(fontSize: 18)),
             Text(schedule.title ?? "",
                 style:
@@ -206,7 +231,7 @@ class _DetailSchedule extends State<DetailSchedule> {
         ),
         Row(
           children: [
-            Text('${AppLocalizations.of(context).startTime}: ',
+            Text('${AppLocalizations.of(context).labelStart}: ',
                 style: const TextStyle(fontSize: 18)),
             Text(timestampToString(schedule.start!),
                 style:
@@ -218,7 +243,7 @@ class _DetailSchedule extends State<DetailSchedule> {
         ),
         Row(
           children: [
-            Text('${AppLocalizations.of(context).endTime}: ',
+            Text('${AppLocalizations.of(context).labelEnd}: ',
                 style: const TextStyle(fontSize: 18)),
             Text(timestampToString(schedule.end!),
                 style:
@@ -243,7 +268,7 @@ class _DetailSchedule extends State<DetailSchedule> {
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(AppLocalizations.of(context).supervisor,
+            Text(AppLocalizations.of(context).supervisor + ": ",
                 style: const TextStyle(fontSize: 18)),
             Text(schedule.teacher ?? "",
                 style:

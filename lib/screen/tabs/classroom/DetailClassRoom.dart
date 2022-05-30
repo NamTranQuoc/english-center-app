@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 import 'package:english_center/components/background/background.dart';
-import 'package:english_center/components/button/ButtonCustom.dart';
 import 'package:english_center/components/message/Notification.dart';
 import 'package:english_center/domain/Classroom.dart';
 import 'package:english_center/util/ParseUtil.dart';
@@ -116,15 +115,40 @@ class _DetailClassRoom extends State<DetailClassRoom> {
                 Container(
                   margin: const EdgeInsets.fromLTRB(0, 0, 0, 20),
                 ),
-                ButtonCustom(
-                    AppLocalizations.of(context).register, Colors.lightBlue,
-                    () {
-                  registerClassroom(widget.classroom.id!).then((value) {
-                    if (value.code == 9999) {
-                      showSuccess("register_success");
-                    }
-                  });
-                })
+                Container(
+                  alignment: Alignment.center,
+                  // margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                  child: RaisedButton(
+                    onPressed: () {
+                      registerClassroom(widget.classroom.id!).then((value) {
+                        if (value.code == 9999) {
+                          showSuccess("register_success");
+                        }
+                      });
+                    },
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(80.0)),
+                    textColor: Colors.white,
+                    padding: const EdgeInsets.all(0),
+                    child: Container(
+                      alignment: Alignment.center,
+                      height: 50.0,
+                      width: 240,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(80.0),
+                          gradient: const LinearGradient(colors: [
+                            Color(0xFF2661FA),
+                            Color(0xFF6685E3),
+                          ])),
+                      padding: const EdgeInsets.all(0),
+                      child: Text(
+                        AppLocalizations.of(context).register,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                )
               ],
             )));
   }

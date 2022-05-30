@@ -98,7 +98,7 @@ class _DetailCourseScreen extends State<DetailCourse> {
                       padding: const EdgeInsets.only(
                           left: 10, top: 5, right: 20, bottom: 5),
                       child: Text(
-                        AppLocalizations.of(context).labelCourseInfo,
+                        AppLocalizations.of(context).labelClassList,
                         style: const TextStyle(
                             fontWeight: FontWeight.w800, fontSize: 24),
                       ),
@@ -119,13 +119,8 @@ class _DetailCourseScreen extends State<DetailCourse> {
                 ),
                 child: Stack(
                   children: <Widget>[
-                    Container(
-                      padding: const EdgeInsets.only(left: 25, top: 25),
-                      child: Text(AppLocalizations.of(context).labelClassList,
-                          style: kTitleTextStyle),
-                    ),
                     Padding(
-                      padding: const EdgeInsets.all(35),
+                      padding: const EdgeInsets.all(20),
                       child: ListView.builder(
                         itemCount: _class.length,
                         scrollDirection: Axis.vertical,
@@ -148,7 +143,7 @@ class _DetailCourseScreen extends State<DetailCourse> {
                                       TextSpan(
                                         text: _class[index].name! + "\n",
                                         style: kSubtitleTextSyule.copyWith(
-                                          fontWeight: FontWeight.w600,
+                                          fontWeight: FontWeight.bold,
                                           height: 1.5,
                                         ),
                                       ),
@@ -161,7 +156,7 @@ class _DetailCourseScreen extends State<DetailCourse> {
                                             "\n",
                                         style: TextStyle(
                                           color: kTextColor.withOpacity(.8),
-                                          fontSize: 18,
+                                          fontSize: 15,
                                         ),
                                       ),
                                       TextSpan(
@@ -171,7 +166,7 @@ class _DetailCourseScreen extends State<DetailCourse> {
                                             listToString(_class[index].dow!),
                                         style: TextStyle(
                                           color: kTextColor.withOpacity(.8),
-                                          fontSize: 18,
+                                          fontSize: 15,
                                         ),
                                       ),
                                     ],
