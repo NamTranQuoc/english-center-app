@@ -66,12 +66,12 @@ Future<Response> postAuthenticated(String endpoint, Object body,
             loader: false);
       }
     });
-    LocalStorage().cleanToken();
-    BuildContext? context = NavigationService.navigatorKey.currentContext;
-    Navigator.push(
+    // LocalStorage().cleanToken();
+    // BuildContext? context = NavigationService.navigatorKey.currentContext;
+    /*Navigator.push(
       context!,
       MaterialPageRoute(builder: (context) => LoginScreen()),
-    );
+    );*/
     throw Exception('authentication');
   }
 }
@@ -129,12 +129,12 @@ Future<Response> putAuthenticated(String endpoint, Object body,
             loader: false);
       }
     });
-    LocalStorage().cleanToken();
-    BuildContext? context = NavigationService.navigatorKey.currentContext;
-    Navigator.push(
+    // LocalStorage().cleanToken();
+    // BuildContext? context = NavigationService.navigatorKey.currentContext;
+    /*Navigator.push(
       context!,
       MaterialPageRoute(builder: (context) => LoginScreen()),
-    );
+    );*/
     throw Exception('authentication');
   }
 }
@@ -190,12 +190,12 @@ Future<Response> getAuthenticated(String endpoint,
             loader: false);
       }
     });
-    LocalStorage().cleanToken();
-    BuildContext? context = NavigationService.navigatorKey.currentContext;
-    Navigator.push(
+    // LocalStorage().cleanToken();
+    // BuildContext? context = NavigationService.navigatorKey.currentContext;
+    /*Navigator.push(
       context!,
       MaterialPageRoute(builder: (context) => LoginScreen()),
-    );
+    );*/
     throw Exception('authentication');
   }
 }

@@ -71,7 +71,7 @@ class _BodyScreen extends State<BodyScreen> {
             press: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => MyCourseScreen()),
+                MaterialPageRoute(builder: (context) => MyCourse()),
               );
             },
           ),
@@ -118,12 +118,12 @@ class _BodyScreen extends State<BodyScreen> {
                     widget.storage.cleanToken();
                     Provider.of<MemberProvider>(context, listen: false)
                         .set(Member.fromJson({}));
-                    Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-                      return LoginScreen();
-                    }));
                   });
                 }
               });
+              Navigator.of(context).push(MaterialPageRoute(builder: (_) {
+                return LoginScreen();
+              }));
             },
           ),
           SizedBox(

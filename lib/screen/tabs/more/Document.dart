@@ -1,43 +1,89 @@
+import 'dart:isolate';
+import 'dart:ui';
+
 import 'package:english_center/constants.dart';
 import 'package:english_center/domain/Classroom.dart';
-import 'package:english_center/screen/tabs/classroom/DetailClassRoom.dart';
-import 'package:english_center/screen/tabs/more/Document.dart';
+import 'package:english_center/domain/Document.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../../../services/Register.dart';
-import '../../../util/ParseUtil.dart';
+import '../../../services/Document.dart';
+import 'package:flutter_downloader/flutter_downloader.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:path_provider/path_provider.dart';
 
-class MyCourse extends StatefulWidget {
+class Document extends StatefulWidget {
   static const routeName = '/detail_course';
 
-  MyCourse();
+  final Classroom classroom;
+
+  Document(this.classroom);
 
   @override
-  _MyCourseScreen createState() => _MyCourseScreen();
+  _DocumentScreen createState() => _DocumentScreen();
 }
 
-class _MyCourseScreen extends State<MyCourse> {
+class _DocumentScreen extends State<Document> {
   @override
   void initState() {
+    IsolateNameServer.registerPortWithName(_port.sendPort, 'downloader_send_port');
+    _port.listen((dynamic data) {
+      String id = data[0];
+      DownloadTaskStatus status = data[1];
+      int progress = data[2];
+      if(status == DownloadTaskStatus.complete) {
+        print("======================================================");
+      }
+
+      setState((){ });
+    });
+
+    FlutterDownloader.registerCallback(downloadCallback);
     super.initState();
 
-    getClassByCourse();
+    getDocument();
   }
 
-  List<Classroom> _class = [];
+  List<DocumentDomain> _document = [];
   String name = "";
 
-  void getClassByCourse() {
-    getRegisterByStudent().then((value) {
+  void getDocument() {
+    getDocumentByStudent(widget.classroom.courseId!).then((value) {
       if (value.code == 9999) {
         List<Map<String, dynamic>> list = List.from(value.payload);
         for (var element in list) {
-          Classroom classStudy = Classroom.fromJson(element);
-          _class.add(classStudy);
+          DocumentDomain document = DocumentDomain.fromJson(element);
+          _document.add(document);
           setState(() {});
         }
       }
     });
+  }
+
+  Future downloadFile(String url) async {
+    var status = await Permission.storage.request();
+    if (status.isGranted) {
+      final baseStorage = await getExternalStorageDirectory();
+
+      await FlutterDownloader.enqueue(
+        url: "https://firebasestorage.googleapis.com/v0/b/englishcenter-2021.appspot.com/o/documents%2F"+ url +"?alt=media",
+        savedDir: "/storage/emulated/0/Download/",
+        showNotification: true, // show download progress in status bar (for Android)
+        openFileFromNotification: true, // click on notification to open downloaded file (for Android)
+      );
+    }
+  }
+
+  ReceivePort _port = ReceivePort();
+
+  @override
+  void dispose() {
+    IsolateNameServer.removePortNameMapping('downloader_send_port');
+    super.dispose();
+  }
+
+  @pragma('vm:entry-point')
+  static void downloadCallback(String id, DownloadTaskStatus status, int progress) {
+    final SendPort? send = IsolateNameServer.lookupPortByName('downloader_send_port');
+    send!.send([id, status, progress]);
   }
 
   @override
@@ -78,9 +124,8 @@ class _MyCourseScreen extends State<MyCourse> {
                       color: kBestSellerColor,
                       padding: const EdgeInsets.only(
                           left: 10, top: 5, right: 20, bottom: 5),
-                      child: Text(
-                        AppLocalizations.of(context).labelClassList,
-                        style: const TextStyle(
+                      child: const Text("Tài Liệu",
+                        style: TextStyle(
                             fontWeight: FontWeight.w800, fontSize: 24),
                       ),
                     ),
@@ -101,14 +146,15 @@ class _MyCourseScreen extends State<MyCourse> {
                 child: Stack(
                   children: <Widget>[
                     Padding(
-                      padding: const EdgeInsets.all(20),
+                      padding: const EdgeInsets.all(30),
                       child: ListView.builder(
-                        itemCount: _class.length,
+                        itemCount: _document.length,
                         scrollDirection: Axis.vertical,
                         itemBuilder: (context, index) {
                           return Padding(
-                            padding: const EdgeInsets.only(bottom: 30),
+                            padding: const EdgeInsets.only(bottom: 40),
                             child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
                                 Text(
                                   (index + 1).toString(),
@@ -122,29 +168,16 @@ class _MyCourseScreen extends State<MyCourse> {
                                   text: TextSpan(
                                     children: [
                                       TextSpan(
-                                        text: _class[index].name! + "\n",
+                                        text: _document[index].name! + "\n",
                                         style: kSubtitleTextSyule.copyWith(
                                           fontWeight: FontWeight.bold,
                                           height: 1.5,
                                         ),
                                       ),
                                       TextSpan(
-                                        text: AppLocalizations.of(context)
-                                            .labelDateStart +
-                                            ": " +
-                                            timestampToDate(
-                                                _class[index].startDate!) +
+                                        text: "Type" +
+                                            ": " + _document[index].type! +
                                             "\n",
-                                        style: TextStyle(
-                                          color: kTextColor.withOpacity(.8),
-                                          fontSize: 15,
-                                        ),
-                                      ),
-                                      TextSpan(
-                                        text: AppLocalizations.of(context)
-                                            .labelSchedule +
-                                            ": " +
-                                            listToString(_class[index].dow!),
                                         style: TextStyle(
                                           color: kTextColor.withOpacity(.8),
                                           fontSize: 15,
@@ -155,7 +188,7 @@ class _MyCourseScreen extends State<MyCourse> {
                                 ),
                                 const Spacer(),
                                 Container(
-                                  margin: const EdgeInsets.only(left: 20),
+                                  margin: const EdgeInsets.only(right: 20),
                                   height: 40,
                                   width: 40,
                                   decoration: BoxDecoration(
@@ -163,15 +196,9 @@ class _MyCourseScreen extends State<MyCourse> {
                                     color: kGreenColor.withOpacity(1),
                                   ),
                                   child: IconButton(
-                                    icon: const Icon(Icons.chevron_right),
-                                    onPressed: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              Document(_class[index]),
-                                        ),
-                                      );
+                                    icon: const Icon(Icons.download),
+                                    onPressed: ()  {
+                                      downloadFile(_document[index].path!);
                                     },
                                   ),
                                 )
@@ -197,7 +224,7 @@ class BestSellerClipper extends CustomClipper<Path> {
   getClip(Size size) {
     var path = Path();
     path.lineTo(size.width - 20, 0);
-    path.lineTo(size.width, size.height / 2);
+    path.lineTo(size.width, size.height);
     path.lineTo(size.width - 20, size.height);
     path.lineTo(0, size.height);
     path.lineTo(0, 0);

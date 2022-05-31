@@ -10,3 +10,8 @@ Future<Response> registerClassroom(String classId) async {
   return postAuthenticated(
       '${endpoint}add_v2', {"class_id": classId, "status": "unpaid"});
 }
+
+Future<Response> getRegisterByStudent() async {
+  return getAuthenticated(
+      '${endpoint}gets_by_student');
+}
