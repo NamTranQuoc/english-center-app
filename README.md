@@ -10,4 +10,7 @@ step 2: Open CMD in downloaded in step 1
 
 step 3: Connect your device android
 
-step 4: Run `flutter run --no-sound-null-safety`
+step 4: Run 
+ `flutter pub get`
+ `flutter gen-l10n`
+ `flutter run --no-sound-null-safety`
