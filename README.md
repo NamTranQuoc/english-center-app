@@ -1,16 +1,16 @@
 # english_center
 
-A new Flutter project.
+English Center.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+step 1: Clone project with branch master (https://github.com/NamTranQuoc/english-center-app.git)
 
-A few resources to get you started if this is your first Flutter project:
+step 2: Open CMD in downloaded in step 1
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+step 3: Connect your device android
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+step 4: Run 
+ `flutter pub get`
+ `flutter gen-l10n`
+ `flutter run --no-sound-null-safety`

@@ -9,6 +9,7 @@ import 'package:english_center/util/NavigationService.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -43,6 +44,11 @@ void main() async {
     sound: true,
   );
 
+  await FlutterDownloader.initialize(
+      debug: true ,// optional: set to false to disable printing logs to console (default: true)
+      ignoreSsl: true // option: set to false to disable working with http links (default: false)
+  );
+
   runApp(
     MultiProvider(
       providers: [
@@ -71,7 +77,7 @@ class MyApp extends StatelessWidget {
 
     return MaterialApp(
       title: 'English center',
-      navigatorKey: NavigationService.navigatorKey,
+      // navigatorKey: NavigationService.navigatorKey,
       initialRoute: LoginScreen.routeName,
       routes: {
         MainScreen.routeName: (context) => MainScreen(),
