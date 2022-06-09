@@ -41,14 +41,6 @@ class _RegisExamScreen extends State<RegisExamScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.pop(context);
-        },
-        child: const Icon(Icons.chevron_left, color: Colors.black54),
-        backgroundColor: Colors.white,
-        mini: true,
-      ),
       floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
       body: Container(
         width: double.infinity,

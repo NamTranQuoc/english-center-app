@@ -36,7 +36,7 @@ class _SignUpScreen extends State<SignUpScreen> {
               stringToTimeStamp(dob.text))
           .then((value) {
         if (value.code == 9999) {
-          showSuccess(AppLocalizations.of(context).labelExamInfo);
+          showSuccess("signup_success");
           Navigator.of(context).push(MaterialPageRoute(builder: (_) {
             return LoginScreen();
           }));

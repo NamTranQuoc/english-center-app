@@ -111,6 +111,7 @@ class _BodyScreen extends State<BodyScreen> {
             icon: "assets/icons/Log out.svg",
             color: Colors.redAccent,
             press: () {
+              LocalStorage().cleanToken();
               FirebaseMessaging.instance.getToken().then((v) {
                 if (v != null) {
                   postAuthenticated('${Common.host}/auth/logout?token=$v', {})
